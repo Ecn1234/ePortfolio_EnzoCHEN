@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de profils clients - Cardio Good Fitness | Enzo CHEN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo-dot {
+            color: var(--primary-color);
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        /* Header projet */
+        .projet-header {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .projet-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .projet-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Contenu principal */
+        .projet-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        /* Section des téléchargements */
+        .downloads-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .downloads-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .downloads-title h2 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .downloads-title p {
+            color: var(--gray-color);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .download-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .download-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .download-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .download-card p {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section description */
+        .description-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .description-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .description-section h3 {
+            margin: 25px 0 15px;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+        }
+
+        .description-section p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .description-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .description-section li {
+            color: var(--gray-color);
+            margin-bottom: 8px;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .insight-box h4 {
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .tech-stack span {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .btn-retour {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+
+        .btn-retour:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .projet-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .downloads-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projet-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .projet-content,
+            .downloads-section,
+            .description-section {
+                padding: 25px;
+            }
+            
+            .meta-item {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .downloads-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+		
+		/* Footer - Nouveau design amélioré */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Bouton retour */
+.btn-retour {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 12px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-bottom: 30px;
+}
+
+.btn-retour:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-color: transparent;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+    
+    .footer-links {
+        gap: 20px;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .btn-retour {
+        margin-bottom: 25px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Footer - Nouveau design amélioré */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+    
+    .footer-links {
+        gap: 20px;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Footer - Nouveau design amélioré (taille réduite) */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 40px 0 25px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 20px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-link {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.7rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.4rem;
+    }
+    
+    .footer-text {
+        font-size: 0.75rem;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links {
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links a {
+        font-size: 0.65rem;
+    }
+    
+    .footer-social {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Footer - Nouveau design amélioré (taille réduite) */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 40px 0 25px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 20px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-link {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.7rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.4rem;
+    }
+    
+    .footer-text {
+        font-size: 0.75rem;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links {
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links a {
+        font-size: 0.65rem;
+    }
+    
+    .footer-social {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Footer - Version agrandie */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.social-link {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 30px;
+        margin-top: 50px;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .footer-text {
+        font-size: 0.9rem;
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+    
+    .footer-social {
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .footer-copyright {
+        font-size: 0.75rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
+            <a href="index.html#projets" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="projet-header">
+            <h1>Analyse de profils clients - Cardio Good Fitness</h1>
+            <div class="projet-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> Décembre 2025</div>
+                <div class="meta-item"><i class="fas fa-tag"></i> Statistique</div>
+                <div class="meta-item"><i class="fas fa-chart-line"></i> Analyse descriptive</div>
+                <div class="meta-item"><i class="fas fa-users"></i> 180 clients</div>
+            </div>
+            <div class="category-badge">
+                <i class="fas fa-chart-bar"></i> Projet académique - BUT Science des Données
+            </div>
+        </div>
+
+        <div class="projet-content">
+            <!-- Partie gauche : Résumé / Objectifs -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bullseye"></i> Objectifs
+                </h2>
+                <p>Réalisation d'une étude statistique complète sur un jeu de données clients afin d'identifier les différences de profils selon le genre et le type de produit acheté (tapis de course).</p>
+                
+                <h3 style="margin: 20px 0 10px;"><i class="fas fa-question-circle"></i> Problématiques</h3>
+                <ul>
+                    <li>Quels sont les profils types des clients selon le genre ?</li>
+                    <li>Existe-t-il des différences significatives entre les modèles de tapis de course ?</li>
+                    <li>Quelles variables sont corrélées entre elles ?</li>
+                    <li>Comment segmenter la clientèle pour mieux cibler les offres marketing ?</li>
+                </ul>
+
+                <h3 style="margin: 20px 0 10px;"><i class="fas fa-chart-line"></i> Méthodologie</h3>
+                <ul>
+                    <li>Analyse descriptive des variables sociodémographiques</li>
+                    <li>Tests statistiques : Welch, Khi-deux, Fisher, Pearson, Spearman</li>
+                    <li>Segmentation par modèle de tapis de course</li>
+                    <li>Identification des corrélations entre variables</li>
+                </ul>
+            </div>
+
+            <!-- Partie droite : Résultats clés -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-chart-simple"></i> Résultats clés
+                </h2>
+                
+                <div class="insight-box">
+                    <h4><i class="fas fa-venus-mars"></i> Différences selon le genre</h4>
+                    <p>Les hommes présentent des revenus, une fréquence d'utilisation et une intensité de pratique significativement plus élevés que les femmes.</p>
+                </div>
+
+                <div class="insight-box">
+                    <h4><i class="fas fa-tag"></i> Segmentation produit</h4>
+                    <p><strong>Modèles d'entrée/milieu de gamme (TM195, TM498)</strong> → profils similaires<br>
+                    <strong>Modèle haut de gamme (TM798)</strong> → clients plus aisés, plus diplômés et plus sportifs</p>
+                </div>
+
+                <div class="insight-box">
+                    <h4><i class="fas fa-link"></i> Corrélations identifiées</h4>
+                    <p>• Forte corrélation entre <strong>âge et revenu</strong><br>
+                    • Lien modéré entre <strong>revenu et intensité d'utilisation</strong><br>
+                    • Relation entre <strong>diplôme et choix du modèle premium</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section des téléchargements -->
+        <div class="downloads-section">
+            <div class="downloads-title">
+                <h2><i class="fas fa-download"></i> Téléchargements</h2>
+                <p>Retrouvez l'intégralité du rapport statistique, le code R et le jeu de données utilisé</p>
+            </div>
+            <div class="downloads-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Rapport statistique</h3>
+                    <p>Analyse complète des profils clients - 12 pages incluant graphiques et interprétations</p>
+                    <a href="pdf/EnzoCHEN_MichaelDAI_tp2test.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger PDF
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Code R</h3>
+                    <p>Script complet des analyses : tests statistiques, visualisations et modélisation</p>
+                    <a href="pdf/EnzoCHEN_MichaelDAI_Code_R.R" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger .R
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <h3>Jeu de données CSV</h3>
+                    <p>Base de données clients (180 observations) utilisée pour l'analyse statistique</p>
+                    <a href="pdf/CardioGoodFitness.csv" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger CSV
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section description détaillée -->
+        <div class="description-section">
+            <h2><i class="fas fa-chart-line"></i> Démarche analytique</h2>
+            
+            <h3>1. Analyse descriptive univariée</h3>
+            <p>Première étape : exploration des données avec calculs de moyennes, médianes, écarts-types et visualisations (histogrammes, boxplots) pour chaque variable : âge, revenu, niveau d'éducation, fréquence d'utilisation, intensité de pratique, etc.</p>
+            
+            <h3>2. Analyse bivariée et tests statistiques</h3>
+            <p>Comparaison des profils selon le genre et selon le modèle de tapis de course acheté :</p>
+            <ul>
+                <li><strong>Test de Welch</strong> : comparaison des moyennes de revenus et d'intensité entre hommes et femmes</li>
+                <li><strong>Test du Khi-deux / Fisher</strong> : analyse des relations entre variables qualitatives (genre/diplôme, modèle/produit)</li>
+                <li><strong>Corrélations de Pearson et Spearman</strong> : mesure des liens entre variables quantitatives (âge/revenu, revenu/intensité)</li>
+            </ul>
+            
+            <h3>3. Segmentation par modèle de produit</h3>
+            <p>Comparaison des trois modèles de tapis de course (TM195, TM498, TM798) pour identifier les différences de profils clients :</p>
+            <ul>
+                <li>TM195 et TM498 : profils similaires (clients avec revenus moyens, pratique modérée)</li>
+                <li>TM798 : profil premium (revenus élevés, niveau d'éducation supérieur, pratique intensive)</li>
+            </ul>
+            
+            <h3>4. Interprétation et recommandations</h3>
+            <p>Synthèse des insights extraits pour orienter les stratégies marketing :</p>
+            <ul>
+                <li>Cibler les hommes pour les produits à forte intensité d'utilisation</li>
+                <li>Adapter les offres selon le profil économique (entrée de gamme vs premium)</li>
+                <li>Développer des campagnes différenciées pour chaque segment identifié</li>
+            </ul>
+
+            <div class="tech-stack">
+                <span><i class="fab fa-r-project"></i> R</span>
+                <span><i class="fas fa-chart-line"></i> ggplot2</span>
+                <span><i class="fas fa-chart-pie"></i> dplyr</span>
+                <span><i class="fas fa-chart-bar"></i> FactoMineR</span>
+                <span><i class="fas fa-table"></i> readr</span>
+                <span><i class="fas fa-chart-simple"></i> corrplot</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    Enzo<span class="footer-logo-dot">.</span>CHEN
+                </div>
+                <p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
+                
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:echen170406@gmail.com" class="social-link email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:0767896889" class="social-link phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </a>
+                    <a href="https://github.com/Ecn1234" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html#accueil">Accueil</a>
+                    <a href="index.html#profil">Profil</a>
+                    <a href="index.html#parcours">Parcours</a>
+                    <a href="index.html#competences">Compétences</a>
+                    <a href="index.html#projets">Projets</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                
+                <p class="footer-copyright">
+                    &copy; 2026 Enzo CHEN. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+	
+</body>
+</html>

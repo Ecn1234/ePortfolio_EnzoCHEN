@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modélisation de courbes de croissance - Régression | Enzo CHEN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo-dot {
+            color: var(--primary-color);
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        /* Header projet */
+        .projet-header {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .projet-header h1 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .projet-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Contenu principal */
+        .projet-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        /* Section des téléchargements */
+        .downloads-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .downloads-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .downloads-title h2 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .downloads-title p {
+            color: var(--gray-color);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .download-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .download-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .download-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .download-card p {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section description */
+        .description-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .description-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .description-section h3 {
+            margin: 25px 0 15px;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+        }
+
+        .description-section p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .description-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .description-section li {
+            color: var(--gray-color);
+            margin-bottom: 8px;
+        }
+
+        .facteurs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .facteur-card {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .facteur-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .facteur-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .facteur-card h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .model-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-left: 4px solid #06b6d4;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .model-box h4 {
+            color: #0891b2;
+            margin-bottom: 10px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-card {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .comparison-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .tech-stack span {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .btn-retour {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+
+        .btn-retour:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .projet-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .facteurs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projet-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .projet-content,
+            .downloads-section,
+            .description-section {
+                padding: 25px;
+            }
+            
+            .meta-item {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .downloads-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+		
+		/* Footer - Version agrandie */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.social-link {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 30px;
+        margin-top: 50px;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .footer-text {
+        font-size: 0.9rem;
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+    
+    .footer-social {
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .footer-copyright {
+        font-size: 0.75rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
+            <a href="index.html#projets" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="projet-header">
+            <h1>Modélisation de courbes de croissance</h1>
+            <h1 style="font-size: 1.5rem; margin-top: -10px;">Régression sur données réelles - Étude comparative</h1>
+            <div class="projet-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> Juin 2025</div>
+                <div class="meta-item"><i class="fas fa-tag"></i> Data Science</div>
+                <div class="meta-item"><i class="fas fa-child"></i> 8 000 enfants</div>
+                <div class="meta-item"><i class="fas fa-chart-line"></i> Régression polynomiale</div>
+            </div>
+            <div class="category-badge">
+                <i class="fas fa-chart-line"></i> Projet académique - BUT Science des Données
+            </div>
+        </div>
+
+        <div class="projet-content">
+            <!-- Partie gauche : Résumé / Objectifs -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bullseye"></i> Objectifs
+                </h2>
+                <p>Analyser la croissance de 8 000 enfants âgés de 5 à 19 ans issus de deux pays (Nouvelle-Zélande et Émirats Arabes Unis) afin de modéliser et comparer les trajectoires de croissance selon l'âge, le sexe et le pays d'origine.</p>
+                
+                <h3 style="margin: 25px 0 15px;"><i class="fas fa-database"></i> Données</h3>
+                <ul>
+                    <li><strong>Effectif :</strong> 8 000 enfants</li>
+                    <li><strong>Tranche d'âge :</strong> 5 à 19 ans</li>
+                    <li><strong>Pays :</strong> Nouvelle-Zélande et Émirats Arabes Unis</li>
+                    <li><strong>Variables :</strong> Âge, sexe, pays, taille</li>
+                </ul>
+
+                <h3 style="margin: 25px 0 15px;"><i class="fas fa-chart-line"></i> Méthodologie</h3>
+                <ul>
+                    <li>Analyse exploratoire des données (univariée et bivariée)</li>
+                    <li>Modélisation par régression polynomiale (degré 1 à 4)</li>
+                    <li>Sélection du modèle optimal (compromis précision/complexité)</li>
+                    <li>Visualisation des courbes de croissance par sexe et pays</li>
+                </ul>
+            </div>
+
+            <!-- Partie droite : Facteurs étudiés -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-chart-simple"></i> Facteurs influençant la croissance
+                </h2>
+                
+                <div class="facteurs-grid">
+                    <div class="facteur-card">
+                        <i class="fas fa-venus-mars"></i>
+                        <h4>Sexe</h4>
+                        <p>Les garçons sont systématiquement plus grands que les filles</p>
+                    </div>
+                    <div class="facteur-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Âge</h4>
+                        <p>Augmentation forte avec une variabilité plus importante à l'adolescence</p>
+                    </div>
+                    <div class="facteur-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>Pays d'origine</h4>
+                        <p>Nouvelle-Zélande présente des tailles moyennes plus élevées que les ÉAU</p>
+                    </div>
+                </div>
+
+                <div class="model-box">
+                    <h4><i class="fas fa-chart-line"></i> Modélisation polynomiale</h4>
+                    <p><strong>Comparaison des modèles (degré 1 à 4) :</strong><br>
+                    • Degré 1 : trop linéaire, ne capture pas la croissance différentielle<br>
+                    • Degré 2 : meilleur mais encore limité<br>
+                    • <strong>Degré 3 : retenu comme le plus pertinent</strong> → meilleur compromis entre précision et complexité<br>
+                    • Degré 4 : sur-ajustement potentiel</p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h5><i class="fas fa-flag-checkered"></i> Nouvelle-Zélande</h5>
+                        <p>Tailles moyennes plus élevées</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h5><i class="fas fa-flag-checkered"></i> Émirats Arabes Unis</h5>
+                        <p>Tailles moyennes plus faibles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section des téléchargements -->
+        <div class="downloads-section">
+            <div class="downloads-title">
+                <h2><i class="fas fa-download"></i> Téléchargements</h2>
+                <p>Retrouvez l'intégralité des livrables du projet : rapport d'analyse et code R</p>
+            </div>
+            <div class="downloads-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Rapport d'analyse</h3>
+                    <p>Rapport complet présentant la méthodologie, les résultats et les courbes de croissance</p>
+                    <a href="pdf/SAE Régrésssion PDF1.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger PDF
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Code R</h3>
+                    <p>Script complet des analyses : régressions polynomiales, visualisations et sélection de modèle</p>
+                    <a href="pdf/CodePropreSAERegressionSurDonneesReelles.R" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger .R
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section description détaillée -->
+        <div class="description-section">
+            <h2><i class="fas fa-chart-line"></i> Démarche méthodologique</h2>
+            
+            <h3>1. Analyse exploratoire des données</h3>
+            <p>Réalisation d'analyses univariées (distribution de l'âge, de la taille, répartition par sexe et par pays) et bivariées (relation âge-taille, comparaison des tailles moyennes selon le sexe et le pays) pour comprendre la structure des données et identifier les tendances principales.</p>
+            
+            <h3>2. Modélisation par régression polynomiale</h3>
+            <p>Construction de modèles polynomiaux de degré 1 à 4 pour modéliser la relation non linéaire entre l'âge et la taille. Comparaison des modèles via des critères de qualité (R² ajusté, AIC, BIC) et analyse des résidus.</p>
+            
+            <h3>3. Sélection du modèle optimal</h3>
+            <p>Le modèle polynomial de degré 3 est retenu comme le plus pertinent, offrant le meilleur compromis entre précision d'ajustement et complexité. Il capture efficacement l'accélération de croissance à l'adolescence et le ralentissement ultérieur.</p>
+            
+            <h3>4. Analyse des facteurs explicatifs</h3>
+            <p>Intégration des variables sexe et pays dans le modèle pour quantifier leur impact sur la taille. Visualisation des courbes de croissance séparées par sexe et par pays.</p>
+            
+            <h3>5. Visualisation des résultats</h3>
+            <p>Production de graphiques des courbes de croissance (médiane et quartiles) illustrant les différences nettes selon le sexe et le pays d'origine.</p>
+
+            <h2 style="margin-top: 30px;"><i class="fas fa-chart-simple"></i> Principales conclusions</h2>
+            <ul>
+                <li><strong>Les garçons sont systématiquement plus grands</strong> que les filles à tous les âges</li>
+                <li><strong>La Nouvelle-Zélande présente des tailles moyennes plus élevées</strong> que les Émirats Arabes Unis</li>
+                <li><strong>La croissance est non linéaire</strong> : le modèle polynomial de degré 3 capture au mieux cette relation</li>
+                <li><strong>Impact conjoint des facteurs biologiques et environnementaux</strong> sur le développement des enfants</li>
+            </ul>
+
+            <div class="tech-stack">
+                <span><i class="fab fa-r-project"></i> R</span>
+                <span><i class="fas fa-chart-line"></i> lm()</span>
+                <span><i class="fas fa-chart-pie"></i> ggplot2</span>
+                <span><i class="fas fa-chart-bar"></i> dplyr</span>
+                <span><i class="fas fa-chart-simple"></i> Régression polynomiale</span>
+                <span><i class="fas fa-chart-line"></i> AIC / BIC</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    Enzo<span class="footer-logo-dot">.</span>CHEN
+                </div>
+                <p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
+                
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:echen170406@gmail.com" class="social-link email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:0767896889" class="social-link phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </a>
+                    <a href="https://github.com/Ecn1234" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html#accueil">Accueil</a>
+                    <a href="index.html#profil">Profil</a>
+                    <a href="index.html#parcours">Parcours</a>
+                    <a href="index.html#competences">Compétences</a>
+                    <a href="index.html#projets">Projets</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                
+                <p class="footer-copyright">
+                    &copy; 2026 Enzo CHEN. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

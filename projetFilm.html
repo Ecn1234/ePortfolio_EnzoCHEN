@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nettoyage et structuration de données - Cinéma | Enzo CHEN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo-dot {
+            color: var(--primary-color);
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        /* Header projet */
+        .projet-header {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .projet-header h1 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .projet-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Contenu principal */
+        .projet-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        /* Section des téléchargements */
+        .downloads-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .downloads-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .downloads-title h2 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .downloads-title p {
+            color: var(--gray-color);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .download-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .download-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .download-card p {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            margin-bottom: 25px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 14px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section description */
+        .description-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .description-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .description-section h3 {
+            margin: 25px 0 15px;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+        }
+
+        .description-section p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .description-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .description-section li {
+            color: var(--gray-color);
+            margin-bottom: 8px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .process-card {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .process-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .process-card i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .process-card h4 {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        .output-box {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .output-box h4 {
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .tech-stack span {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .btn-retour {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+
+        .btn-retour:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .projet-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projet-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .projet-content,
+            .downloads-section,
+            .description-section {
+                padding: 25px;
+            }
+            
+            .meta-item {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+		
+		/* Footer - Version agrandie */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.social-link {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 30px;
+        margin-top: 50px;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .footer-text {
+        font-size: 0.9rem;
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+    
+    .footer-social {
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .footer-copyright {
+        font-size: 0.75rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
+            <a href="index.html#projets" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="projet-header">
+            <h1>Nettoyage et structuration de données</h1>
+            <h1 style="font-size: 1.5rem; margin-top: -10px;">Traitement de données cinéma - Python</h1>
+            <div class="projet-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> Novembre 2024</div>
+                <div class="meta-item"><i class="fas fa-tag"></i> Informatique</div>
+                <div class="meta-item"><i class="fas fa-film"></i> Données cinéma</div>
+                <div class="meta-item"><i class="fas fa-code"></i> Python standard</div>
+            </div>
+            <div class="category-badge">
+                <i class="fas fa-code"></i> Projet académique - BUT Science des Données
+            </div>
+        </div>
+
+        <div class="projet-content">
+            <!-- Partie gauche : Résumé / Objectifs -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bullseye"></i> Objectifs
+                </h2>
+                <p>Développer un programme en Python (sans bibliothèques externes) permettant de traiter des fichiers de données bruts sur le cinéma, partiellement corrompus et au format non standard.</p>
+                
+                <h3 style="margin: 25px 0 15px;"><i class="fas fa-tasks"></i> Missions</h3>
+                <ul>
+                    <li>Lire et parser des fichiers texte complexes</li>
+                    <li>Nettoyer et restructurer les données corrompues</li>
+                    <li>Générer automatiquement deux fichiers de sortie structurés</li>
+                </ul>
+
+                <h3 style="margin: 25px 0 15px;"><i class="fas fa-chart-line"></i> Contraintes techniques</h3>
+                <ul>
+                    <li>Bibliothèque standard Python uniquement</li>
+                    <li>Chemins relatifs pour les fichiers</li>
+                    <li>Formats de sortie imposés</li>
+                </ul>
+            </div>
+
+            <!-- Partie droite : Processus -->
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-cogs"></i> Processus de traitement
+                </h2>
+                
+                <div class="process-grid">
+                    <div class="process-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Lecture</h4>
+                        <p>Parsing des fichiers bruts</p>
+                    </div>
+                    <div class="process-card">
+                        <i class="fas fa-broom"></i>
+                        <h4>Nettoyage</h4>
+                        <p>Gestion des valeurs corrompues</p>
+                    </div>
+                    <div class="process-card">
+                        <i class="fas fa-table"></i>
+                        <h4>Structuration</h4>
+                        <p>Normalisation des données</p>
+                    </div>
+                    <div class="process-card">
+                        <i class="fas fa-file-export"></i>
+                        <h4>Génération</h4>
+                        <p>Export CSV + TXT</p>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <h4><i class="fas fa-file-csv"></i> Fichiers de sortie</h4>
+                    <p><strong>CSV structuré :</strong> compatible Excel, contenant les informations des films (titre, année, durée, votes, score) avec une référence unique générée</p>
+                    <p style="margin-top: 10px;"><strong>TXT récapitulatif :</strong> statistiques globales (nombre de films, score minimum, maximum et moyenne)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section des téléchargements -->
+        <div class="downloads-section">
+            <div class="downloads-title">
+                <h2><i class="fas fa-download"></i> Téléchargements</h2>
+                <p>Retrouvez l'intégralité du projet : code source, données brutes et fichiers générés</p>
+            </div>
+            <div class="downloads-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-archive"></i>
+                    </div>
+                    <h3>Projet complet</h3>
+                    <p>Archive ZIP contenant le script Python, les données brutes, les fichiers CSV et TXT générés, ainsi que la documentation</p>
+                    <a href="pdf/DossierSAEfichier.zip" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger .ZIP
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section description détaillée -->
+        <div class="description-section">
+            <h2><i class="fas fa-code"></i> Architecture du programme</h2>
+            
+            <h3>1. Lecture et parsing des fichiers</h3>
+            <p>Le programme parcourt les fichiers texte bruts, identifie les différents champs (titre, année, durée, votes, score) et gère les formats non standards. La lecture s'effectue ligne par ligne pour optimiser la mémoire.</p>
+            
+            <h3>2. Nettoyage des données</h3>
+            <p>Traitement des valeurs manquantes et corrompues : suppression des caractères indésirables, normalisation des formats de dates et de nombres, gestion des doublons et des incohérences.</p>
+            
+            <h3>3. Structuration et normalisation</h3>
+            <p>Organisation des données nettoyées en champs cohérents. Génération d'un identifiant unique pour chaque film. Conversion des types de données (entiers, flottants, chaînes) selon le format cible.</p>
+            
+            <h3>4. Génération du fichier CSV</h3>
+            <p>Export des données structurées au format CSV avec séparateur point-virgule pour une compatibilité optimale avec Excel. Gestion des caractères spéciaux et des guillemets pour éviter les erreurs d'import.</p>
+            
+            <h3>5. Génération du fichier récapitulatif</h3>
+            <p>Calcul des statistiques globales : nombre total de films, score minimum, score maximum, score moyen (arrondi à 2 décimales). Écriture dans un fichier texte formaté.</p>
+
+            <h2 style="margin-top: 30px;"><i class="fas fa-chart-simple"></i> Compétences mobilisées</h2>
+            <ul>
+                <li><strong>Gestion de fichiers</strong> : lecture/écriture, manipulation de chemins</li>
+                <li><strong>Manipulation de chaînes de caractères</strong> : parsing, nettoyage, extraction</li>
+                <li><strong>Structures de données</strong> : listes, dictionnaires pour l'organisation des données</li>
+                <li><strong>Automatisation</strong> : traitement en une seule exécution</li>
+                <li><strong>Respect des contraintes</strong> : bibliothèque standard uniquement</li>
+            </ul>
+
+            <div class="tech-stack">
+                <span><i class="fab fa-python"></i> Python</span>
+                <span><i class="fas fa-file-alt"></i> Manipulation de fichiers</span>
+                <span><i class="fas fa-chart-line"></i> Parsing</span>
+                <span><i class="fas fa-table"></i> CSV</span>
+                <span><i class="fas fa-chart-bar"></i> Statistiques</span>
+                <span><i class="fas fa-code"></i> Regex</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    Enzo<span class="footer-logo-dot">.</span>CHEN
+                </div>
+                <p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
+                
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:echen170406@gmail.com" class="social-link email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:0767896889" class="social-link phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </a>
+                    <a href="https://github.com/Ecn1234" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html#accueil">Accueil</a>
+                    <a href="index.html#profil">Profil</a>
+                    <a href="index.html#parcours">Parcours</a>
+                    <a href="index.html#competences">Compétences</a>
+                    <a href="index.html#projets">Projets</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                
+                <p class="footer-copyright">
+                    &copy; 2026 Enzo CHEN. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
