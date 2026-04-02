@@ -4576,6 +4576,478 @@ h1, h2, h3, h4, h5, h6 {
     .social-link { width: 45px; height: 45px; font-size: 1.2rem; }
     .footer-copyright { font-size: 0.75rem; }
 }
+
+/* Carte CV spécifique */
+.cv-card {
+    background: linear-gradient(135deg, #ffffff, #f0fdf4);
+    border: 1px solid #10b981;
+}
+
+.cv-card:hover {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.cv-card:hover .contact-icon {
+    background: white;
+    color: #10b981;
+}
+
+.cv-card .contact-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* Section Profil - Design harmonisé */
+.profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profil-left,
+.profil-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profil-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.profil-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.15);
+}
+
+.profil-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+}
+
+.profil-card-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.profil-card-header h3 {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.profil-card-body {
+    padding: 20px 25px;
+}
+
+/* Info rows - style uniforme */
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Achievement highlight - style harmonisé */
+.achievement-highlight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.achievement-badge {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.achievement-details h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.achievement-details p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin: 0;
+}
+
+/* Search values - style uniforme */
+.search-values {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.search-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-item:hover {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    transform: translateX(5px);
+}
+
+.search-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.search-text {
+    flex: 1;
+}
+
+.search-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    margin-bottom: 4px;
+}
+
+.search-text span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.4;
+}
+
+/* Projects stats */
+.projects-stats {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.stats-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.projects-stats p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin-bottom: 15px;
+}
+
+.projects-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stat-badge {
+    padding: 5px 12px;
+    background: #f1f5f9;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--gray-color);
+    transition: all 0.2s ease;
+}
+
+.stat-badge:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Centres d'intérêt */
+.interests-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.interest-showcase-item {
+    display: flex;
+    gap: 16px;
+    padding: 15px;
+    background: white;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+    cursor: default;
+}
+
+.interest-showcase-item:hover {
+    transform: translateX(5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px -5px rgba(37, 99, 235, 0.15);
+}
+
+.interest-showcase-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.interest-showcase-icon.tennis {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.interest-showcase-icon.pingpong {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.interest-showcase-icon.piano {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.interest-showcase-icon.harmonica {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    color: white;
+}
+
+.interest-showcase-info {
+    flex: 1;
+}
+
+.interest-showcase-info h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.interest-showcase-info p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.interest-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 20px;
+    font-size: 0.65rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.interests-quote {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    border-radius: 16px;
+    margin-top: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.interests-quote i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+.interests-quote p {
+    font-size: 0.85rem;
+    color: var(--dark-color);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .profil-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .info-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+    
+    .achievement-highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .interest-showcase-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .interest-showcase-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .interest-showcase-info h4 {
+        font-size: 0.95rem;
+    }
+    
+    .interest-showcase-info p {
+        font-size: 0.8rem;
+    }
+    
+    .interests-quote {
+        padding: 14px;
+    }
+    
+    .interests-quote p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Timeline header avec badges */
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.timeline-header h3 {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.timeline-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.timeline-badge.formation {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+}
+
+.timeline-badge.work {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+/* Nouvelle mention Très Bien - couleur violette */
+.mention-tb-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
     </style>
 </head>
 <body>
@@ -4586,7 +5058,7 @@ h1, h2, h3, h4, h5, h6 {
             <ul class="nav-menu">
                 <li><a href="#accueil" class="nav-link active">Accueil</a></li>
                 <li><a href="#profil" class="nav-link">Profil</a></li>
-                <li><a href="#parcours" class="nav-link">Mon parcours</a></li>
+                <li><a href="#parcours" class="nav-link">Parcours</a></li>
                 <li><a href="#competences" class="nav-link">Compétences</a></li>
                 <li><a href="#projets" class="nav-link">Projets</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -4648,20 +5120,32 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                     <div class="profil-card-body">
                         <div class="info-row">
-                            <div class="info-label"><i class="fas fa-graduation-cap"></i><span>Statut</span></div>
-                            <div class="info-value">Étudiant en 2ème année de BUT Science des Données</div>
+                            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Statut</div>
+                                <div class="info-value">Étudiant en 2ème année de BUT Science des Données</div>
+                            </div>
                         </div>
                         <div class="info-row">
-                            <div class="info-label"><i class="fas fa-briefcase"></i><span>Recherche</span></div>
-                            <div class="info-value">Stage Data Scientist (4-5 mois) — Avril à août 2026</div>
+                            <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Recherche</div>
+                                <div class="info-value">Stage Data Scientist (4-5 mois) — Avril à août 2026</div>
+                            </div>
                         </div>
                         <div class="info-row">
-                            <div class="info-label"><i class="fas fa-bullseye"></i><span>Objectif</span></div>
-                            <div class="info-value">Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</div>
+                            <div class="info-icon"><i class="fas fa-bullseye"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Objectif</div>
+                                <div class="info-value">Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</div>
+                            </div>
                         </div>
                         <div class="info-row">
-                            <div class="info-label"><i class="fas fa-map-marker-alt"></i><span>Lieu</span></div>
-                            <div class="info-value">Gagny 93220, Île-de-France</div>
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Localisation</div>
+                                <div class="info-value">Gagny 93220, Île-de-France</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4692,21 +5176,21 @@ h1, h2, h3, h4, h5, h6 {
                     <div class="profil-card-body">
                         <div class="search-values">
                             <div class="search-item">
-                                <i class="fas fa-chart-line"></i>
+                                <div class="search-icon"><i class="fas fa-chart-line"></i></div>
                                 <div class="search-text">
                                     <strong>Une entreprise innovante</strong>
                                     <span>Où la data est au cœur des décisions stratégiques</span>
                                 </div>
                             </div>
                             <div class="search-item">
-                                <i class="fas fa-users"></i>
+                                <div class="search-icon"><i class="fas fa-users"></i></div>
                                 <div class="search-text">
                                     <strong>Une équipe passionnée</strong>
                                     <span>Pour apprendre et partager autour de projets stimulants</span>
                                 </div>
                             </div>
                             <div class="search-item">
-                                <i class="fas fa-rocket"></i>
+                                <div class="search-icon"><i class="fas fa-rocket"></i></div>
                                 <div class="search-text">
                                     <strong>Des missions concrètes</strong>
                                     <span>Analyse, modélisation et valorisation des données</span>
@@ -4747,7 +5231,7 @@ h1, h2, h3, h4, h5, h6 {
                         <h3>Centres d'intérêt</h3>
                     </div>
                     <div class="profil-card-body">
-                        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px;">
+                        <div class="interests-showcase">
                             <div class="interest-showcase-item">
                                 <div class="interest-showcase-icon tennis"><i class="fas fa-table-tennis"></i></div>
                                 <div class="interest-showcase-info">
@@ -5057,15 +5541,16 @@ h1, h2, h3, h4, h5, h6 {
                 </div>
             </div>
     </section>
-    <!-- Section Projets -->
+        <!-- Section Projets -->
     <section id="projets" class="section projets-section">
         <div class="container">
             <h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
             <p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
             
             <div class="projets-grid">
-                <!-- Projet 1 -->
-                <div class="projet-card">
+                <!-- Projet 1 - Cardio Good Fitness -->
+                <div class="projet-card" style="background-image: url('img/projet-cardio.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Déc 2025</div>
                     <div class="projet-card-category statistique">
                         <i class="fas fa-chart-line"></i> Statistique
@@ -5087,8 +5572,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 2 -->
-                <div class="projet-card">
+                <!-- Projet 2 - Pollution CO2 -->
+                <div class="projet-card" style="background-image: url('img/projet-pollution.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Déc 2025</div>
                     <div class="projet-card-category datascience">
                         <i class="fas fa-chart-line"></i> Data Science
@@ -5110,8 +5596,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 3 -->
-                <div class="projet-card">
+                <!-- Projet 3 - RGPD -->
+                <div class="projet-card" style="background-image: url('img/projet-rgpd.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Déc 2025</div>
                     <div class="projet-card-category reglementaire">
                         <i class="fas fa-gavel"></i> Réglementaire
@@ -5133,8 +5620,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 4 -->
-                <div class="projet-card">
+                <!-- Projet 4 - SAS -->
+                <div class="projet-card" style="background-image: url('img/projet-sas.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Nov 2025</div>
                     <div class="projet-card-category informatique">
                         <i class="fas fa-code"></i> Informatique
@@ -5156,8 +5644,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 5 -->
-                <div class="projet-card">
+                <!-- Projet 5 - Nettoyage données cinéma -->
+                <div class="projet-card" style="background-image: url('img/projet-film.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Nov 2024</div>
                     <div class="projet-card-category informatique">
                         <i class="fas fa-code"></i> Informatique
@@ -5179,8 +5668,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 6 -->
-                <div class="projet-card">
+                <!-- Projet 6 - Analyse bonheur -->
+                <div class="projet-card" style="background-image: url('img/projet-bonheur.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Oct 2024</div>
                     <div class="projet-card-category statistique">
                         <i class="fas fa-chart-line"></i> Statistique
@@ -5202,8 +5692,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 7 -->
-                <div class="projet-card">
+                <!-- Projet 7 - Enquête étudiants -->
+                <div class="projet-card" style="background-image: url('img/projet-enquete.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Déc 2024</div>
                     <div class="projet-card-category statistique">
                         <i class="fas fa-chart-line"></i> Statistique
@@ -5225,8 +5716,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 8 -->
-                <div class="projet-card">
+                <!-- Projet 8 - Échantillonnage étoiles -->
+                <div class="projet-card" style="background-image: url('img/projet-etoiles.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Juin 2025</div>
                     <div class="projet-card-category statistique">
                         <i class="fas fa-chart-line"></i> Statistique
@@ -5248,8 +5740,9 @@ h1, h2, h3, h4, h5, h6 {
                     </div>
                 </div>
 
-                <!-- Projet 9 -->
-                <div class="projet-card">
+                <!-- Projet 9 - Croissance -->
+                <div class="projet-card" style="background-image: url('img/projet-croissance.jpg');">
+                    <div class="projet-card-overlay"></div>
                     <div class="projet-card-badge">Juin 2025</div>
                     <div class="projet-card-category datascience">
                         <i class="fas fa-chart-line"></i> Data Science
@@ -5274,12 +5767,20 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </section>
 
-         <!-- Section Contact -->
+    <!-- Section Contact -->
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2 class="section-title">Contactez<span class="highlight">-moi</span></h2>
             <div class="contact-content">
                 <div class="contact-info">
+                    <!-- Bouton CV en premier -->
+                    <a href="pdf/CV général.pdf" class="contact-card cv-card" download>
+                        <div class="contact-icon"><i class="fas fa-file-pdf"></i></div>
+                        <div class="contact-details">
+                            <h3>Télécharger mon CV</h3>
+                            <p>CV - Enzo CHEN</p>
+                        </div>
+                    </a>
                     <a href="mailto:echen170406@gmail.com" class="contact-card">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div class="contact-details">
