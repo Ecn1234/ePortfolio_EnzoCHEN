@@ -4,9 +4,4579 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enzo CHEN - Étudiant en Data Science</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --accent-color: #06b6d4;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --gray-color: #64748b;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.highlight {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--accent-color), transparent);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-left: 10px;
+}
+
+.logo-dot {
+    color: var(--primary-color);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin-right: 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-color);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--dark-color);
+    transition: var(--transition);
+}
+
+/* Section Accueil */
+.accueil-section {
+    padding-top: 140px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.accueil-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.accueil-text {
+    animation: fadeInLeft 1s ease;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--gray-color);
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.role {
+    font-size: 1.5rem;
+    color: var(--gray-color);
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: var(--gray-color);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.accueil-image {
+    position: relative;
+    animation: fadeInRight 1s ease;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+.floating-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-element:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+    top: 50%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.floating-element:nth-child(3) {
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.floating-element:nth-child(4) {
+    top: 30%;
+    right: 5%;
+    animation-delay: 3s;
+}
+
+/* Section Profil */
+.profil-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.info-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.info-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.info-item {
+    margin-bottom: 15px;
+}
+
+.info-item strong {
+    color: var(--dark-color);
+    margin-right: 10px;
+}
+
+.langue-item {
+    margin-bottom: 20px;
+}
+
+.langue-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.langue-name {
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.langue-label {
+    font-size: 0.82rem;
+    color: var(--gray-color);
+}
+
+.langue-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+}
+
+.langue-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.stats-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.stats-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+}
+
+.achievement, .availability {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.achievement-icon, .availability-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 10px;
+}
+
+.interests {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.interest-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.interest-item:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.project-count {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.count-number {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Section Mon Parcours - Timeline enrichie (ordre inversé : du plus récent au plus ancien) */
+.parcours-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 150px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.timeline-date {
+    min-width: 140px;
+    text-align: right;
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    padding: 5px 30px 5px 5px;
+    font-size: 1.1rem;
+    z-index: 2;
+    background: transparent;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.timeline-date::after {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 4px solid var(--primary-color);
+    border-radius: 50%;
+    z-index: 3;
+    box-shadow: 0 0 0 4px var(--light-color);
+}
+
+.timeline-content {
+    background: white;
+    padding: 25px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    flex: 1;
+    transition: var(--transition);
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.timeline-content:hover::before {
+    opacity: 1;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content h3 {
+    color: var(--dark-color);
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+.timeline-subtitle {
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.timeline-description {
+    color: var(--gray-color);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.timeline-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 10px;
+}
+
+.timeline-badge-work {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.timeline-icon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 2.5rem;
+    opacity: 0.1;
+    transition: var(--transition);
+}
+
+.timeline-content:hover .timeline-icon {
+    opacity: 0.2;
+    transform: scale(1.1);
+}
+
+/* Location et entreprise */
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 8px 0;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.location-info i {
+    color: var(--primary-color);
+    width: 16px;
+}
+
+.company-name {
+    font-weight: 600;
+    color: var(--dark-color);
+    background: #f1f5f9;
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.mention-tb {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 30px;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 12px;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+/* Section Compétences */
+.competence-category {
+    margin-bottom: 40px;
+}
+
+.competence-category h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.tool-category {
+    background: white;
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.tool-category:hover {
+    transform: translateY(-5px);
+}
+
+.tool-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.tool-item:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.tool-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.tool-item:hover .tool-icon {
+    color: white;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.skill-tag {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.skill-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Section Projets */
+.projets-section {
+    background: #f8fafc;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--gray-color);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.projets-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 30px;
+    color: var(--gray-color);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.projets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.projet-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.projet-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.projet-card-header {
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projet-card-content {
+    padding: 25px;
+    flex: 1;
+}
+
+.projet-card-content h3 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.projet-description {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.projet-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.projet-tags .tag {
+    padding: 5px 12px;
+    background: #e2e8f0;
+    color: var(--gray-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 0;
+    transition: var(--transition);
+}
+
+.projet-card:hover .projet-tags .tag {
+    background: var(--primary-color);
+    color: white;
+}
+
+.projet-card-footer {
+    padding: 0 25px 25px;
+}
+
+.details-btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.details-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Section Contact */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+}
+
+.contact-info {
+    display: grid;
+    gap: 20px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    transform: translateX(10px);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.contact-card:hover .contact-icon {
+    background: white;
+    color: var(--primary-color);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.linkedin-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-card:hover .linkedin-link {
+    color: white;
+}
+
+.contact-form-container {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.form-header {
+    margin-bottom: 25px;
+}
+
+.form-header h3 {
+    margin-bottom: 8px;
+    color: var(--dark-color);
+}
+
+.form-header p {
+    color: var(--gray-color);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background: #f8fafc;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: white;
+}
+
+.form-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: var(--radius);
+    display: none;
+}
+
+.form-message.success {
+    background: #d1fae5;
+    color: #065f46;
+    display: block;
+}
+
+.form-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    display: block;
+}
+
+.form-message.info {
+    background: #dbeafe;
+    color: #1e40af;
+    display: block;
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-color);
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 30px;
+}
+
+/* Bouton retour en haut */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--gray-color);
+    cursor: pointer;
+    transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-close:hover {
+    background: #f1f5f9;
+    color: var(--danger-color);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.projet-modal-description {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.projet-details h3 {
+    color: var(--primary-color);
+    margin: 20px 0 10px;
+    font-size: 1.1rem;
+}
+
+.projet-details ul {
+    padding-left: 20px;
+    color: var(--gray-color);
+    line-height: 1.8;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.tech-tags .tag {
+    background: #e2e8f0;
+    color: var(--gray-color);
+    margin-top: 0;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .accueil-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .profil-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .title {
+        font-size: 2.8rem;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-link {
+        padding: 15px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .projets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 15px;
+        padding-left: 45px;
+    }
+
+    .timeline-date {
+        min-width: auto;
+        text-align: left;
+        padding: 4px 12px 4px 10px;
+        width: fit-content;
+        font-size: 0.95rem;
+    }
+
+    .timeline-date::after {
+        left: -33px;
+        right: auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .timeline-content {
+        margin-left: 0;
+    }
+
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .logo {
+        margin-left: 0;
+        font-size: 1.6rem;
+    }
+
+    .nav-menu {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .role {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .contact-form-container {
+        padding: 20px;
+    }
+}
+
+/* Styles améliorés pour la section Compétences */
+
+/* Statistique - cartes modernes */
+.enhanced-category {
+    margin-bottom: 50px;
+}
+
+.stats-enhanced-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--primary-color);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.stat-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.stat-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Informatique Décisionnelle */
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.business-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.business-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, white, #f8fafc);
+}
+
+.business-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.business-card:hover .business-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.business-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.business-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Section Langues améliorée */
+.langues-category {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 24px;
+    padding: 10px 0 20px 0;
+}
+
+.langues-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.langue-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid transparent;
+}
+
+.langue-card-modern:hover {
+    transform: translateY(-8px);
+    border-bottom-color: var(--primary-color);
+    box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
+}
+
+.langue-flag {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.langue-flag i {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.langue-info {
+    margin-bottom: 15px;
+}
+
+.langue-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.langue-progress {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.langue-level-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.langue-desc {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.4;
+    margin-top: 12px;
+}
+
+/* Responsive pour les nouvelles sections */
+@media (max-width: 768px) {
+    .stats-enhanced-grid,
+    .business-grid,
+    .langues-enhanced {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card-modern,
+    .business-card {
+        padding: 18px;
+    }
+    
+    .langue-card-modern {
+        padding: 20px;
+    }
+}
+
+/* Styles améliorés pour la section Compétences */
+
+/* Statistique - cartes modernes */
+.enhanced-category {
+    margin-bottom: 50px;
+}
+
+.stats-enhanced-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--primary-color);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.stat-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.stat-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Informatique Décisionnelle */
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.business-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.business-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, white, #f8fafc);
+}
+
+.business-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.business-card:hover .business-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.business-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.business-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Section Langues améliorée */
+.langues-category {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 24px;
+    padding: 10px 0 20px 0;
+    margin-bottom: 50px;
+}
+
+.langues-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.langue-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid transparent;
+}
+
+.langue-card-modern:hover {
+    transform: translateY(-8px);
+    border-bottom-color: var(--primary-color);
+    box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
+}
+
+.langue-flag {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.langue-flag i {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.langue-info {
+    margin-bottom: 15px;
+}
+
+.langue-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.langue-progress {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.langue-level-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.langue-desc {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.4;
+    margin-top: 12px;
+}
+
+/* Skills tags avec icônes */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.skill-tag i {
+    font-size: 0.9rem;
+}
+
+.skill-tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.skill-tag:hover i {
+    color: white;
+}
+
+/* Titres des catégories Outils et Technologies avec icônes */
+.tool-category h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.tool-category h4 i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Responsive pour les nouvelles sections */
+@media (max-width: 768px) {
+    .stats-enhanced-grid,
+    .business-grid,
+    .langues-enhanced {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card-modern,
+    .business-card {
+        padding: 18px;
+    }
+    
+    .langue-card-modern {
+        padding: 20px;
+    }
+    
+    .skill-tag {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Nouvelle grille moderne pour Outils et Technologies */
+.tools-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.tool-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.tool-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.tool-card-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.tool-card-header h4 {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.tool-card-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tool-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f8fafc;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.tool-chip i {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+.tool-chip:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+.tool-chip:hover i {
+    color: white;
+}
+
+/* Icône pour Jupyter Notebook (fa-chart-simple est utilisé, mais on peut aussi utiliser une classe personnalisée) */
+/* Si vous voulez une icône plus spécifique, voici un style alternatif */
+.tool-chip i.fa-chart-simple {
+    /* Icône de remplacement pour Jupyter */
+}
+
+/* Ajustement pour les petites tailles */
+@media (max-width: 768px) {
+    .tools-grid-modern {
+        grid-template-columns: 1fr;
+    }
+    
+    .tool-card-items {
+        gap: 8px;
+    }
+    
+    .tool-chip {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Amélioration des autres sections existantes */
+.stats-enhanced-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card-modern {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.stat-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.stat-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Business cards */
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.business-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.business-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.business-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.business-card:hover .business-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.business-content h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.business-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Langues */
+.langues-category {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 24px;
+    padding: 10px 0 20px 0;
+}
+
+.langues-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.langue-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid transparent;
+}
+
+.langue-card-modern:hover {
+    transform: translateY(-8px);
+    border-bottom-color: var(--primary-color);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.langue-flag {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.langue-flag i {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.langue-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.langue-progress {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.langue-level-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.langue-desc {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.4;
+    margin-top: 12px;
+}
+
+/* Skills tags */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 40px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.skill-tag i {
+    font-size: 0.9rem;
+}
+
+.skill-tag:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-enhanced-grid,
+    .business-grid,
+    .langues-enhanced {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card-modern,
+    .business-card {
+        padding: 18px;
+    }
+    
+    .langue-card-modern {
+        padding: 20px;
+    }
+    
+    .skill-tag {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Savoir-être - Nouveau design amélioré */
+.soft-skills-category {
+    margin-top: 20px;
+}
+
+.soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.soft-skill-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.08);
+    cursor: default;
+}
+
+.soft-skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+}
+
+.soft-skill-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.soft-skill-card:hover .soft-skill-icon {
+    transform: scale(1.05);
+}
+
+.soft-skill-content {
+    flex: 1;
+}
+
+.soft-skill-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--dark-color);
+}
+
+.soft-skill-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive pour les soft skills */
+@media (max-width: 768px) {
+    .soft-skills-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .soft-skill-card {
+        padding: 18px;
+    }
+    
+    .soft-skill-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .soft-skill-content h4 {
+        font-size: 1rem;
+    }
+    
+    .soft-skill-content p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Profil - Nouveau design amélioré */
+.info-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.info-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 14px;
+    transition: all 0.2s ease;
+}
+
+.info-item:hover {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    transform: translateX(5px);
+}
+
+.info-item i {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.info-text {
+    flex: 1;
+}
+
+.info-text strong {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.info-text span {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+/* Timeline simple pour la formation */
+.timeline-simple {
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-simple::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.timeline-simple-item {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.timeline-simple-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-simple-dot {
+    position: absolute;
+    left: -20px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.timeline-simple-content h4 {
+    font-size: 1rem;
+    color: var(--dark-color);
+    margin-bottom: 4px;
+}
+
+.timeline-simple-date {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.timeline-simple-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Stats cards améliorées */
+.stats-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.stats-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 12px;
+}
+
+.achievement, .availability {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.achievement-icon, .availability-icon {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.achievement-content h4, .availability-content h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.achievement-content p, .availability-content p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin: 0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.interests {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.interest-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.interest-item:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: translateY(-2px);
+}
+
+.interest-item i {
+    font-size: 1rem;
+}
+
+.project-count {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.count-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.count-text {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+}
+
+/* Centres d'intérêt - Version développée et personnelle */
+.interests-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.interests-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.interest-showcase-item {
+    display: flex;
+    gap: 18px;
+    padding: 15px;
+    background: white;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    cursor: default;
+}
+
+.interest-showcase-item:hover {
+    transform: translateX(8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.15);
+}
+
+.interest-showcase-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.interest-showcase-item:hover .interest-showcase-icon {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.interest-showcase-icon.tennis {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.interest-showcase-icon.pingpong {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.interest-showcase-icon.piano {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.interest-showcase-icon.harmonica {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    color: white;
+}
+
+.interest-showcase-info {
+    flex: 1;
+}
+
+.interest-showcase-info h4 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.interest-showcase-info p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.interest-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.interests-quote {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    border-radius: 16px;
+    margin-top: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.interests-quote i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+.interests-quote p {
+    font-size: 0.85rem;
+    color: var(--dark-color);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive pour les centres d'intérêt */
+@media (max-width: 768px) {
+    .interest-showcase-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .interest-showcase-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .interest-showcase-info h4 {
+        font-size: 0.95rem;
+    }
+    
+    .interest-showcase-info p {
+        font-size: 0.8rem;
+    }
+    
+    .interests-quote {
+        padding: 14px;
+    }
+    
+    .interests-quote p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Centres d'intérêt - Version développée et personnelle */
+.interests-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.interests-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.interest-showcase-item {
+    display: flex;
+    gap: 18px;
+    padding: 15px;
+    background: white;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    cursor: default;
+}
+
+.interest-showcase-item:hover {
+    transform: translateX(8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.15);
+}
+
+.interest-showcase-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.interest-showcase-item:hover .interest-showcase-icon {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.interest-showcase-icon.tennis {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.interest-showcase-icon.pingpong {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.interest-showcase-icon.piano {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.interest-showcase-icon.harmonica {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    color: white;
+}
+
+.interest-showcase-info {
+    flex: 1;
+}
+
+.interest-showcase-info h4 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.interest-showcase-info p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.interest-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.interests-quote {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    border-radius: 16px;
+    margin-top: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.interests-quote i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+.interests-quote p {
+    font-size: 0.85rem;
+    color: var(--dark-color);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive pour les centres d'intérêt */
+@media (max-width: 768px) {
+    .interest-showcase-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .interest-showcase-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .interest-showcase-info h4 {
+        font-size: 0.95rem;
+    }
+    
+    .interest-showcase-info p {
+        font-size: 0.8rem;
+    }
+    
+    .interests-quote {
+        padding: 14px;
+    }
+    
+    .interests-quote p {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* Section Profil - Nouveau design équilibré */
+.profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profil-left,
+.profil-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profil-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.profil-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: rgba(37, 99, 235, 0.15);
+}
+
+.profil-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+}
+
+.profil-card-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.profil-card-header h3 {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.profil-card-body {
+    padding: 20px 25px;
+}
+
+/* Info rows */
+.info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-label i {
+    width: 28px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.info-label span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Achievement highlight */
+.achievement-highlight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.achievement-badge {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.achievement-details h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.achievement-details p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin: 0;
+}
+
+/* Projects stats */
+.projects-stats {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.stats-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.projects-stats p {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 15px;
+}
+
+.projects-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stat-badge {
+    padding: 5px 12px;
+    background: #f1f5f9;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--gray-color);
+    transition: all 0.2s ease;
+}
+
+.stat-badge:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Interests full width */
+.interests-fullwidth {
+    margin-top: 10px;
+}
+
+.interests-card-full {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.interests-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.interest-showcase-item {
+    display: flex;
+    gap: 16px;
+    padding: 18px;
+    background: white;
+    border-radius: 18px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+    cursor: default;
+}
+
+.interest-showcase-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.15);
+}
+
+.interest-showcase-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.interest-showcase-item:hover .interest-showcase-icon {
+    transform: scale(1.05);
+}
+
+.interest-showcase-icon.tennis {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.interest-showcase-icon.pingpong {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.interest-showcase-icon.piano {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.interest-showcase-icon.harmonica {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    color: white;
+}
+
+.interest-showcase-info h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: var(--dark-color);
+}
+
+.interest-showcase-info p {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.interest-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: 20px;
+    font-size: 0.65rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.interests-quote {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    border-radius: 18px;
+    margin-top: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.interests-quote i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+.interests-quote p {
+    font-size: 0.85rem;
+    color: var(--dark-color);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .profil-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .interests-showcase {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-row {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .info-label {
+        min-width: auto;
+    }
+    
+    .achievement-highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .interest-showcase-item {
+        padding: 14px;
+    }
+    
+    .interest-showcase-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .interests-quote {
+        padding: 14px;
+    }
+    
+    .interests-quote p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Ce que je recherche - Nouvelle carte */
+.search-values {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.search-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-item:hover {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    transform: translateX(5px);
+}
+
+.search-item i {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.search-text {
+    flex: 1;
+}
+
+.search-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    margin-bottom: 4px;
+}
+
+.search-text span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    line-height: 1.4;
+}
+
+
+.profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 0;
+    align-items: start;
+}
+
+.profil-left,
+.profil-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.interests-fullwidth {
+    display: none;
+}
+
+
+/* Modifier le style existant de .highlight ou ajouter ce nouveau style */
+.highlight-name {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+/* Si vous préférez garder le soulignement et une couleur visible, utilisez ceci à la place : */
+.highlight-name {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.highlight-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.3;
+    z-index: -1;
+}
+
+
+/* Photo de profil */
+.profile-photo {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
+    border: 4px solid white;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    z-index: 10;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover img {
+    transform: scale(1.05);
+}
+
+/* Ajustement des éléments flottants pour ne pas cacher la photo */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    animation: float 6s ease-in-out infinite;
+    z-index: 5;
+}
+
+.floating-element:nth-child(2) {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.floating-element:nth-child(3) {
+    top: 20%;
+    right: 0%;
+    animation-delay: 1s;
+}
+
+.floating-element:nth-child(4) {
+    bottom: 15%;
+    left: 0%;
+    animation-delay: 2s;
+}
+
+.floating-element:nth-child(5) {
+    bottom: 25%;
+    right: 5%;
+    animation-delay: 3s;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .profile-photo {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .image-wrapper {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .image-wrapper {
+        height: 280px;
+    }
+}
+
+
+/* Section Projets - Nouveau design amélioré */
+.projets-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--gray-color);
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 30px;
+}
+
+.projet-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.projet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.25);
+}
+
+.projet-card-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.projet-card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 20px 0 0 25px;
+    width: fit-content;
+}
+
+.projet-card-category i {
+    font-size: 0.8rem;
+}
+
+.projet-card-category.statistique {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.projet-card-category.datascience {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.projet-card-category.informatique {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+}
+
+.projet-card-category.reglementaire {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.projet-card-content {
+    padding: 20px 25px 15px 25px;
+    flex: 1;
+}
+
+.projet-card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: var(--dark-color);
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.projet-card:hover .projet-card-content h3 {
+    color: var(--primary-color);
+}
+
+.projet-description {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.projet-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.projet-tags .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f1f5f9;
+    color: var(--gray-color);
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.projet-tags .tag i {
+    font-size: 0.7rem;
+}
+
+.projet-card:hover .projet-tags .tag {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.projet-card-footer {
+    padding: 0 25px 25px 25px;
+}
+
+.details-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 40px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-btn i {
+    transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-color: transparent;
+}
+
+.details-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .projets-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .projet-card-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .projet-description {
+        font-size: 0.85rem;
+    }
+    
+    .projet-card-category {
+        margin: 15px 0 0 20px;
+        padding: 6px 14px;
+        font-size: 0.75rem;
+    }
+    
+    .projet-card-badge {
+        top: 15px;
+        right: 15px;
+        padding: 4px 12px;
+        font-size: 0.7rem;
+    }
+}	
+
+.details-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 40px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.details-btn i {
+    transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-color: transparent;
+}
+
+.details-btn:hover i {
+    transform: translateX(5px);
+}
+
+
+
+/* Contact links */
+.contact-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.contact-card:hover .contact-link {
+    color: white;
+}
+/* Contact cards - cliquables */
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.contact-card:hover {
+    transform: translateX(10px);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.contact-card:hover .contact-icon {
+    background: white;
+    color: var(--primary-color);
+}
+
+.contact-card.no-link {
+    cursor: default;
+}
+
+.contact-card.no-link:hover {
+    transform: translateX(10px);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.contact-card.no-link:hover .contact-icon {
+    background: white;
+    color: var(--primary-color);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.contact-details h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--gray-color);
+}
+
+.contact-details p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.contact-card:hover .contact-details h3,
+.contact-card:hover .contact-details p {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 18px;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Footer - Nouveau design amélioré */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol (optionnel) */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+    
+    .footer-links {
+        gap: 20px;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Footer - Version standard */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+    
+    .footer-links {
+        gap: 20px;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Footer - Version standard unique */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 60px 0 30px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Liens de navigation footer */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Réseaux sociaux */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.social-link:hover::before {
+    left: 0;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+/* Couleurs spécifiques au survol */
+.social-link.linkedin:hover::before {
+    background: linear-gradient(135deg, #0077b5, #00a0dc);
+}
+
+.social-link.email:hover::before {
+    background: linear-gradient(135deg, #ea4335, #fbbc04);
+}
+
+.social-link.phone:hover::before {
+    background: linear-gradient(135deg, #34a853, #00c851);
+}
+
+.social-link.github:hover::before {
+    background: linear-gradient(135deg, #333, #6e5494);
+}
+
+/* Copyright */
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-text {
+        font-size: 0.85rem;
+        padding: 0 20px;
+    }
+    
+    .footer-links {
+        gap: 20px;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+.footer-content { text-align: center; position: relative; z-index: 2; }
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+.footer-links a:hover { color: white; }
+.footer-links a:hover::after { width: 100%; }
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 45px;
+}
+.social-link {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+.social-link:hover::before { left: 0; }
+.social-link:hover { transform: translateY(-5px); color: white; }
+.social-link.linkedin:hover::before { background: linear-gradient(135deg, #0077b5, #00a0dc); }
+.social-link.email:hover::before { background: linear-gradient(135deg, #ea4335, #fbbc04); }
+.social-link.phone:hover::before { background: linear-gradient(135deg, #34a853, #00c851); }
+.social-link.github:hover::before { background: linear-gradient(135deg, #333, #6e5494); }
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+    .footer { padding: 50px 0 30px; margin-top: 50px; }
+    .footer-logo { font-size: 2rem; margin-bottom: 20px; }
+    .footer-text { font-size: 0.9rem; padding: 0 20px; margin-bottom: 30px; }
+    .footer-links { gap: 25px; margin-bottom: 30px; }
+    .footer-links a { font-size: 0.85rem; }
+    .footer-social { gap: 15px; margin-bottom: 35px; }
+    .social-link { width: 45px; height: 45px; font-size: 1.2rem; }
+    .footer-copyright { font-size: 0.75rem; }
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 80px 0 50px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+.footer-content { text-align: center; position: relative; z-index: 2; }
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.footer-logo-dot {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.footer-text {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+}
+.footer-links a:hover { color: white; }
+.footer-links a:hover::after { width: 100%; }
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 45px;
+}
+.social-link {
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: var(--transition);
+    z-index: -1;
+}
+.social-link:hover::before { left: 0; }
+.social-link:hover { transform: translateY(-5px); color: white; }
+.social-link.linkedin:hover::before { background: linear-gradient(135deg, #0077b5, #00a0dc); }
+.social-link.email:hover::before { background: linear-gradient(135deg, #ea4335, #fbbc04); }
+.social-link.phone:hover::before { background: linear-gradient(135deg, #34a853, #00c851); }
+.social-link.github:hover::before { background: linear-gradient(135deg, #333, #6e5494); }
+.footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+    .footer { padding: 50px 0 30px; margin-top: 50px; }
+    .footer-logo { font-size: 2rem; margin-bottom: 20px; }
+    .footer-text { font-size: 0.9rem; padding: 0 20px; margin-bottom: 30px; }
+    .footer-links { gap: 25px; margin-bottom: 30px; }
+    .footer-links a { font-size: 0.85rem; }
+    .footer-social { gap: 15px; margin-bottom: 35px; }
+    .social-link { width: 45px; height: 45px; font-size: 1.2rem; }
+    .footer-copyright { font-size: 0.75rem; }
+}
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -16,7 +4586,7 @@
             <ul class="nav-menu">
                 <li><a href="#accueil" class="nav-link active">Accueil</a></li>
                 <li><a href="#profil" class="nav-link">Profil</a></li>
-                <li><a href="#formation" class="nav-link">Formation</a></li>
+                <li><a href="#parcours" class="nav-link">Mon parcours</a></li>
                 <li><a href="#competences" class="nav-link">Compétences</a></li>
                 <li><a href="#projets" class="nav-link">Projets</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -30,12 +4600,13 @@
     </nav>
 
     <!-- Section Accueil -->
+
     <section id="accueil" class="section accueil-section">
         <div class="container">
             <div class="accueil-content">
                 <div class="accueil-text">
                     <h3 class="subtitle">Bonjour, je suis</h3>
-                    <h1 class="title">Enzo <span class="highlight">CHEN</span></h1>
+                    <h1 class="title">Enzo <span class="highlight-name">CHEN</span></h1>
                     <h2 class="role">Étudiant en Data Science - Recherche de stage</h2>
                     <p class="description">
                         Dynamique, motivé et curieux, je suis à la recherche d'un stage en data science d'avril à août 2026 pour mettre en pratique mes compétences en statistique, analyse et gestion de données.
@@ -47,584 +4618,708 @@
                 </div>
                 <div class="accueil-image">
                     <div class="image-wrapper">
-                        <div class="floating-element floating-1">
-                            <i class="fas fa-chart-line"></i>
+                        <!-- Photo de profil -->
+                        <div class="profile-photo">
+                            <img src="img/photoEnzoCostard.jpg" alt="Enzo CHEN">
                         </div>
-                        <div class="floating-element floating-2">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div class="floating-element floating-3">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="floating-element floating-4">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
+                        <div class="floating-element floating-1"><i class="fas fa-chart-line"></i></div>
+                        <div class="floating-element floating-2"><i class="fas fa-database"></i></div>
+                        <div class="floating-element floating-3"><i class="fas fa-code"></i></div>
+                        <div class="floating-element floating-4"><i class="fas fa-chart-bar"></i></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+	<!-- Section Profil -->
+  <section id="profil" class="section profil-section">
+    <div class="container">
+        <h2 class="section-title">Mon <span class="highlight">Profil</span></h2>
 
-    <!-- Section Profil -->
-    <section id="profil" class="section profil-section">
-        <div class="container">
-            <h2 class="section-title">Mon <span class="highlight">Profil</span></h2>
-            <div class="profil-content">
-                <div class="profil-info">
-                    <div class="info-card">
-                        <h3><i class="fas fa-user-circle"></i> À propos</h3>
-                        <div class="info-item">
-                            <strong>Statut :</strong>
-                            <span>Étudiant en 2ème année de BUT Science des Données</span>
-                        </div>
-                        <div class="info-item">
-                            <strong>Recherche :</strong>
-                            <span>Stage Data Scientist (4-5 mois) - Disponible d'avril à août 2026</span>
-                        </div>
-                        <div class="info-item">
-                            <strong>Objectif :</strong>
-                            <span>Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</span>
-                        </div>
-                        <div class="info-item">
-                            <strong>Localisation :</strong>
-                            <span>Gagny 93220</span>
-                        </div>
+        <div class="profil-grid">
+            <!-- Colonne gauche -->
+            <div class="profil-left">
+
+                <!-- Qui suis-je -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <h3>Qui suis-je ?</h3>
                     </div>
-                    
-                    <div class="info-card">
-                        <h3><i class="fas fa-language"></i> Langues</h3>
-                        <div class="langues-container">
-                            <div class="langue-item">
-                                <span class="langue-name">Français</span>
-                                <div class="langue-bar">
-                                    <div class="langue-level" style="width: 100%;" data-level="Natif"></div>
-                                </div>
-                            </div>
-                            <div class="langue-item">
-                                <span class="langue-name">Anglais</span>
-                                <div class="langue-bar">
-                                    <div class="langue-level" style="width: 80%;" data-level="B2"></div>
-                                </div>
-                            </div>
-                            <div class="langue-item">
-                                <span class="langue-name">Chinois</span>
-                                <div class="langue-bar">
-                                    <div class="langue-level" style="width: 100%;" data-level="Natif"></div>
-                                </div>
-                            </div>
+                    <div class="profil-card-body">
+                        <div class="info-row">
+                            <div class="info-label"><i class="fas fa-graduation-cap"></i><span>Statut</span></div>
+                            <div class="info-value">Étudiant en 2ème année de BUT Science des Données</div>
                         </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3><i class="fas fa-briefcase"></i> Expériences professionnelles</h3>
-                        <div class="experience-list">
-                            <div class="exp-item">
-                                <div class="exp-date">Juillet 2024</div>
-                                <div class="exp-content">
-                                    <h4>Serveur dans un restaurant</h4>
-                                    <p>Service en salle, prise de commandes, relation client</p>
-                                </div>
-                            </div>
-                            <div class="exp-item">
-                                <div class="exp-date">Août 2024</div>
-                                <div class="exp-content">
-                                    <h4>Caissier de tabac</h4>
-                                    <p>Gestion de caisse, conseil client, gestion des stocks</p>
-                                </div>
-                            </div>
+                        <div class="info-row">
+                            <div class="info-label"><i class="fas fa-briefcase"></i><span>Recherche</span></div>
+                            <div class="info-value">Stage Data Scientist (4-5 mois) — Avril à août 2026</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label"><i class="fas fa-bullseye"></i><span>Objectif</span></div>
+                            <div class="info-value">Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label"><i class="fas fa-map-marker-alt"></i><span>Lieu</span></div>
+                            <div class="info-value">Gagny 93220, Île-de-France</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="profil-stats">
-                    <div class="stats-card">
-                        <h3><i class="fas fa-trophy"></i> Récompense</h3>
-                        <div class="achievement">
-                            <div class="achievement-icon">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <div class="achievement-content">
+
+                <!-- Récompense -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-trophy"></i></div>
+                        <h3>Récompense</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="achievement-highlight">
+                            <div class="achievement-badge"><i class="fas fa-medal"></i></div>
+                            <div class="achievement-details">
                                 <h4>Challenge DataViz INSEE</h4>
-                                <p>1ère place à l'IUT Paris Rives de Seine - Janvier 2025</p>
+                                <p>1ère place à l'IUT Paris Rives de Seine — Janvier 2025</p>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-card">
-                        <h3><i class="fas fa-calendar-check"></i> Disponibilité</h3>
-                        <div class="availability">
-                            <div class="availability-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="availability-content">
-                                <h4>Stage Data Scientist</h4>
-                                <p>4-5 mois - Avril à août 2026</p>
-                                <div class="tag">Recherche active</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-card">
-                        <h3><i class="fas fa-heart"></i> Centres d'intérêt</h3>
-                        <div class="interests">
-                            <div class="interest-item">
-                                <i class="fas fa-tennis-ball"></i>
-                                <span>Tennis</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fas fa-table-tennis"></i>
-                                <span>Ping-pong</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fas fa-music"></i>
-                                <span>Piano</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fas fa-guitar"></i>
-                                <span>Harmonica</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-card">
-                        <h3><i class="fas fa-project-diagram"></i> Projets réalisés</h3>
-                        <div class="project-count">
-                            <div class="count-number">9</div>
-                            <div class="count-text">Projets académiques en Data Science</div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Ce que je recherche -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Ce que je recherche</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="search-values">
+                            <div class="search-item">
+                                <i class="fas fa-chart-line"></i>
+                                <div class="search-text">
+                                    <strong>Une entreprise innovante</strong>
+                                    <span>Où la data est au cœur des décisions stratégiques</span>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                <i class="fas fa-users"></i>
+                                <div class="search-text">
+                                    <strong>Une équipe passionnée</strong>
+                                    <span>Pour apprendre et partager autour de projets stimulants</span>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                <i class="fas fa-rocket"></i>
+                                <div class="search-text">
+                                    <strong>Des missions concrètes</strong>
+                                    <span>Analyse, modélisation et valorisation des données</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="profil-right">
+
+                <!-- Projets réalisés -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3>Projets réalisés</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="projects-stats">
+                            <div class="stats-number">9</div>
+                            <p>Projets académiques en Data Science</p>
+                            <div class="projects-badges">
+                                <span class="stat-badge">📊 Statistique</span>
+                                <span class="stat-badge">🐍 Python</span>
+                                <span class="stat-badge">📈 DataViz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Centres d'intérêt -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Centres d'intérêt</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px;">
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon tennis"><i class="fas fa-table-tennis"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Tennis</h4>
+                                    <p>Passionné par ce sport de précision et de stratégie, je pratique en compétition depuis 5 ans.</p>
+                                    <div class="interest-tag">Sport de raquette</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon pingpong"><i class="fas fa-table-tennis"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Ping-pong</h4>
+                                    <p>Réflexes et concentration, un sport qui développe la réactivité et l'esprit de compétition.</p>
+                                    <div class="interest-tag">Sport de précision</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon piano"><i class="fas fa-music"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Piano</h4>
+                                    <p>La musique comme exutoire créatif, je joue du piano depuis 8 ans (classique et jazz).</p>
+                                    <div class="interest-tag">Instrument à clavier</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon harmonica"><i class="fas fa-guitar"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Harmonica</h4>
+                                    <p>Petit instrument aux grandes possibilités, idéal pour le blues et l'improvisation.</p>
+                                    <div class="interest-tag">Instrument à vent</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="interests-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>La rigueur du sport et la créativité de la musique m'aident à trouver un équilibre entre analyse technique et innovation.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
-
-    <!-- Section Formation -->
-    <section id="formation" class="section formation-section">
+    </div>
+</section>
+    <!-- Section Mon Parcours (Timeline du plus récent au plus ancien) -->
+    <section id="parcours" class="section parcours-section">
         <div class="container">
-            <h2 class="section-title">Formation <span class="highlight">Académique</span></h2>
+            <h2 class="section-title">Mon <span class="highlight">Parcours</span></h2>
             <div class="timeline">
+                <!-- 1. BUT Science des données (2024 – 2027) - Le plus récent / en cours -->
                 <div class="timeline-item">
                     <div class="timeline-date">2024 – 2027</div>
                     <div class="timeline-content">
-                        <h3>BUT Science des données (Bac+3)</h3>
-                        <p class="timeline-subtitle">IUT Paris Rives de Seine</p>
-                        <p>Mathématiques / Numérique Sciences Informatiques</p>
-                        <p><strong>Actuellement en deuxième année</strong> - Parcours : Exploration et modélisation statistique</p>
+                        <h3>BUT Science des données</h3>
+                        <div class="timeline-subtitle">IUT Paris Rives de Seine - Parcours Exploration et modélisation statistique</div>
+                        <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris, Île-de-France</div>
+                        <p class="timeline-description">Formation en statistique avancée, programmation (Python, R, SQL), data visualisation et modélisation prédictive. Actuellement en deuxième année avec un projet de stage prévu d'avril à août 2026.</p>
+                        <span class="timeline-badge"><i class="fas fa-graduation-cap"></i> Formation en cours</span>
+                        <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
                     </div>
                 </div>
-                
+
+                <!-- 2. Baccalauréat Général - Lycée Gustave Eiffel (2024) -->
                 <div class="timeline-item">
                     <div class="timeline-date">2024</div>
                     <div class="timeline-content">
-                        <h3>Baccalauréat Général Section Européenne anglaise</h3>
-                        <p class="timeline-subtitle">Lycée Gustave Eiffel (Gagny)</p>
-                        <div class="badge">Mention Très Bien</div>
+                        <h3>Baccalauréat Général</h3>
+                        <div class="timeline-subtitle">Lycée Gustave Eiffel (Gagny) - Section Européenne anglaise</div>
+                        <div class="location-info"><i class="fas fa-map-marker-alt"></i> Gagny, Île-de-France</div>
+                        <p class="timeline-description">Obtention du Baccalauréat Général avec mention Très Bien. Spécialités : Mathématiques et Sciences Économiques et Sociales.</p>
+                        <div class="mention-tb"><i class="fas fa-star"></i> Mention Très Bien</div>
+                        <span class="timeline-badge"><i class="fas fa-graduation-cap"></i> Formation</span>
+                        <div class="timeline-icon"><i class="fas fa-school"></i></div>
+                    </div>
+                </div>
+
+                <!-- 3. Caissier en tabac-presse - Atmosphère Paris 10 (Août 2024) -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Août 2024</div>
+                    <div class="timeline-content">
+                        <h3>Caissier en tabac-presse</h3>
+                        <div class="timeline-subtitle">Atmosphère - Paris 10e</div>
+                        <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 10e, Île-de-France</div>
+                        <p class="timeline-description">Gestion de caisse, conseil client, gestion des stocks, encaissements et gestion des flux clients. Acquisition de rigueur et sens du service client.</p>
+                        <span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
+                        <div class="timeline-icon"><i class="fas fa-cash-register"></i></div>
+                    </div>
+                </div>
+
+                <!-- 4. Serveur en restauration - Thaiger Paris 4e (Juillet 2024 - le plus ancien) -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Juillet 2024</div>
+                    <div class="timeline-content">
+                        <h3>Serveur en restauration</h3>
+                        <div class="timeline-subtitle">Thaiger - Paris 4e</div>
+                        <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 4e, Île-de-France</div>
+                        <p class="timeline-description">Service en salle, prise de commandes, relation client, gestion des plannings et travail en équipe. Développement de compétences en communication et gestion du stress.</p>
+                        <span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
+                        <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Section Compétences -->
     <section id="competences" class="section competences-section">
         <div class="container">
             <h2 class="section-title">Mes <span class="highlight">Compétences</span></h2>
-            
-            <!-- Outils et Technologies -->
+
+            <!-- Outils et Technologies - Design original avec 3 groupes de 4 outils -->
             <div class="competence-category">
                 <h3><i class="fas fa-tools"></i> Outils et Technologies</h3>
                 <div class="tools-grid">
                     <div class="tool-category">
-                        <h4>Analyse de données</h4>
+                        <h4><i class="fab fa-python"></i> Langages & Programmation</h4>
                         <div class="tool-items">
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                                <span class="tool-name">Power BI</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span class="tool-name">Access</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-calculator"></i>
-                                </div>
-                                <span class="tool-name">R</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <span class="tool-name">SAS</span>
-                            </div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fab fa-python"></i></div><span class="tool-name">Python</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">R</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQL</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-code"></i></div><span class="tool-name">SAS</span></div>
                         </div>
                     </div>
-                    
                     <div class="tool-category">
-                        <h4>Programmation</h4>
+                        <h4><i class="fas fa-chart-pie"></i> Data Visualisation & BI</h4>
                         <div class="tool-items">
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span class="tool-name">SQL</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fab fa-python"></i>
-                                </div>
-                                <span class="tool-name">Python (Numpy, Pandas)</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fab fa-html5"></i>
-                                </div>
-                                <span class="tool-name">HTML</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fab fa-css3-alt"></i>
-                                </div>
-                                <span class="tool-name">CSS</span>
-                            </div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-bar"></i></div><span class="tool-name">Power BI</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-pie"></i></div><span class="tool-name">Tableau</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">ggplot2</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-simple"></i></div><span class="tool-name">Matplotlib</span></div>
                         </div>
                     </div>
-                    
                     <div class="tool-category">
-                        <h4>Bureautique</h4>
+                        <h4><i class="fas fa-database"></i> SGBD & Stockage</h4>
                         <div class="tool-items">
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-file-excel"></i>
-                                </div>
-                                <span class="tool-name">Suite Office</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-chart-pie"></i>
-                                </div>
-                                <span class="tool-name">Canva</span>
-                            </div>
-                            <div class="tool-item">
-                                <div class="tool-icon">
-                                    <i class="fas fa-poll"></i>
-                                </div>
-                                <span class="tool-name">LimeSurvey</span>
-                            </div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-table"></i></div><span class="tool-name">Microsoft Access</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-cloud"></i></div><span class="tool-name">MySQL</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-server"></i></div><span class="tool-name">PostgreSQL</span></div>
+                            <div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQLite</span></div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Compétences Statistiques -->
-            <div class="competence-category">
-                <h3><i class="fas fa-chart-line"></i> Compétences en Statistique</h3>
-                <div class="skills-container">
-                    <div class="skill-tag">Techniques de sondage et méthodologie d'enquête</div>
-                    <div class="skill-tag">Analyse descriptive, inférentielle et prédictive</div>
-                    <div class="skill-tag">Modélisation statistique (linéaire, séries temporelles)</div>
-                    <div class="skill-tag">Tests d'hypothèses et validation de modèles</div>
-                    <div class="skill-tag">Rédaction de rapports statistiques</div>
-                </div>
-            </div>
-            
-            <!-- Compétences Informatique Décisionnelle -->
-            <div class="competence-category">
-                <h3><i class="fas fa-laptop-code"></i> Informatique Décisionnelle</h3>
-                <div class="skills-container">
-                    <div class="skill-tag">Requêtage et gestion de bases de données</div>
-                    <div class="skill-tag">Programmation automatisée des analyses statistiques</div>
-                    <div class="skill-tag">Datavisualisation et tableaux de bord interactifs</div>
-                    <div class="skill-tag">Reporting et présentation des résultats</div>
-                </div>
-            </div>
-            
-            <!-- Savoir-être -->
-            <div class="competence-category">
-                <h3><i class="fas fa-users"></i> Savoir-être</h3>
-                <div class="skills-container">
-                    <div class="skill-tag">Travail en équipe</div>
-                    <div class="skill-tag">Autonomie et rigueur</div>
-                    <div class="skill-tag">Programmation web</div>
-                    <div class="skill-tag">Adaptabilité</div>
-                    <div class="skill-tag">Curiosité intellectuelle</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
+            <!-- Statistique - Version améliorée -->
+            <div class="competence-category enhanced-category">
+                <h3><i class="fas fa-chart-line"></i> Statistique</h3>
+                <div class="stats-enhanced-grid">
+                    <div class="stat-card-modern">
+                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="stat-content">
+                            <h4>Méthodologie d'enquête</h4>
+                            <p>Techniques de sondage, conception de questionnaires, échantillonnage stratifié</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-modern">
+                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="stat-content">
+                            <h4>Analyse avancée</h4>
+                            <p>Descriptive, inférentielle, prédictive et analyse multivariée</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-modern">
+                        <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="stat-content">
+                            <h4>Modélisation</h4>
+                            <p>Régression linéaire/logistique, séries temporelles, modèles ARIMA</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-modern">
+                        <div class="stat-icon"><i class="fas fa-vial"></i></div>
+                        <div class="stat-content">
+                            <h4>Tests & Validation</h4>
+                            <p>Tests d'hypothèses, ANOVA, validation croisée, métriques d'évaluation</p>
+                        </div>
+                    </div>
+                    <div class="stat-card-modern">
+                        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="stat-content">
+                            <h4>Reporting statistique</h4>
+                            <p>Rédaction de rapports, interprétation des résultats, recommandations data-driven</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informatique Décisionnelle -->
+            <div class="competence-category enhanced-category">
+                <h3><i class="fas fa-laptop-code"></i> Informatique Décisionnelle</h3>
+                <div class="business-grid">
+                    <div class="business-card">
+                        <div class="business-icon"><i class="fas fa-database"></i></div>
+                        <div class="business-content">
+                            <h4>Gestion de données</h4>
+                            <p>Requêtage SQL avancé, optimisation de requêtes, gestion de bases relationnelles</p>
+                        </div>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon"><i class="fas fa-robot"></i></div>
+                        <div class="business-content">
+                            <h4>Automatisation</h4>
+                            <p>Programmation SAS, scripts Python pour analyses automatisées, ETL</p>
+                        </div>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="business-content">
+                            <h4>Data Visualisation</h4>
+                            <p>Tableaux de bord Power BI, dashboards interactifs, dataviz avec R/ggplot2</p>
+                        </div>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="business-content">
+                            <h4>Reporting & BI</h4>
+                            <p>Création de rapports décisionnels, indicateurs KPI, storytelling data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langues -->
+            <div class="competence-category langues-category">
+                <h3><i class="fas fa-language"></i> Langues</h3>
+                <div class="langues-enhanced">
+                    <div class="langue-card-modern">
+                        <div class="langue-flag"><i class="fas fa-flag-checkered"></i></div>
+                        <div class="langue-info">
+                            <span class="langue-name">Français</span>
+                            <div class="langue-progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="langue-level-badge">Natif</span>
+                        </div>
+                        <div class="langue-desc">Langue maternelle - Maîtrise parfaite à l'écrit comme à l'oral</div>
+                    </div>
+                    <div class="langue-card-modern">
+                        <div class="langue-flag"><i class="fas fa-flag-checkered"></i></div>
+                        <div class="langue-info">
+                            <span class="langue-name">Chinois</span>
+                            <div class="langue-progress">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                            <span class="langue-level-badge">Natif</span>
+                        </div>
+                        <div class="langue-desc">Langue maternelle - Bilingue complet, parfaitement courant</div>
+                    </div>
+                    <div class="langue-card-modern">
+                        <div class="langue-flag"><i class="fas fa-language"></i></div>
+                        <div class="langue-info">
+                            <span class="langue-name">Anglais</span>
+                            <div class="langue-progress">
+                                <div class="progress-bar" style="width: 80%"></div>
+                            </div>
+                            <span class="langue-level-badge">B2 - Intermédiaire supérieur</span>
+                        </div>
+                        <div class="langue-desc">Capacité à communiquer efficacement, lu, écrit et parlé couramment</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savoir-être - Version améliorée -->
+            <div class="competence-category soft-skills-category">
+                <h3><i class="fas fa-users"></i> Savoir-être</h3>
+                <div class="soft-skills-grid">
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-users"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Travail en équipe</h4>
+                            <p>Capacité à collaborer efficacement, partager les connaissances et contribuer aux objectifs communs.</p>
+                        </div>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Autonomie & Rigueur</h4>
+                            <p>Organisation personnelle, respect des délais et souci du détail dans l'exécution des tâches.</p>
+                        </div>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Adaptabilité</h4>
+                            <p>Flexibilité face aux changements, capacité à apprendre rapidement de nouvelles technologies.</p>
+                        </div>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Curiosité intellectuelle</h4>
+                            <p>Veille technologique constante, envie d'apprendre et de se former en continu.</p>
+                        </div>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-comments"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Communication</h4>
+                            <p>Capacité à vulgariser des concepts techniques et à présenter clairement des résultats d'analyse.</p>
+                        </div>
+                    </div>
+                    <div class="soft-skill-card">
+                        <div class="soft-skill-icon"><i class="fas fa-clock"></i></div>
+                        <div class="soft-skill-content">
+                            <h4>Gestion du stress</h4>
+                            <p>Réactivité sous pression, priorisation des tâches et maintien de la qualité en situation tendue.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
     <!-- Section Projets -->
     <section id="projets" class="section projets-section">
         <div class="container">
             <h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
-            <p class="section-subtitle">Projets académiques en Data Science, Statistique et Informatique</p>
+            <p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
             
-            <!-- Filtres par catégorie -->
-            <div class="projets-filters">
-                <button class="filter-btn active" data-filter="all">Tous les projets</button>
-                <button class="filter-btn" data-filter="statistique">Statistique</button>
-                <button class="filter-btn" data-filter="informatique">Informatique</button>
-                <button class="filter-btn" data-filter="data-science">Data Science</button>
-                <button class="filter-btn" data-filter="reglementaire">Réglementaire</button>
-            </div>
-            
-            <!-- Grille des projets -->
             <div class="projets-grid">
-                <!-- Projet 1 : Analyse statistique Cardio Good Fitness -->
-                <div class="projet-card" data-category="statistique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Déc 2025</span>
-                        <span class="projet-category">Statistique</span>
+                <!-- Projet 1 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Déc 2025</div>
+                    <div class="projet-card-category statistique">
+                        <i class="fas fa-chart-line"></i> Statistique
                     </div>
                     <div class="projet-card-content">
                         <h3>Analyse de profils clients - Cardio Good Fitness</h3>
-                        <p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation.</p>
+                        <p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation pour optimiser les stratégies marketing.</p>
                         <div class="projet-tags">
-                            <span class="tag">Tests statistiques</span>
-                            <span class="tag">Analyse descriptive</span>
-                            <span class="tag">R</span>
+                            <span class="tag"><i class="fas fa-chart-bar"></i> Tests statistiques</span>
+                            <span class="tag"><i class="fas fa-chart-pie"></i> Analyse descriptive</span>
+                            <span class="tag"><i class="fab fa-r-project"></i> R</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="1">Voir les détails</button>
+                        <a href="projetAnalyseCardio.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 2 : Série temporelle métro Châtelet -->
-                <div class="projet-card" data-category="data-science">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Déc 2025</span>
-                        <span class="projet-category">Data Science</span>
+
+                <!-- Projet 2 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Déc 2025</div>
+                    <div class="projet-card-category datascience">
+                        <i class="fas fa-chart-line"></i> Data Science
                     </div>
                     <div class="projet-card-content">
                         <h3>Analyse série temporelle - Pollution CO2</h3>
-                        <p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien.</p>
+                        <p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien à l'aide de modèles SARIMA.</p>
                         <div class="projet-tags">
-                            <span class="tag">Séries temporelles</span>
-                            <span class="tag">Prévision</span>
-                            <span class="tag">Python</span>
+                            <span class="tag"><i class="fas fa-waveform"></i> Séries temporelles</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Prévision</span>
+                            <span class="tag"><i class="fab fa-python"></i> Python</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="2">Voir les détails</button>
+                        <a href="projetSerieTemp.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 3 : Conformité RGPD -->
-                <div class="projet-card" data-category="reglementaire">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Déc 2025</span>
-                        <span class="projet-category">Réglementaire</span>
+
+                <!-- Projet 3 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Déc 2025</div>
+                    <div class="projet-card-category reglementaire">
+                        <i class="fas fa-gavel"></i> Réglementaire
                     </div>
                     <div class="projet-card-content">
                         <h3>Analyse de conformité RGPD</h3>
-                        <p class="projet-description">Évaluation RGPD et rédaction d'AIPD pour une entreprise de grande distribution.</p>
+                        <p class="projet-description">Évaluation RGPD et rédaction d'Analyse d'Impact sur la Protection des Données pour une entreprise de grande distribution.</p>
                         <div class="projet-tags">
-                            <span class="tag">RGPD</span>
-                            <span class="tag">AIPD</span>
-                            <span class="tag">Analyse de risques</span>
+                            <span class="tag"><i class="fas fa-shield-alt"></i> RGPD</span>
+                            <span class="tag"><i class="fas fa-file-alt"></i> AIPD</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Analyse de risques</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="3">Voir les détails</button>
+                        <a href="projetRGPD.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 4 : Automatisation SAS -->
-                <div class="projet-card" data-category="informatique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Nov 2025</span>
-                        <span class="projet-category">Informatique</span>
+
+                <!-- Projet 4 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Nov 2025</div>
+                    <div class="projet-card-category informatique">
+                        <i class="fas fa-code"></i> Informatique
                     </div>
                     <div class="projet-card-content">
                         <h3>Système automatisé de pilotage SAS</h3>
-                        <p class="projet-description">Développement d'un système d'automatisation SAS avec interface Excel.</p>
+                        <p class="projet-description">Développement d'un système d'automatisation des analyses statistiques avec interface Excel.</p>
                         <div class="projet-tags">
-                            <span class="tag">SAS</span>
-                            <span class="tag">Automatisation</span>
-                            <span class="tag">Excel</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> SAS</span>
+                            <span class="tag"><i class="fas fa-robot"></i> Automatisation</span>
+                            <span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="4">Voir les détails</button>
+                        <a href="projetSASdomaine.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 5 : Nettoyage de données -->
-                <div class="projet-card" data-category="informatique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Nov 2024</span>
-                        <span class="projet-category">Informatique</span>
+
+                <!-- Projet 5 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Nov 2024</div>
+                    <div class="projet-card-category informatique">
+                        <i class="fas fa-code"></i> Informatique
                     </div>
                     <div class="projet-card-content">
                         <h3>Nettoyage et structuration de données</h3>
-                        <p class="projet-description">Nettoyage de fichiers textes complexes sur des films avec Python.</p>
+                        <p class="projet-description">Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.</p>
                         <div class="projet-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Nettoyage de données</span>
-                            <span class="tag">CSV</span>
+                            <span class="tag"><i class="fab fa-python"></i> Python</span>
+                            <span class="tag"><i class="fas fa-broom"></i> Nettoyage</span>
+                            <span class="tag"><i class="fas fa-database"></i> CSV</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="5">Voir les détails</button>
+                        <a href="projetFilm.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 6 : Analyse World Happiness Report -->
-                <div class="projet-card" data-category="statistique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Oct 2024</span>
-                        <span class="projet-category">Statistique</span>
+
+                <!-- Projet 6 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Oct 2024</div>
+                    <div class="projet-card-category statistique">
+                        <i class="fas fa-chart-line"></i> Statistique
                     </div>
                     <div class="projet-card-content">
                         <h3>Analyse du bonheur dans le monde</h3>
-                        <p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays.</p>
+                        <p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays à travers le monde.</p>
                         <div class="projet-tags">
-                            <span class="tag">Statistique descriptive</span>
-                            <span class="tag">Tests statistiques</span>
-                            <span class="tag">DataViz</span>
+                            <span class="tag"><i class="fas fa-chart-bar"></i> Statistique descriptive</span>
+                            <span class="tag"><i class="fas fa-flask"></i> Tests statistiques</span>
+                            <span class="tag"><i class="fas fa-chart-pie"></i> DataViz</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="6">Voir les détails</button>
+                        <a href="projetAnalyseBonheur.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 7 : Enquête pratiques culturelles -->
-                <div class="projet-card" data-category="statistique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Déc 2024</span>
-                        <span class="projet-category">Statistique</span>
+
+                <!-- Projet 7 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Déc 2024</div>
+                    <div class="projet-card-category statistique">
+                        <i class="fas fa-chart-line"></i> Statistique
                     </div>
                     <div class="projet-card-content">
                         <h3>Enquête pratiques culturelles étudiants</h3>
-                        <p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles.</p>
+                        <p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.</p>
                         <div class="projet-tags">
-                            <span class="tag">Enquête</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">Excel</span>
+                            <span class="tag"><i class="fas fa-clipboard-list"></i> Enquête</span>
+                            <span class="tag"><i class="fas fa-database"></i> SQL</span>
+                            <span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="7">Voir les détails</button>
+                        <a href="projetEnqueteEtudiant.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 8 : Échantillonnage magnitudes d'étoiles -->
-                <div class="projet-card" data-category="statistique">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Juin 2025</span>
-                        <span class="projet-category">Statistique</span>
+
+                <!-- Projet 8 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Juin 2025</div>
+                    <div class="projet-card-category statistique">
+                        <i class="fas fa-chart-line"></i> Statistique
                     </div>
                     <div class="projet-card-content">
                         <h3>Estimation par échantillonnage</h3>
-                        <p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles.</p>
+                        <p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.</p>
                         <div class="projet-tags">
-                            <span class="tag">Échantillonnage</span>
-                            <span class="tag">Intervalles de confiance</span>
-                            <span class="tag">Tests d'hypothèses</span>
+                            <span class="tag"><i class="fas fa-chart-bar"></i> Échantillonnage</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Intervalles de confiance</span>
+                            <span class="tag"><i class="fas fa-flask"></i> Tests d'hypothèses</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="8">Voir les détails</button>
+                        <a href="projetEchantillonnage.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Projet 9 : Analyse de régression croissance -->
-                <div class="projet-card" data-category="data-science">
-                    <div class="projet-card-header">
-                        <span class="projet-date">Juin 2025</span>
-                        <span class="projet-category">Data Science</span>
+
+                <!-- Projet 9 -->
+                <div class="projet-card">
+                    <div class="projet-card-badge">Juin 2025</div>
+                    <div class="projet-card-category datascience">
+                        <i class="fas fa-chart-line"></i> Data Science
                     </div>
                     <div class="projet-card-content">
                         <h3>Modélisation de courbes de croissance</h3>
                         <p class="projet-description">Étude de la croissance staturale des enfants via régression polynomiale.</p>
                         <div class="projet-tags">
-                            <span class="tag">Régression</span>
-                            <span class="tag">Modélisation</span>
-                            <span class="tag">Polynomiale</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Régression</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Modélisation</span>
+                            <span class="tag"><i class="fas fa-chart-line"></i> Polynomiale</span>
                         </div>
                     </div>
                     <div class="projet-card-footer">
-                        <button class="details-btn" data-projet="9">Voir les détails</button>
+                        <a href="projetCroissance.html" class="details-btn">
+                            <span>Découvrir</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section Contact -->
+         <!-- Section Contact -->
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2 class="section-title">Contactez<span class="highlight">-moi</span></h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                    <a href="mailto:echen170406@gmail.com" class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>echen170406@gmail.com</p>
                         </div>
+                    </a>
+                    <a href="tel:0767896889" class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-details">
+                            <h3>Téléphone</h3>
+                            <p>07 67 89 68 89</p>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="contact-card">
+                        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                        <div class="contact-details">
+                            <h3>LinkedIn</h3>
+                            <p>Mon profil LinkedIn</p>
+                        </div>
+                    </a>
+                    <div class="contact-card no-link">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="contact-details">
                             <h3>Adresse</h3>
                             <p>Gagny 93220</p>
                         </div>
                     </div>
-                    
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>echen170406@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Téléphone</h3>
-                            <p>07 67 89 68 89</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>LinkedIn</h3>
-                            <a href="#" class="linkedin-link">Mon profil LinkedIn</a>
-                        </div>
-                    </div>
                 </div>
-                
                 <div class="contact-form-container">
                     <div class="form-header">
                         <h3>Envoyez-moi un message</h3>
                         <p>Je suis intéressé par des opportunités de stage en data science d'avril à août 2026.</p>
                     </div>
                     <form id="contact-form" class="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Votre nom" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Votre email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" placeholder="Sujet" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" rows="5" placeholder="Votre message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Envoyer le message
-                        </button>
+                        <div class="form-group"><input type="text" id="name" placeholder="Votre nom" required></div>
+                        <div class="form-group"><input type="email" id="email" placeholder="Votre email" required></div>
+                        <div class="form-group"><input type="text" id="subject" placeholder="Sujet" required></div>
+                        <div class="form-group"><textarea id="message" rows="5" placeholder="Votre message" required></textarea></div>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
                         <div id="form-message" class="form-message"></div>
                     </form>
                 </div>
@@ -636,36 +5331,297 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">Enzo CHEN</div>
-                <p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
-                <div class="footer-social">
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:echen170406@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                    <a href="tel:0767896889" class="social-link"><i class="fas fa-phone"></i></a>
+                <div class="footer-logo">
+                    Enzo<span class="footer-logo-dot">.</span>CHEN
                 </div>
-                <p class="footer-copyright">© 2025 Enzo CHEN. Tous droits réservés.</p>
+                <p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
+                
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:echen170406@gmail.com" class="social-link email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:0767896889" class="social-link phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </a>
+                    <a href="https://github.com/Ecn1234" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html#accueil">Accueil</a>
+                    <a href="index.html#profil">Profil</a>
+                    <a href="index.html#parcours">Parcours</a>
+                    <a href="index.html#competences">Compétences</a>
+                    <a href="index.html#projets">Projets</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                
+                <p class="footer-copyright">
+                    &copy; 2026 Enzo CHEN. Tous droits réservés.
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Bouton retour en haut -->
-    <button id="back-to-top" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <button id="back-to-top" class="back-to-top"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Modal pour les détails des projets -->
+    <!-- Modal -->
     <div id="projet-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modal-title">Détails du projet</h2>
                 <button class="modal-close">&times;</button>
             </div>
-            <div class="modal-body">
-                <div id="modal-content"></div>
-            </div>
+            <div class="modal-body"><div id="modal-content"></div></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+// Menu mobile
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+        }
+    });
+});
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section');
+const navHeight = 80;
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - navHeight;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+    });
+});
+
+// Back to top
+const backToTopBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('visible');
+    else backToTopBtn.classList.remove('visible');
+});
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Filter projets
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projetCards = document.querySelectorAll('.projet-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const filterValue = button.getAttribute('data-filter');
+        projetCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                card.style.display = 'flex';
+                setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 10);
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => { card.style.display = 'none'; }, 300);
+            }
+        });
+    });
+});
+
+// Modal
+const modal = document.getElementById('projet-modal');
+const modalClose = modal.querySelector('.modal-close');
+const modalTitle = modal.querySelector('#modal-title');
+const modalContent = modal.querySelector('#modal-content');
+const detailButtons = document.querySelectorAll('.details-btn');
+
+const projetsData = {
+    1: {
+        title: "Analyse de profils clients - Cardio Good Fitness",
+        description: "Analyse approfondie des profils de 180 clients de tapis de course pour identifier les segments de marché et optimiser les stratégies marketing.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Identifier les différents profils de clients pour personnaliser les offres commerciales et améliorer la rétention.</p><h3>Méthodologie</h3><ul><li>Analyse descriptive des variables sociodémographiques</li><li>Tests statistiques (ANOVA, tests d'indépendance)</li><li>Segmentation par clustering K-means</li><li>Analyse de variance pour identifier les différences significatives</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">R</span><span class="tag">ggplot2</span><span class="tag">dplyr</span><span class="tag">FactoMineR</span></div><h3>Résultats</h3><p>Identification de 4 segments de clients avec des comportements d'achat distincts. Recommandations stratégiques pour chaque segment.</p></div>`
+    },
+    2: {
+        title: "Analyse série temporelle - Pollution CO2",
+        description: "Étude de la concentration en CO2 dans le métro parisien pour prévoir les pics de pollution.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Prévoir la concentration en CO2 dans la station Châtelet pour optimiser la ventilation.</p><h3>Méthodologie</h3><ul><li>Collecte de données horaires sur 6 mois</li><li>Analyse de la stationnarité (tests ADF)</li><li>Identification de modèle ARIMA/SARIMA</li><li>Validation croisée des prévisions</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Statsmodels</span><span class="tag">Matplotlib</span></div><h3>Résultats</h3><p>Modèle SARIMA(1,1,1)(1,1,1,24) avec MAPE de 8.2%. Prévisions permettant d'anticiper les pics de pollution.</p></div>`
+    },
+    3: {
+        title: "Analyse de conformité RGPD",
+        description: "Audit de conformité RGPD pour une entreprise de grande distribution.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Évaluer la conformité RGPD et rédiger une Analyse d'Impact sur la Protection des Données (AIPD).</p><h3>Méthodologie</h3><ul><li>Cartographie des traitements de données</li><li>Analyse des risques pour les droits et libertés</li><li>Évaluation des mesures de sécurité existantes</li><li>Rédaction de l'AIPD conforme CNIL</li></ul><h3>Livrables</h3><div class="tech-tags"><span class="tag">AIPD</span><span class="tag">Cartographie</span><span class="tag">Analyse de risques</span><span class="tag">RGPD</span></div><h3>Résultats</h3><p>Identification de 3 traitements à risque nécessitant des mesures correctives. AIPD validée par le DPO.</p></div>`
+    },
+    4: {
+        title: "Système automatisé de pilotage SAS",
+        description: "Développement d'un système d'automatisation des analyses statistiques avec interface Excel.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Automatiser les procédures SAS courantes via une interface utilisateur Excel.</p><h3>Méthodologie</h3><ul><li>Développement de macros SAS</li><li>Création d'interface Excel avec VBA</li><li>Automatisation du traitement de données</li><li>Génération automatique de rapports</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">SAS</span><span class="tag">VBA</span><span class="tag">Excel</span><span class="tag">Macros</span></div><h3>Résultats</h3><p>Réduction de 70% du temps de traitement. Interface intuitive pour les utilisateurs non techniques.</p></div>`
+    },
+    5: {
+        title: "Nettoyage et structuration de données",
+        description: "Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Transformer des fichiers textes non structurés en base de données exploitable.</p><h3>Méthodologie</h3><ul><li>Parsing des fichiers texte avec expressions régulières</li><li>Nettoyage des données (valeurs manquantes, incohérences)</li><li>Structuration en tables relationnelles</li><li>Export en format CSV et SQL</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">Python</span><span class="tag">Regex</span><span class="tag">Pandas</span><span class="tag">CSV</span></div><h3>Résultats</h3><p>Base de données de 1500 films avec métadonnées structurées. Réduction de 95% des erreurs de données.</p></div>`
+    },
+    6: {
+        title: "Analyse du bonheur dans le monde",
+        description: "Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Analyser les déterminants du bonheur et l'impact de la pandémie COVID-19.</p><h3>Méthodologie</h3><ul><li>Analyse descriptive des données World Happiness Report</li><li>Régression linéaire multiple</li><li>Comparaison pré/post COVID-19</li><li>Visualisation interactive des résultats</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">R</span><span class="tag">ggplot2</span><span class="tag">Shiny</span><span class="tag">Markdown</span></div><h3>Résultats</h3><p>Le PIB explique 62% de la variance du bonheur. Impact significatif du COVID-19 sur la santé mentale.</p></div>`
+    },
+    7: {
+        title: "Enquête pratiques culturelles étudiants",
+        description: "Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Comprendre l'évolution des pratiques culturelles avec la digitalisation.</p><h3>Méthodologie</h3><ul><li>Conception du questionnaire (LimeSurvey)</li><li>Échantillonnage stratifié de 300 étudiants</li><li>Analyse statistique avec tests khi-deux</li><li>Base de données SQL pour le stockage</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">LimeSurvey</span><span class="tag">SPSS</span></div><h3>Résultats</h3><p>82% des étudiants privilégient les contenus numériques. Corrélation forte entre usage numérique et diminution des sorties culturelles.</p></div>`
+    },
+    8: {
+        title: "Estimation par échantillonnage",
+        description: "Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Estimer avec précision la magnitude moyenne d'une population d'étoiles à partir d'échantillons.</p><h3>Méthodologie</h3><ul><li>Échantillonnage aléatoire simple et stratifié</li><li>Calcul d'intervalles de confiance à 95%</li><li>Tests d'hypothèses sur la moyenne</li><li>Analyse de la puissance des tests</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">R</span><span class="tag">Statistiques</span><span class="tag">Échantillonnage</span><span class="tag">LaTeX</span></div><h3>Résultats</h3><p>Estimation de magnitude moyenne: 4.2 ± 0.15. Échantillonnage stratifié 30% plus efficace que simple.</p></div>`
+    },
+    9: {
+        title: "Modélisation de courbes de croissance",
+        description: "Étude de la croissance staturale des enfants via régression polynomiale.",
+        details: `<div class="projet-details"><h3>Objectif</h3><p>Modéliser la croissance des enfants pour détecter d'éventuels retards de croissance.</p><h3>Méthodologie</h3><ul><li>Régression polynomiale (degré 2 à 5)</li><li>Validation croisée pour sélection du modèle</li><li>Analyse des résidus</li><li>Comparaison avec les courbes de référence OMS</li></ul><h3>Technologies utilisées</h3><div class="tech-tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Matplotlib</span><span class="tag">NumPy</span></div><h3>Résultats</h3><p>Modèle polynomial degré 3 optimal (R² = 0.94). Outil de détection précoce des retards de croissance.</p></div>`
+    }
+};
+
+detailButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const projetId = button.getAttribute('data-projet');
+        const projet = projetsData[projetId];
+        if (projet) {
+            modalTitle.textContent = projet.title;
+            modalContent.innerHTML = `<p class="projet-modal-description">${projet.description}</p>${projet.details}`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+});
+
+modalClose.addEventListener('click', () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Formulaire contact
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+    if (!formData.name || !formData.email || !formData.message) {
+        showFormMessage('Veuillez remplir tous les champs obligatoires', 'error');
+        return;
+    }
+    showFormMessage('Envoi en cours...', 'info');
+    setTimeout(() => {
+        showFormMessage('Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.', 'success');
+        contactForm.reset();
+        setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+    }, 1500);
+});
+
+function showFormMessage(text, type) {
+    formMessage.textContent = text;
+    formMessage.className = 'form-message ' + type;
+    formMessage.style.display = 'block';
+}
+
+// Animations au scroll
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animated');
+    });
+}, observerOptions);
+
+document.querySelectorAll('.info-card, .stats-card, .timeline-content, .tool-category, .projet-card').forEach(el => {
+    observer.observe(el);
+});
+
+const timelineItems = document.querySelectorAll('.timeline-item');
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+            }, index * 200);
+        }
+    });
+}, { threshold: 0.2 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    // Animation barres de langue
+    const langueLevels = document.querySelectorAll('.langue-level');
+    langueLevels.forEach(level => {
+        const width = level.style.width;
+        level.style.width = '0';
+        setTimeout(() => { level.style.width = width; }, 500);
+    });
+
+    // Timeline
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        timelineObserver.observe(item);
+    });
+});
+    </script>
 </body>
 </html>
