@@ -5048,6 +5048,103 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 600;
 	box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
+
+/* Supprimer tout ce bloc */
+.langues-category {
+	background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+	border-radius: 24px;
+	padding: 10px 0 20px 0;
+	margin-bottom: 50px;
+}
+
+.langues-enhanced {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 25px;
+	margin-top: 25px;
+}
+
+.langue-card-modern {
+	background: white;
+	border-radius: 20px;
+	padding: 25px;
+	text-align: center;
+	transition: all 0.3s ease;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	border-bottom: 3px solid transparent;
+}
+
+.langue-card-modern:hover {
+	transform: translateY(-8px);
+	border-bottom-color: var(--primary-color);
+	box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
+}
+
+.langue-flag {
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
+
+.langue-flag i {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.langue-info {
+	margin-bottom: 15px;
+}
+
+.langue-name {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--dark-color);
+	display: block;
+	margin-bottom: 12px;
+}
+
+.langue-progress {
+	height: 8px;
+	background: #e2e8f0;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.progress-bar {
+	height: 100%;
+	background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+	border-radius: 10px;
+	transition: width 1s ease;
+}
+
+.langue-level-badge {
+	display: inline-block;
+	padding: 4px 12px;
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-radius: 20px;
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+.langue-desc {
+	font-size: 0.8rem;
+	color: var(--gray-color);
+	line-height: 1.4;
+	margin-top: 12px;
+}
+
+/* Et aussi supprimer le responsive associé */
+@media (max-width: 768px) {
+	.langues-enhanced {
+		grid-template-columns: 1fr;
+	}
+	.langue-card-modern {
+		padding: 20px;
+	}
+}
 	</style>
 </head>
 <body>
@@ -5368,7 +5465,7 @@ h1, h2, h3, h4, h5, h6 {
 					<div class="tool-category">
 						<h4><i class="fas fa-database"></i> SGBD & Stockage</h4>
 						<div class="tool-items">
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-table"></i></div><span class="tool-name">Microsoft Access</span></div>
+							<div class="tool-item"><div class="tool-icon"><i class="fas fa-table"></i></div><span class="tool-name">Access</span></div>
 							<div class="tool-item"><div class="tool-icon"><i class="fas fa-cloud"></i></div><span class="tool-name">MySQL</span></div>
 							<div class="tool-item"><div class="tool-icon"><i class="fas fa-server"></i></div><span class="tool-name">PostgreSQL</span></div>
 							<div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQLite</span></div>
@@ -5377,41 +5474,41 @@ h1, h2, h3, h4, h5, h6 {
 				</div>
 			</div>
 
-			<!-- Statistique - Version améliorée -->
+			<!-- Statistique -->
 			<div class="competence-category enhanced-category">
 				<h3><i class="fas fa-chart-line"></i> Statistique</h3>
-				<div class="stats-enhanced-grid">
-					<div class="stat-card-modern">
-						<div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
-						<div class="stat-content">
+				<div class="business-grid">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-clipboard-list"></i></div>
+						<div class="business-content">
 							<h4>Méthodologie d'enquête</h4>
 							<p>Techniques de sondage, conception de questionnaires, échantillonnage stratifié</p>
 						</div>
 					</div>
-					<div class="stat-card-modern">
-						<div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-						<div class="stat-content">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-chart-line"></i></div>
+						<div class="business-content">
 							<h4>Analyse avancée</h4>
 							<p>Descriptive, inférentielle, prédictive et analyse multivariée</p>
 						</div>
 					</div>
-					<div class="stat-card-modern">
-						<div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
-						<div class="stat-content">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-project-diagram"></i></div>
+						<div class="business-content">
 							<h4>Modélisation</h4>
 							<p>Régression linéaire/logistique, séries temporelles, modèles ARIMA</p>
 						</div>
 					</div>
-					<div class="stat-card-modern">
-						<div class="stat-icon"><i class="fas fa-vial"></i></div>
-						<div class="stat-content">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-vial"></i></div>
+						<div class="business-content">
 							<h4>Tests & Validation</h4>
 							<p>Tests d'hypothèses, ANOVA, validation croisée, métriques d'évaluation</p>
 						</div>
 					</div>
-					<div class="stat-card-modern">
-						<div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
-						<div class="stat-content">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-chart-bar"></i></div>
+						<div class="business-content">
 							<h4>Reporting statistique</h4>
 							<p>Rédaction de rapports, interprétation des résultats, recommandations data-driven</p>
 						</div>
@@ -5455,93 +5552,81 @@ h1, h2, h3, h4, h5, h6 {
 			</div>
 
 			<!-- Langues -->
-			<div class="competence-category langues-category">
+			<div class="competence-category enhanced-category">
 				<h3><i class="fas fa-language"></i> Langues</h3>
-				<div class="langues-enhanced">
-					<div class="langue-card-modern">
-						<div class="langue-flag"><i class="fas fa-flag-checkered"></i></div>
-						<div class="langue-info">
-							<span class="langue-name">Français</span>
-							<div class="langue-progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="langue-level-badge">Natif</span>
+				<div class="business-grid">
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
+						<div class="business-content">
+							<h4>Français <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
+							<p>Langue maternelle - Maîtrise parfaite à l'écrit comme à l'oral</p>
 						</div>
-						<div class="langue-desc">Langue maternelle - Maîtrise parfaite à l'écrit comme à l'oral</div>
 					</div>
-					<div class="langue-card-modern">
-						<div class="langue-flag"><i class="fas fa-flag-checkered"></i></div>
-						<div class="langue-info">
-							<span class="langue-name">Chinois</span>
-							<div class="langue-progress">
-								<div class="progress-bar" style="width: 100%"></div>
-							</div>
-							<span class="langue-level-badge">Natif</span>
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
+						<div class="business-content">
+							<h4>Chinois <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
+							<p>Langue maternelle - Bilingue complet, parfaitement courant</p>
 						</div>
-						<div class="langue-desc">Langue maternelle - Bilingue complet, parfaitement courant</div>
 					</div>
-					<div class="langue-card-modern">
-						<div class="langue-flag"><i class="fas fa-language"></i></div>
-						<div class="langue-info">
-							<span class="langue-name">Anglais</span>
-							<div class="langue-progress">
-								<div class="progress-bar" style="width: 80%"></div>
-							</div>
-							<span class="langue-level-badge">B2 - Intermédiaire supérieur</span>
+					<div class="business-card">
+						<div class="business-icon"><i class="fas fa-language"></i></div>
+						<div class="business-content">
+							<h4>Anglais <span style="font-size:0.7rem; background:linear-gradient(135deg, #2563eb, #06b6d4); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">B2</span></h4>
+							<p>Capacité à communiquer efficacement, lu, écrit et parlé couramment</p>
 						</div>
-						<div class="langue-desc">Capacité à communiquer efficacement, lu, écrit et parlé couramment</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Savoir-être - Version améliorée -->
-			<div class="competence-category soft-skills-category">
-				<h3><i class="fas fa-users"></i> Savoir-être</h3>
-				<div class="soft-skills-grid">
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-users"></i></div>
-						<div class="soft-skill-content">
-							<h4>Travail en équipe</h4>
-							<p>Capacité à collaborer efficacement, partager les connaissances et contribuer aux objectifs communs.</p>
-						</div>
+			<!-- Savoir-être -->
+		<div class="competence-category enhanced-category">
+			<h3><i class="fas fa-users"></i> Savoir-être</h3>
+			<div class="business-grid">
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-users"></i></div>
+					<div class="business-content">
+						<h4>Travail en équipe</h4>
+						<p>Capacité à collaborer efficacement, partager les connaissances et contribuer aux objectifs communs</p>
 					</div>
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-user-check"></i></div>
-						<div class="soft-skill-content">
-							<h4>Autonomie & Rigueur</h4>
-							<p>Organisation personnelle, respect des délais et souci du détail dans l'exécution des tâches.</p>
-						</div>
+				</div>
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-user-check"></i></div>
+					<div class="business-content">
+						<h4>Autonomie & Rigueur</h4>
+						<p>Organisation personnelle, respect des délais et souci du détail dans l'exécution des tâches</p>
 					</div>
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-sync-alt"></i></div>
-						<div class="soft-skill-content">
-							<h4>Adaptabilité</h4>
-							<p>Flexibilité face aux changements, capacité à apprendre rapidement de nouvelles technologies.</p>
-						</div>
+				</div>
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-sync-alt"></i></div>
+					<div class="business-content">
+						<h4>Adaptabilité</h4>
+						<p>Flexibilité face aux changements, capacité à apprendre rapidement de nouvelles technologies</p>
 					</div>
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-lightbulb"></i></div>
-						<div class="soft-skill-content">
-							<h4>Curiosité intellectuelle</h4>
-							<p>Veille technologique constante, envie d'apprendre et de se former en continu.</p>
-						</div>
+				</div>
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-lightbulb"></i></div>
+					<div class="business-content">
+						<h4>Curiosité intellectuelle</h4>
+						<p>Veille technologique constante, envie d'apprendre et de se former en continu</p>
 					</div>
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-comments"></i></div>
-						<div class="soft-skill-content">
-							<h4>Communication</h4>
-							<p>Capacité à vulgariser des concepts techniques et à présenter clairement des résultats d'analyse.</p>
-						</div>
+				</div>
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-comments"></i></div>
+					<div class="business-content">
+						<h4>Communication</h4>
+						<p>Capacité à vulgariser des concepts techniques et à présenter clairement des résultats d'analyse</p>
 					</div>
-					<div class="soft-skill-card">
-						<div class="soft-skill-icon"><i class="fas fa-clock"></i></div>
-						<div class="soft-skill-content">
-							<h4>Gestion du stress</h4>
-							<p>Réactivité sous pression, priorisation des tâches et maintien de la qualité en situation tendue.</p>
-						</div>
+				</div>
+				<div class="business-card">
+					<div class="business-icon"><i class="fas fa-clock"></i></div>
+					<div class="business-content">
+						<h4>Gestion du stress</h4>
+						<p>Réactivité sous pression, priorisation des tâches et maintien de la qualité en situation tendue</p>
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 		<!-- Section Projets -->
 	<section id="projets" class="section projets-section">
