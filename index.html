@@ -5145,6 +5145,922 @@ h1, h2, h3, h4, h5, h6 {
 		padding: 20px;
 	}
 }
+
+/* ========== SECTION PROJETS AMÉLIORÉE AVEC IMAGES ========== */
+
+/* Grille des projets */
+.projets-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+	gap: 30px;
+	margin-top: 20px;
+}
+
+/* Carte projet */
+.projet-card {
+	position: relative;
+	background: white;
+	border-radius: 24px;
+	overflow: hidden;
+	transition: all 0.4s ease;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	min-height: 450px;
+	cursor: pointer;
+}
+
+/* Image d'arrière-plan */
+.projet-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: transform 0.5s ease;
+	z-index: 0;
+}
+
+.projet-card:hover::before {
+	transform: scale(1.05);
+}
+
+/* Overlay sombre pour lisibilité */
+.projet-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%);
+	z-index: 1;
+}
+
+/* Images spécifiques pour chaque projet */
+.projet-card[data-projet="1"]::before { background-image: url('img/projet-cardio.jpg'); }
+.projet-card[data-projet="2"]::before { background-image: url('img/projet-pollution.jpg'); }
+.projet-card[data-projet="3"]::before { background-image: url('img/projet-rgpd.jpg'); }
+.projet-card[data-projet="4"]::before { background-image: url('img/projet-sas.jpg'); }
+.projet-card[data-projet="5"]::before { background-image: url('img/projet-film.jpg'); }
+.projet-card[data-projet="6"]::before { background-image: url('img/projet-bonheur.jpg'); }
+.projet-card[data-projet="7"]::before { background-image: url('img/projet-enquete.jpg'); }
+.projet-card[data-projet="8"]::before { background-image: url('img/projet-etoiles.jpg'); }
+.projet-card[data-projet="9"]::before { background-image: url('img/projet-croissance.jpg'); }
+
+/* Badge date */
+.projet-card-badge {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(5px);
+	padding: 6px 14px;
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	z-index: 3;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Catégorie du projet */
+.projet-card-category {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 18px;
+	border-radius: 30px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	margin: 20px 0 0 25px;
+	width: fit-content;
+	z-index: 3;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	font-family: 'Poppins', sans-serif;
+}
+
+.projet-card-category i {
+	font-size: 0.8rem;
+}
+
+.projet-card-category.statistique {
+	background: linear-gradient(135deg, #10b981, #059669);
+	color: white;
+}
+
+.projet-card-category.datascience {
+	background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+	color: white;
+}
+
+.projet-card-category.informatique {
+	background: linear-gradient(135deg, #06b6d4, #0891b2);
+	color: white;
+}
+
+.projet-card-category.reglementaire {
+	background: linear-gradient(135deg, #f59e0b, #d97706);
+	color: white;
+}
+
+/* Contenu de la carte */
+.projet-card-content {
+	padding: 20px 25px;
+	flex: 1;
+	z-index: 2;
+	position: relative;
+}
+
+.projet-card-content h3 {
+	font-size: 1.3rem;
+	margin-bottom: 12px;
+	color: white;
+	line-height: 1.4;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	font-family: 'Poppins', sans-serif;
+}
+
+.projet-description {
+	color: rgba(255, 255, 255, 0.92);
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Tags */
+.projet-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 15px;
+}
+
+.projet-tags .tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(5px);
+	color: white;
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.projet-tags .tag i {
+	font-size: 0.7rem;
+}
+
+.projet-card:hover .projet-tags .tag {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	transform: translateY(-2px);
+}
+
+/* Footer de la carte */
+.projet-card-footer {
+	padding: 0 25px 25px 25px;
+	z-index: 2;
+	position: relative;
+}
+
+.details-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 20px;
+	background: rgba(255, 255, 255, 0.95);
+	border: none;
+	border-radius: 40px;
+	color: var(--primary-color);
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	font-family: 'Poppins', sans-serif;
+}
+
+.details-btn i {
+	transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.details-btn:hover i {
+	transform: translateX(5px);
+}
+
+/* Effet au survol */
+.projet-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation d'apparition */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.projet-card {
+	animation: fadeInUp 0.6s ease forwards;
+	opacity: 0;
+}
+
+.projet-card:nth-child(1) { animation-delay: 0.1s; }
+.projet-card:nth-child(2) { animation-delay: 0.2s; }
+.projet-card:nth-child(3) { animation-delay: 0.3s; }
+.projet-card:nth-child(4) { animation-delay: 0.4s; }
+.projet-card:nth-child(5) { animation-delay: 0.5s; }
+.projet-card:nth-child(6) { animation-delay: 0.6s; }
+.projet-card:nth-child(7) { animation-delay: 0.7s; }
+.projet-card:nth-child(8) { animation-delay: 0.8s; }
+.projet-card:nth-child(9) { animation-delay: 0.9s; }
+
+/* Fallback si pas d'images - Dégradés de couleurs */
+.no-image .projet-card[data-projet="1"]::before { 
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.no-image .projet-card[data-projet="2"]::before { 
+	background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.no-image .projet-card[data-projet="3"]::before { 
+	background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+.no-image .projet-card[data-projet="4"]::before { 
+	background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+.no-image .projet-card[data-projet="5"]::before { 
+	background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+.no-image .projet-card[data-projet="6"]::before { 
+	background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+.no-image .projet-card[data-projet="7"]::before { 
+	background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+.no-image .projet-card[data-projet="8"]::before { 
+	background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+.no-image .projet-card[data-projet="9"]::before { 
+	background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.projets-grid {
+		grid-template-columns: 1fr;
+		gap: 25px;
+	}
+	
+	.projet-card {
+		min-height: 400px;
+	}
+	
+	.projet-card-content h3 {
+		font-size: 1.1rem;
+	}
+	
+	.projet-description {
+		font-size: 0.85rem;
+	}
+	
+	.projet-card-category {
+		margin: 15px 0 0 20px;
+		padding: 6px 14px;
+		font-size: 0.75rem;
+	}
+	
+	.projet-card-badge {
+		top: 15px;
+		right: 15px;
+		padding: 4px 12px;
+		font-size: 0.7rem;
+	}
+	
+	.projet-tags .tag {
+		padding: 4px 10px;
+		font-size: 0.7rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.projet-card {
+		min-height: 380px;
+	}
+	
+	.projet-card-content {
+		padding: 15px 20px;
+	}
+	
+	.projet-card-footer {
+		padding: 0 20px 20px 20px;
+	}
+	
+	.details-btn {
+		padding: 10px 16px;
+		font-size: 0.85rem;
+	}
+}
+
+/* ========== SECTION PROJETS AMÉLIORÉE - VERSION CLAIRE ========== */
+
+/* Grille des projets */
+.projets-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+	gap: 30px;
+	margin-top: 20px;
+}
+
+/* Carte projet */
+.projet-card {
+	position: relative;
+	background: white;
+	border-radius: 24px;
+	overflow: hidden;
+	transition: all 0.4s ease;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	min-height: 420px;
+	cursor: pointer;
+}
+
+/* Image d'arrière-plan */
+.projet-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: transform 0.5s ease;
+	z-index: 0;
+}
+
+.projet-card:hover::before {
+	transform: scale(1.05);
+}
+
+/* Overlay clair et doux pour lisibilité */
+.projet-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(248,250,252,0.88) 100%);
+	z-index: 1;
+}
+
+/* Images spécifiques pour chaque projet */
+.projet-card[data-projet="1"]::before { background-image: url('img/projet-cardio.jpg'); }
+.projet-card[data-projet="2"]::before { background-image: url('img/projet-pollution.jpg'); }
+.projet-card[data-projet="3"]::before { background-image: url('img/projet-rgpd.jpg'); }
+.projet-card[data-projet="4"]::before { background-image: url('img/projet-sas.jpg'); }
+.projet-card[data-projet="5"]::before { background-image: url('img/projet-film.jpg'); }
+.projet-card[data-projet="6"]::before { background-image: url('img/projet-bonheur.jpg'); }
+.projet-card[data-projet="7"]::before { background-image: url('img/projet-enquete.jpg'); }
+.projet-card[data-projet="8"]::before { background-image: url('img/projet-etoiles.jpg'); }
+.projet-card[data-projet="9"]::before { background-image: url('img/projet-croissance.jpg'); }
+
+/* Badge date */
+.projet-card-badge {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	backdrop-filter: blur(5px);
+	padding: 6px 14px;
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: white;
+	z-index: 3;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Catégorie du projet */
+.projet-card-category {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 18px;
+	border-radius: 30px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	margin: 20px 0 0 25px;
+	width: fit-content;
+	z-index: 3;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	font-family: 'Poppins', sans-serif;
+}
+
+.projet-card-category i {
+	font-size: 0.8rem;
+}
+
+.projet-card-category.statistique {
+	background: linear-gradient(135deg, #10b981, #059669);
+	color: white;
+}
+
+.projet-card-category.datascience {
+	background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+	color: white;
+}
+
+.projet-card-category.informatique {
+	background: linear-gradient(135deg, #06b6d4, #0891b2);
+	color: white;
+}
+
+.projet-card-category.reglementaire {
+	background: linear-gradient(135deg, #f59e0b, #d97706);
+	color: white;
+}
+
+/* Contenu de la carte - couleurs sombres pour contraste sur fond clair */
+.projet-card-content {
+	padding: 20px 25px;
+	flex: 1;
+	z-index: 2;
+	position: relative;
+}
+
+.projet-card-content h3 {
+	font-size: 1.3rem;
+	margin-bottom: 12px;
+	color: var(--dark-color);
+	line-height: 1.4;
+	font-family: 'Poppins', sans-serif;
+}
+
+.projet-description {
+	color: var(--gray-color);
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+/* Tags */
+.projet-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 15px;
+}
+
+.projet-tags .tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: #f1f5f9;
+	color: var(--gray-color);
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	border: 1px solid #e2e8f0;
+}
+
+.projet-tags .tag i {
+	font-size: 0.7rem;
+	color: var(--primary-color);
+}
+
+.projet-card:hover .projet-tags .tag {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-color: transparent;
+}
+
+.projet-card:hover .projet-tags .tag i {
+	color: white;
+}
+
+/* Footer de la carte */
+.projet-card-footer {
+	padding: 0 25px 25px 25px;
+	z-index: 2;
+	position: relative;
+}
+
+.details-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 20px;
+	background: white;
+	border: 2px solid var(--primary-color);
+	border-radius: 40px;
+	color: var(--primary-color);
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	font-family: 'Poppins', sans-serif;
+}
+
+.details-btn i {
+	transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-color: transparent;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.details-btn:hover i {
+	transform: translateX(5px);
+}
+
+/* Effet au survol */
+.projet-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation d'apparition */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.projet-card {
+	animation: fadeInUp 0.6s ease forwards;
+	opacity: 0;
+}
+
+.projet-card:nth-child(1) { animation-delay: 0.1s; }
+.projet-card:nth-child(2) { animation-delay: 0.2s; }
+.projet-card:nth-child(3) { animation-delay: 0.3s; }
+.projet-card:nth-child(4) { animation-delay: 0.4s; }
+.projet-card:nth-child(5) { animation-delay: 0.5s; }
+.projet-card:nth-child(6) { animation-delay: 0.6s; }
+.projet-card:nth-child(7) { animation-delay: 0.7s; }
+.projet-card:nth-child(8) { animation-delay: 0.8s; }
+.projet-card:nth-child(9) { animation-delay: 0.9s; }
+
+/* Fallback si pas d'images - Dégradés pastel clairs */
+.no-image .projet-card::after {
+	background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.92) 100%);
+}
+
+.no-image .projet-card[data-projet="1"]::before { 
+	background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+.no-image .projet-card[data-projet="2"]::before { 
+	background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+}
+.no-image .projet-card[data-projet="3"]::before { 
+	background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+.no-image .projet-card[data-projet="4"]::before { 
+	background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+}
+.no-image .projet-card[data-projet="5"]::before { 
+	background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+}
+.no-image .projet-card[data-projet="6"]::before { 
+	background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+}
+.no-image .projet-card[data-projet="7"]::before { 
+	background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+}
+.no-image .projet-card[data-projet="8"]::before { 
+	background: linear-gradient(135deg, #ccfbf1 0%, #a7f3d0 100%);
+}
+.no-image .projet-card[data-projet="9"]::before { 
+	background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.projets-grid {
+		grid-template-columns: 1fr;
+		gap: 25px;
+	}
+	
+	.projet-card {
+		min-height: 380px;
+	}
+	
+	.projet-card-content h3 {
+		font-size: 1.1rem;
+	}
+	
+	.projet-description {
+		font-size: 0.85rem;
+	}
+	
+	.projet-card-category {
+		margin: 15px 0 0 20px;
+		padding: 6px 14px;
+		font-size: 0.75rem;
+	}
+	
+	.projet-card-badge {
+		top: 15px;
+		right: 15px;
+		padding: 4px 12px;
+		font-size: 0.7rem;
+	}
+	
+	.projet-tags .tag {
+		padding: 4px 10px;
+		font-size: 0.7rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.projet-card {
+		min-height: 360px;
+	}
+	
+	.projet-card-content {
+		padding: 15px 20px;
+	}
+	
+	.projet-card-footer {
+		padding: 0 20px 20px 20px;
+	}
+	
+	.details-btn {
+		padding: 10px 16px;
+		font-size: 0.85rem;
+	}
+}
+
+/* Overlay semi-transparent - moins éclairci */
+.projet-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(248,250,252,0.65) 100%);
+	z-index: 1;
+}
+/* ========== SECTION PROJETS - TEXTES PLUS LISIBLES (sans changer l'overlay) ========== */
+
+/* Titres des projets - plus épais avec ombre portée */
+.projet-card-content h3 {
+	font-size: 1.3rem;
+	margin-bottom: 12px;
+	color: var(--dark-color);
+	line-height: 1.4;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 800;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+	letter-spacing: -0.3px;
+}
+
+/* Description - plus contrastée */
+.projet-description {
+	color: var(--dark-color);
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+	font-weight: 500;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Tags - plus lisibles */
+.projet-tags .tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--primary-color);
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	transition: all 0.3s ease;
+	border: 1px solid rgba(37, 99, 235, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.projet-tags .tag i {
+	font-size: 0.7rem;
+	color: var(--primary-color);
+}
+
+.projet-card:hover .projet-tags .tag {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-color: transparent;
+}
+
+.projet-card:hover .projet-tags .tag i {
+	color: white;
+}
+
+/* Badge date - plus visible */
+.projet-card-badge {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	backdrop-filter: blur(5px);
+	padding: 6px 14px;
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: white;
+	z-index: 3;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Bouton Découvrir - plus contrasté */
+.details-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 20px;
+	background: var(--primary-color);
+	border: none;
+	border-radius: 40px;
+	color: white;
+	font-weight: 700;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	font-family: 'Poppins', sans-serif;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-btn i {
+	transition: transform 0.3s ease;
+	color: white;
+}
+
+.details-btn:hover {
+	background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.details-btn:hover i {
+	transform: translateX(5px);
+}
+
+/* ========== SECTION PROJETS - TEXTES PLUS LISIBLES (sans changer l'overlay) ========== */
+
+/* Titres des projets - plus épais avec ombre portée */
+.projet-card-content h3 {
+	font-size: 1.3rem;
+	margin-bottom: 12px;
+	color: var(--dark-color);
+	line-height: 1.4;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 800;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+	letter-spacing: -0.3px;
+}
+
+/* Description - plus contrastée */
+.projet-description {
+	color: var(--dark-color);
+	font-size: 0.9rem;
+	line-height: 1.6;
+	margin-bottom: 20px;
+	font-weight: 500;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Tags - plus lisibles */
+.projet-tags .tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--primary-color);
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	transition: all 0.3s ease;
+	border: 1px solid rgba(37, 99, 235, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.projet-tags .tag i {
+	font-size: 0.7rem;
+	color: var(--primary-color);
+}
+
+.projet-card:hover .projet-tags .tag {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-color: transparent;
+}
+
+.projet-card:hover .projet-tags .tag i {
+	color: white;
+}
+
+/* Badge date - plus visible */
+.projet-card-badge {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	backdrop-filter: blur(5px);
+	padding: 6px 14px;
+	border-radius: 30px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: white;
+	z-index: 3;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	font-family: 'Poppins', sans-serif;
+}
+
+/* Bouton Découvrir - version originale */
+.details-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 20px;
+	background: white;
+	border: 2px solid var(--primary-color);
+	border-radius: 40px;
+	color: var(--primary-color);
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	font-family: 'Poppins', sans-serif;
+}
+
+.details-btn i {
+	transition: transform 0.3s ease;
+	color: var(--primary-color);
+}
+
+.details-btn:hover {
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: white;
+	border-color: transparent;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.details-btn:hover i {
+	transform: translateX(5px);
+	color: white;
+}
 	</style>
 </head>
 <body>
@@ -5629,230 +6545,221 @@ h1, h2, h3, h4, h5, h6 {
 		</div>
 	</section>
 		<!-- Section Projets -->
-	<section id="projets" class="section projets-section">
-		<div class="container">
-			<h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
-			<p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
-			
-			<div class="projets-grid">
-				<!-- Projet 1 - Cardio Good Fitness -->
-				<div class="projet-card" style="background-image: url('img/projet-cardio.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Déc 2025</div>
-					<div class="projet-card-category statistique">
-						<i class="fas fa-chart-line"></i> Statistique
-					</div>
-					<div class="projet-card-content">
-						<h3>Analyse de profils clients - Cardio Good Fitness</h3>
-						<p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation pour optimiser les stratégies marketing.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-chart-bar"></i> Tests statistiques</span>
-							<span class="tag"><i class="fas fa-chart-pie"></i> Analyse descriptive</span>
-							<span class="tag"><i class="fab fa-r-project"></i> R</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetAnalyseCardio.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+<section id="projets" class="section projets-section">
+	<div class="container">
+		<h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
+		<p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
+		
+		<div class="projets-grid">
+			<!-- Projet 1 - Cardio Good Fitness -->
+			<div class="projet-card" data-projet="1">
+				<div class="projet-card-badge">Déc 2025</div>
+				<div class="projet-card-category statistique">
+					<i class="fas fa-chart-line"></i> Statistique
+				</div>
+				<div class="projet-card-content">
+					<h3>Analyse de profils clients - Cardio Good Fitness</h3>
+					<p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation pour optimiser les stratégies marketing.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-chart-bar"></i> Tests statistiques</span>
+						<span class="tag"><i class="fas fa-chart-pie"></i> Analyse descriptive</span>
+						<span class="tag"><i class="fab fa-r-project"></i> R</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetAnalyseCardio.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 2 - Pollution CO2 -->
-				<div class="projet-card" style="background-image: url('img/projet-pollution.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Déc 2025</div>
-					<div class="projet-card-category datascience">
-						<i class="fas fa-chart-line"></i> Data Science
-					</div>
-					<div class="projet-card-content">
-						<h3>Analyse série temporelle - Pollution CO2</h3>
-						<p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien à l'aide de modèles SARIMA.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-waveform"></i> Séries temporelles</span>
-							<span class="tag"><i class="fas fa-chart-line"></i> Prévision</span>
-							<span class="tag"><i class="fab fa-python"></i> Python</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetSerieTemp.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 2 - Pollution CO2 -->
+			<div class="projet-card" data-projet="2">
+				<div class="projet-card-badge">Déc 2025</div>
+				<div class="projet-card-category datascience">
+					<i class="fas fa-chart-line"></i> Data Science
+				</div>
+				<div class="projet-card-content">
+					<h3>Analyse série temporelle - Pollution CO2</h3>
+					<p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien à l'aide de modèles SARIMA.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-waveform"></i> Séries temporelles</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Prévision</span>
+						<span class="tag"><i class="fab fa-python"></i> Python</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetSerieTemp.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 3 - RGPD -->
-				<div class="projet-card" style="background-image: url('img/projet-rgpd.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Déc 2025</div>
-					<div class="projet-card-category reglementaire">
-						<i class="fas fa-gavel"></i> Réglementaire
-					</div>
-					<div class="projet-card-content">
-						<h3>Analyse de conformité RGPD</h3>
-						<p class="projet-description">Évaluation RGPD et rédaction d'Analyse d'Impact sur la Protection des Données pour une entreprise de grande distribution.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-shield-alt"></i> RGPD</span>
-							<span class="tag"><i class="fas fa-file-alt"></i> AIPD</span>
-							<span class="tag"><i class="fas fa-chart-line"></i> Analyse de risques</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetRGPD.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 3 - RGPD -->
+			<div class="projet-card" data-projet="3">
+				<div class="projet-card-badge">Déc 2025</div>
+				<div class="projet-card-category reglementaire">
+					<i class="fas fa-gavel"></i> Réglementaire
+				</div>
+				<div class="projet-card-content">
+					<h3>Analyse de conformité RGPD</h3>
+					<p class="projet-description">Évaluation RGPD et rédaction d'Analyse d'Impact sur la Protection des Données pour une entreprise de grande distribution.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-shield-alt"></i> RGPD</span>
+						<span class="tag"><i class="fas fa-file-alt"></i> AIPD</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Analyse de risques</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetRGPD.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 4 - SAS -->
-				<div class="projet-card" style="background-image: url('img/projet-sas.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Nov 2025</div>
-					<div class="projet-card-category informatique">
-						<i class="fas fa-code"></i> Informatique
-					</div>
-					<div class="projet-card-content">
-						<h3>Système automatisé de pilotage SAS</h3>
-						<p class="projet-description">Développement d'un système d'automatisation des analyses statistiques avec interface Excel.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-chart-line"></i> SAS</span>
-							<span class="tag"><i class="fas fa-robot"></i> Automatisation</span>
-							<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetSASdomaine.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 4 - SAS -->
+			<div class="projet-card" data-projet="4">
+				<div class="projet-card-badge">Nov 2025</div>
+				<div class="projet-card-category informatique">
+					<i class="fas fa-code"></i> Informatique
+				</div>
+				<div class="projet-card-content">
+					<h3>Système automatisé de pilotage SAS</h3>
+					<p class="projet-description">Développement d'un système d'automatisation des analyses statistiques avec interface Excel.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-chart-line"></i> SAS</span>
+						<span class="tag"><i class="fas fa-robot"></i> Automatisation</span>
+						<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetSASdomaine.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 5 - Nettoyage données cinéma -->
-				<div class="projet-card" style="background-image: url('img/projet-film.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Nov 2024</div>
-					<div class="projet-card-category informatique">
-						<i class="fas fa-code"></i> Informatique
-					</div>
-					<div class="projet-card-content">
-						<h3>Nettoyage et structuration de données</h3>
-						<p class="projet-description">Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fab fa-python"></i> Python</span>
-							<span class="tag"><i class="fas fa-broom"></i> Nettoyage</span>
-							<span class="tag"><i class="fas fa-database"></i> CSV</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetFilm.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 5 - Nettoyage données cinéma -->
+			<div class="projet-card" data-projet="5">
+				<div class="projet-card-badge">Nov 2024</div>
+				<div class="projet-card-category informatique">
+					<i class="fas fa-code"></i> Informatique
+				</div>
+				<div class="projet-card-content">
+					<h3>Nettoyage et structuration de données</h3>
+					<p class="projet-description">Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fab fa-python"></i> Python</span>
+						<span class="tag"><i class="fas fa-broom"></i> Nettoyage</span>
+						<span class="tag"><i class="fas fa-database"></i> CSV</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetFilm.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 6 - Analyse bonheur -->
-				<div class="projet-card" style="background-image: url('img/projet-bonheur.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Oct 2024</div>
-					<div class="projet-card-category statistique">
-						<i class="fas fa-chart-line"></i> Statistique
-					</div>
-					<div class="projet-card-content">
-						<h3>Analyse du bonheur dans le monde</h3>
-						<p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays à travers le monde.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-chart-bar"></i> Statistique descriptive</span>
-							<span class="tag"><i class="fas fa-flask"></i> Tests statistiques</span>
-							<span class="tag"><i class="fas fa-chart-pie"></i> DataViz</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetAnalyseBonheur.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 6 - Analyse bonheur -->
+			<div class="projet-card" data-projet="6">
+				<div class="projet-card-badge">Oct 2024</div>
+				<div class="projet-card-category statistique">
+					<i class="fas fa-chart-line"></i> Statistique
+				</div>
+				<div class="projet-card-content">
+					<h3>Analyse du bonheur dans le monde</h3>
+					<p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays à travers le monde.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-chart-bar"></i> Statistique descriptive</span>
+						<span class="tag"><i class="fas fa-flask"></i> Tests statistiques</span>
+						<span class="tag"><i class="fas fa-chart-pie"></i> DataViz</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetAnalyseBonheur.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 7 - Enquête étudiants -->
-				<div class="projet-card" style="background-image: url('img/projet-enquete.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Déc 2024</div>
-					<div class="projet-card-category statistique">
-						<i class="fas fa-chart-line"></i> Statistique
-					</div>
-					<div class="projet-card-content">
-						<h3>Enquête pratiques culturelles étudiants</h3>
-						<p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-clipboard-list"></i> Enquête</span>
-							<span class="tag"><i class="fas fa-database"></i> SQL</span>
-							<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetEnqueteEtudiant.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 7 - Enquête étudiants -->
+			<div class="projet-card" data-projet="7">
+				<div class="projet-card-badge">Déc 2024</div>
+				<div class="projet-card-category statistique">
+					<i class="fas fa-chart-line"></i> Statistique
+				</div>
+				<div class="projet-card-content">
+					<h3>Enquête pratiques culturelles étudiants</h3>
+					<p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-clipboard-list"></i> Enquête</span>
+						<span class="tag"><i class="fas fa-database"></i> SQL</span>
+						<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetEnqueteEtudiant.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 8 - Échantillonnage étoiles -->
-				<div class="projet-card" style="background-image: url('img/projet-etoiles.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Juin 2025</div>
-					<div class="projet-card-category statistique">
-						<i class="fas fa-chart-line"></i> Statistique
-					</div>
-					<div class="projet-card-content">
-						<h3>Estimation par échantillonnage</h3>
-						<p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-chart-bar"></i> Échantillonnage</span>
-							<span class="tag"><i class="fas fa-chart-line"></i> Intervalles de confiance</span>
-							<span class="tag"><i class="fas fa-flask"></i> Tests d'hypothèses</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetEchantillonnage.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
+			<!-- Projet 8 - Échantillonnage étoiles -->
+			<div class="projet-card" data-projet="8">
+				<div class="projet-card-badge">Juin 2025</div>
+				<div class="projet-card-category statistique">
+					<i class="fas fa-chart-line"></i> Statistique
+				</div>
+				<div class="projet-card-content">
+					<h3>Estimation par échantillonnage</h3>
+					<p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-chart-bar"></i> Échantillonnage</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Intervalles de confiance</span>
+						<span class="tag"><i class="fas fa-flask"></i> Tests d'hypothèses</span>
 					</div>
 				</div>
+				<div class="projet-card-footer">
+					<a href="projetEchantillonnage.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
+				</div>
+			</div>
 
-				<!-- Projet 9 - Croissance -->
-				<div class="projet-card" style="background-image: url('img/projet-croissance.jpg');">
-					<div class="projet-card-overlay"></div>
-					<div class="projet-card-badge">Juin 2025</div>
-					<div class="projet-card-category datascience">
-						<i class="fas fa-chart-line"></i> Data Science
+			<!-- Projet 9 - Croissance -->
+			<div class="projet-card" data-projet="9">
+				<div class="projet-card-badge">Juin 2025</div>
+				<div class="projet-card-category datascience">
+					<i class="fas fa-chart-line"></i> Data Science
+				</div>
+				<div class="projet-card-content">
+					<h3>Modélisation de courbes de croissance</h3>
+					<p class="projet-description">Étude de la croissance staturale des enfants via régression polynomiale.</p>
+					<div class="projet-tags">
+						<span class="tag"><i class="fas fa-chart-line"></i> Régression</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Modélisation</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Polynomiale</span>
 					</div>
-					<div class="projet-card-content">
-						<h3>Modélisation de courbes de croissance</h3>
-						<p class="projet-description">Étude de la croissance staturale des enfants via régression polynomiale.</p>
-						<div class="projet-tags">
-							<span class="tag"><i class="fas fa-chart-line"></i> Régression</span>
-							<span class="tag"><i class="fas fa-chart-line"></i> Modélisation</span>
-							<span class="tag"><i class="fas fa-chart-line"></i> Polynomiale</span>
-						</div>
-					</div>
-					<div class="projet-card-footer">
-						<a href="projetCroissance.html" class="details-btn">
-							<span>Découvrir</span>
-							<i class="fas fa-arrow-right"></i>
-						</a>
-					</div>
+				</div>
+				<div class="projet-card-footer">
+					<a href="projetCroissance.html" class="details-btn">
+						<span>Découvrir</span>
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 	<!-- Section Contact -->
 	<section id="contact" class="section contact-section">
