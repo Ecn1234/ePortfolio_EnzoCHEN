@@ -5211,6 +5211,7 @@ h1, h2, h3, h4, h5, h6 {
 .projet-card[data-projet="7"]::before { background-image: url('img/projet-enquete.jpg'); }
 .projet-card[data-projet="8"]::before { background-image: url('img/projet-etoiles.jpg'); }
 .projet-card[data-projet="9"]::before { background-image: url('img/projet-croissance.jpg'); }
+.projet-card[data-projet="10"]::before { background-image: url('img/projet-noveocare.jpg'); }
 
 /* Badge date */
 .projet-card-badge {
@@ -6061,768 +6062,873 @@ h1, h2, h3, h4, h5, h6 {
 	transform: translateX(5px);
 	color: white;
 }
+.status-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #f1f5f9;
+    border-radius: 40px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.details-btn.disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border: none;
+    cursor: default;
+}
+
+.details-btn.disabled:hover {
+    background: #f1f5f9;
+    color: #94a3b8;
+    transform: none;
+    box-shadow: none;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    border-radius: 40px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Image spécifique pour le nouveau projet CardioGoodFitness */
+.projet-card[data-projet="11"]::before { 
+    background-image: url('img/projet-reporting.jpg');
+}
 	</style>
 </head>
 <body>
-	<!-- Navigation -->
-	<nav class="navbar">
-		<div class="nav-container">
-			<div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
-			<ul class="nav-menu">
-				<li><a href="#accueil" class="nav-link active">Accueil</a></li>
-				<li><a href="#profil" class="nav-link">Profil</a></li>
-				<li><a href="#parcours" class="nav-link">Parcours</a></li>
-				<li><a href="#competences" class="nav-link">Compétences</a></li>
-				<li><a href="#projets" class="nav-link">Projets</a></li>
-				<li><a href="#contact" class="nav-link">Contact</a></li>
-			</ul>
-			<div class="hamburger">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
-			</div>
-		</div>
-	</nav>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
+        <ul class="nav-menu">
+            <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+            <li><a href="#profil" class="nav-link">Profil</a></li>
+            <li><a href="#parcours" class="nav-link">Parcours</a></li>
+            <li><a href="#competences" class="nav-link">Compétences</a></li>
+            <li><a href="#projets" class="nav-link">Projets</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>
 
-	<!-- Section Accueil -->
-
-	<section id="accueil" class="section accueil-section">
-		<div class="container">
-			<div class="accueil-content">
-				<div class="accueil-text">
-					<h3 class="subtitle">Bonjour, je suis</h3>
-					<h1 class="title">Enzo <span class="highlight-name">CHEN</span></h1>
-					<h2 class="role">Étudiant en Data Science - Recherche de stage</h2>
-					<p class="description">
-						Dynamique, motivé et curieux, je suis à la recherche d'un stage en data science d'avril à août 2026 pour mettre en pratique mes compétences en statistique, analyse et gestion de données.
-					</p>
-					<div class="cta-buttons">
-						<a href="#projets" class="btn btn-primary">Voir mes projets</a>
-						<a href="#contact" class="btn btn-secondary">Contactez-moi</a>
-					</div>
+<!-- Section Accueil -->
+<section id="accueil" class="section accueil-section">
+    <div class="container">
+        <div class="accueil-content">
+            <div class="accueil-text">
+                <h3 class="subtitle">Bonjour, je suis</h3>
+                <h1 class="title">Enzo <span class="highlight-name">CHEN</span></h1>
+                <h2 class="role">Étudiant en Data Science - Recherche d'alternance</h2>
+                <p class="description">
+                    Dynamique, motivé et curieux, je suis à la recherche d'une alternance en data science (rythme 1 semaine école / 1 semaine entreprise) à partir de septembre 2026 pour mettre en pratique mes compétences en statistique, analyse et gestion de données.
+                </p>
+				<div class="cta-buttons">
+					<a href="#projets" class="btn btn-primary">Voir mes projets</a>
+					<a href="pdf/CV général.pdf" class="btn btn-secondary" download>
+						<i class="fas fa-file-pdf"></i> Télécharger mon CV
+					</a>
 				</div>
-				<div class="accueil-image">
-					<div class="image-wrapper">
-						<!-- Photo de profil -->
-						<div class="profile-photo">
-							<img src="img/photoEnzoCostard.jpg" alt="Enzo CHEN">
-						</div>
-						<div class="floating-element floating-1"><i class="fas fa-chart-line"></i></div>
-						<div class="floating-element floating-2"><i class="fas fa-database"></i></div>
-						<div class="floating-element floating-3"><i class="fas fa-code"></i></div>
-						<div class="floating-element floating-4"><i class="fas fa-chart-bar"></i></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Section Profil -->
-  <section id="profil" class="section profil-section">
-	<div class="container">
-		<h2 class="section-title">Mon <span class="highlight">Profil</span></h2>
-
-		<div class="profil-grid">
-			<!-- Colonne gauche -->
-			<div class="profil-left">
-
-				<!-- Qui suis-je -->
-				<div class="profil-card">
-					<div class="profil-card-header">
-						<div class="profil-card-icon"><i class="fas fa-user-astronaut"></i></div>
-						<h3>Qui suis-je ?</h3>
-					</div>
-					<div class="profil-card-body">
-						<div class="info-row">
-							<div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
-							<div class="info-content">
-								<div class="info-label">Statut</div>
-								<div class="info-value">Étudiant en 2ème année de BUT Science des Données</div>
-							</div>
-						</div>
-						<div class="info-row">
-							<div class="info-icon"><i class="fas fa-briefcase"></i></div>
-							<div class="info-content">
-								<div class="info-label">Recherche</div>
-								<div class="info-value">Stage Data Scientist (4-5 mois) — Avril à août 2026</div>
-							</div>
-						</div>
-						<div class="info-row">
-							<div class="info-icon"><i class="fas fa-bullseye"></i></div>
-							<div class="info-content">
-								<div class="info-label">Objectif</div>
-								<div class="info-value">Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</div>
-							</div>
-						</div>
-						<div class="info-row">
-							<div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-							<div class="info-content">
-								<div class="info-label">Localisation</div>
-								<div class="info-value">Gagny 93220, Île-de-France</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Récompense -->
-				<div class="profil-card">
-					<div class="profil-card-header">
-						<div class="profil-card-icon"><i class="fas fa-trophy"></i></div>
-						<h3>Récompense</h3>
-					</div>
-					<div class="profil-card-body">
-						<div class="achievement-highlight">
-							<div class="achievement-badge"><i class="fas fa-medal"></i></div>
-							<div class="achievement-details">
-								<h4>Challenge DataViz INSEE</h4>
-								<p>1ère place à l'IUT Paris Rives de Seine — Janvier 2025</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Ce que je recherche -->
-				<div class="profil-card">
-					<div class="profil-card-header">
-						<div class="profil-card-icon"><i class="fas fa-handshake"></i></div>
-						<h3>Ce que je recherche</h3>
-					</div>
-					<div class="profil-card-body">
-						<div class="search-values">
-							<div class="search-item">
-								<div class="search-icon"><i class="fas fa-chart-line"></i></div>
-								<div class="search-text">
-									<strong>Une entreprise innovante</strong>
-									<span>Où la data est au cœur des décisions stratégiques</span>
-								</div>
-							</div>
-							<div class="search-item">
-								<div class="search-icon"><i class="fas fa-users"></i></div>
-								<div class="search-text">
-									<strong>Une équipe passionnée</strong>
-									<span>Pour apprendre et partager autour de projets stimulants</span>
-								</div>
-							</div>
-							<div class="search-item">
-								<div class="search-icon"><i class="fas fa-rocket"></i></div>
-								<div class="search-text">
-									<strong>Des missions concrètes</strong>
-									<span>Analyse, modélisation et valorisation des données</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<!-- Colonne droite -->
-			<div class="profil-right">
-
-				<!-- Projets réalisés -->
-				<div class="profil-card">
-					<div class="profil-card-header">
-						<div class="profil-card-icon"><i class="fas fa-project-diagram"></i></div>
-						<h3>Projets réalisés</h3>
-					</div>
-					<div class="profil-card-body">
-						<div class="projects-stats">
-							<div class="stats-number">9</div>
-							<p>Projets académiques en Data Science</p>
-							<div class="projects-badges">
-								<span class="stat-badge">📊 Statistique</span>
-								<span class="stat-badge">🐍 Python</span>
-								<span class="stat-badge">📈 DataViz</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Centres d'intérêt -->
-				<div class="profil-card">
-					<div class="profil-card-header">
-						<div class="profil-card-icon"><i class="fas fa-heart"></i></div>
-						<h3>Centres d'intérêt</h3>
-					</div>
-					<div class="profil-card-body">
-						<div class="interests-showcase">
-							<div class="interest-showcase-item">
-								<div class="interest-showcase-icon tennis"><i class="fas fa-table-tennis"></i></div>
-								<div class="interest-showcase-info">
-									<h4>Tennis</h4>
-									<p>Passionné par ce sport de précision et de stratégie, je pratique en compétition depuis 5 ans.</p>
-									<div class="interest-tag">Sport de raquette</div>
-								</div>
-							</div>
-							<div class="interest-showcase-item">
-								<div class="interest-showcase-icon pingpong"><i class="fas fa-table-tennis"></i></div>
-								<div class="interest-showcase-info">
-									<h4>Ping-pong</h4>
-									<p>Réflexes et concentration, un sport qui développe la réactivité et l'esprit de compétition.</p>
-									<div class="interest-tag">Sport de précision</div>
-								</div>
-							</div>
-							<div class="interest-showcase-item">
-								<div class="interest-showcase-icon piano"><i class="fas fa-music"></i></div>
-								<div class="interest-showcase-info">
-									<h4>Piano</h4>
-									<p>La musique comme exutoire créatif, je joue du piano depuis 8 ans (classique et jazz).</p>
-									<div class="interest-tag">Instrument à clavier</div>
-								</div>
-							</div>
-							<div class="interest-showcase-item">
-								<div class="interest-showcase-icon harmonica"><i class="fas fa-guitar"></i></div>
-								<div class="interest-showcase-info">
-									<h4>Harmonica</h4>
-									<p>Petit instrument aux grandes possibilités, idéal pour le blues et l'improvisation.</p>
-									<div class="interest-tag">Instrument à vent</div>
-								</div>
-							</div>
-						</div>
-						<div class="interests-quote">
-							<i class="fas fa-quote-left"></i>
-							<p>La rigueur du sport et la créativité de la musique m'aident à trouver un équilibre entre analyse technique et innovation.</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="accueil-image">
+                <div class="image-wrapper">
+                    <!-- Photo de profil -->
+                    <div class="profile-photo">
+                        <img src="img/photoEnzoCostard.jpg" alt="Enzo CHEN">
+                    </div>
+                    <div class="floating-element floating-1"><i class="fas fa-chart-line"></i></div>
+                    <div class="floating-element floating-2"><i class="fas fa-database"></i></div>
+                    <div class="floating-element floating-3"><i class="fas fa-code"></i></div>
+                    <div class="floating-element floating-4"><i class="fas fa-chart-bar"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-	<!-- Section Mon Parcours (Timeline du plus récent au plus ancien) -->
+
+<!-- Section Profil -->
+<section id="profil" class="section profil-section">
+    <div class="container">
+        <h2 class="section-title">Mon <span class="highlight">Profil</span></h2>
+        <div class="profil-grid">
+            <!-- Colonne gauche -->
+            <div class="profil-left">
+                <!-- Qui suis-je -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <h3>Qui suis-je ?</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="info-row">
+                            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Statut</div>
+                                <div class="info-value">Étudiant en 2ème année de BUT Science des Données</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Recherche</div>
+                                <div class="info-value">Alternance Data Scientist (rythme 1 semaine école / 1 semaine entreprise) — À partir de septembre 2026</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><i class="fas fa-bullseye"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Objectif</div>
+                                <div class="info-value">Mettre en pratique mes compétences en analyse de données, statistiques et data visualisation</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="info-content">
+                                <div class="info-label">Localisation</div>
+                                <div class="info-value">Gagny 93220, Île-de-France</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Récompense -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-trophy"></i></div>
+                        <h3>Récompense</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="achievement-highlight">
+                            <div class="achievement-badge"><i class="fas fa-medal"></i></div>
+                            <div class="achievement-details">
+                                <h4>Challenge DataViz INSEE</h4>
+                                <p>1ère place à l'IUT Paris Rives de Seine — Janvier 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ce que je recherche -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Ce que je recherche</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="search-values">
+                            <div class="search-item">
+                                <div class="search-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="search-text">
+                                    <strong>Une entreprise innovante</strong>
+                                    <span>Où la data est au cœur des décisions stratégiques</span>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                <div class="search-icon"><i class="fas fa-users"></i></div>
+                                <div class="search-text">
+                                    <strong>Une équipe passionnée</strong>
+                                    <span>Pour apprendre et partager autour de projets stimulants</span>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                <div class="search-icon"><i class="fas fa-rocket"></i></div>
+                                <div class="search-text">
+                                    <strong>Des missions concrètes</strong>
+                                    <span>Analyse, modélisation et valorisation des données</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="profil-right">
+                <!-- Projets réalisés -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3>Projets réalisés</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="projects-stats">
+                            <div class="stats-number">11</div>
+                            <p>Projets académiques en Data Science</p>
+                            <div class="projects-badges">
+                                <span class="stat-badge">📊 Statistique</span>
+                                <span class="stat-badge">🐍 Python</span>
+                                <span class="stat-badge">📈 DataViz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Centres d'intérêt -->
+                <div class="profil-card">
+                    <div class="profil-card-header">
+                        <div class="profil-card-icon"><i class="fas fa-heart"></i></div>
+                        <h3>Centres d'intérêt</h3>
+                    </div>
+                    <div class="profil-card-body">
+                        <div class="interests-showcase">
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon tennis"><i class="fas fa-table-tennis"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Tennis</h4>
+                                    <p>Passionné par ce sport de précision et de stratégie, je pratique en compétition depuis 5 ans.</p>
+                                    <div class="interest-tag">Sport de raquette</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon pingpong"><i class="fas fa-table-tennis"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Ping-pong</h4>
+                                    <p>Réflexes et concentration, un sport qui développe la réactivité et l'esprit de compétition.</p>
+                                    <div class="interest-tag">Sport de précision</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon piano"><i class="fas fa-music"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Piano</h4>
+                                    <p>La musique comme exutoire créatif, je joue du piano depuis 8 ans (classique et jazz).</p>
+                                    <div class="interest-tag">Instrument à clavier</div>
+                                </div>
+                            </div>
+                            <div class="interest-showcase-item">
+                                <div class="interest-showcase-icon harmonica"><i class="fas fa-guitar"></i></div>
+                                <div class="interest-showcase-info">
+                                    <h4>Harmonica</h4>
+                                    <p>Petit instrument aux grandes possibilités, idéal pour le blues et l'improvisation.</p>
+                                    <div class="interest-tag">Instrument à vent</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="interests-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>La rigueur du sport et la créativité de la musique m'aident à trouver un équilibre entre analyse technique et innovation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Mon Parcours (Timeline du plus récent au plus ancien) -->
 <section id="parcours" class="section parcours-section">
-	<div class="container">
-		<h2 class="section-title">Mon <span class="highlight">Parcours</span></h2>
-		<div class="timeline">
-			<!-- 1. BUT Science des données (2024 – 2027) - Le plus récent / en cours -->
-			<div class="timeline-item">
-				<div class="timeline-date">2024 – 2027</div>
-				<div class="timeline-content">
-					<h3>BUT Science des données</h3>
-					<div class="timeline-subtitle">IUT Paris Rives de Seine - Parcours Exploration et modélisation statistique</div>
-					<div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 16e, Île-de-France</div>
-					<p class="timeline-description">Formation en statistique avancée, programmation (Python, R, SQL), data visualisation et modélisation prédictive. Actuellement en deuxième année avec un projet de stage prévu d'avril à août 2026.</p>
-					<span class="timeline-badge"><i class="fas fa-graduation-cap"></i> Formation en cours</span>
-					<div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
-				</div>
-			</div>
+    <div class="container">
+        <h2 class="section-title">Mon <span class="highlight">Parcours</span></h2>
+        <div class="timeline">
+            <!-- 1. Stage Data Engineer - Noveocare (Avril 2026 - Juin 2026) - Le plus récent -->
+            <div class="timeline-item">
+                <div class="timeline-date">Avril 2026</div>
+                <div class="timeline-content">
+                    <h3>Stage Data Engineer - Contrôle qualité & Anti-fraude</h3>
+                    <div class="timeline-subtitle">Noveocare (Assurance santé)</div>
+                    <div class="location-info"><i class="fas fa-map-marker-alt"></i> Chartres 28000, Centre-Val de Loire</div>
+                    <p class="timeline-description">Stage au sein du pôle Data chez Noveocare. Missions : contrôle de la qualité des données, mise en place de systèmes de détection des fraudes, optimisation des pipelines ETL et automatisation des processus de vérification.</p>
+                    <span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i>Expérience professionnelle</span>
+                    <div class="timeline-icon"><i class="fas fa-database"></i></div>
+                </div>
+            </div>
 
-<!-- 2. Baccalauréat Général - Lycée Gustave Eiffel (2024) -->
-<div class="timeline-item">
-	<div class="timeline-date">2024</div>
-	<div class="timeline-content">
-		<h3>Baccalauréat Général</h3>
-		<div class="timeline-subtitle">Lycée Gustave Eiffel (Gagny) - Section Européenne anglaise</div>
-		<div class="location-info"><i class="fas fa-map-marker-alt"></i> Gagny, Île-de-France</div>
-		<p class="timeline-description">Obtention du Baccalauréat Général avec mention Très Bien. Spécialités : Mathématiques et Sciences Économiques et Sociales.</p>
-		<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-			<span class="timeline-badge" style="background: linear-gradient(135deg, #2563eb, #06b6d4);"><i class="fas fa-graduation-cap"></i> Formation</span>
-			<span class="timeline-badge" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-star"></i> Mention Très Bien</span>
-		</div>
-		<div class="timeline-icon"><i class="fas fa-school"></i></div>
-	</div>
-</div>
+            <!-- 2. BUT Science des données (2024 – 2026) -->
+            <div class="timeline-item">
+                <div class="timeline-date">2024 – 2026</div>
+                <div class="timeline-content">
+                    <h3>BUT Science des données</h3>
+                    <div class="timeline-subtitle">IUT Paris Rives de Seine - Parcours Exploration et modélisation statistique</div>
+                    <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 16e, Île-de-France</div>
+                    <p class="timeline-description">Formation en statistique avancée, programmation (Python, R, SQL), data visualisation et modélisation prédictive. Formation en 2 ans (2024-2026) avec obtention du diplôme en juin 2026. Actuellement à la recherche d'une alternance en data science (rythme 1 semaine école / 1 semaine entreprise) à partir de septembre 2026.</p>
+                    <span class="timeline-badge"><i class="fas fa-graduation-cap"></i> Formation</span>
+                    <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
+                </div>
+            </div>
 
-			<!-- 3. Caissier en tabac-presse - Atmosphère Paris 10 (Août 2024) -->
-			<div class="timeline-item">
-				<div class="timeline-date">Août 2024</div>
-				<div class="timeline-content">
-					<h3>Caissier en tabac-presse</h3>
-					<div class="timeline-subtitle">Atmosphère</div>
-					<div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 10e, Île-de-France</div>
-					<p class="timeline-description">Gestion de caisse, conseil client, gestion des stocks, encaissements et gestion des flux clients. Acquisition de rigueur et sens du service client.</p>
-					<span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
-					<div class="timeline-icon"><i class="fas fa-cash-register"></i></div>
-				</div>
-			</div>
+            <!-- 3. Baccalauréat Général - Lycée Gustave Eiffel (2024) -->
+            <div class="timeline-item">
+                <div class="timeline-date">2024</div>
+                <div class="timeline-content">
+                    <h3>Baccalauréat Général</h3>
+                    <div class="timeline-subtitle">Lycée Gustave Eiffel (Gagny) - Section Européenne anglaise</div>
+                    <div class="location-info"><i class="fas fa-map-marker-alt"></i> Gagny, Île-de-France</div>
+                    <p class="timeline-description">Obtention du Baccalauréat Général avec mention Très Bien. Spécialités : Mathématiques et Numérique et Sciences Informatiques (NSI).</p>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <span class="timeline-badge" style="background: linear-gradient(135deg, #2563eb, #06b6d4);"><i class="fas fa-graduation-cap"></i> Formation</span>
+                        <span class="timeline-badge" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-star"></i> Mention Très Bien</span>
+                    </div>
+                    <div class="timeline-icon"><i class="fas fa-school"></i></div>
+                </div>
+            </div>
 
-			<!-- 4. Serveur en restauration - Thaiger Paris 4e (Juillet 2024 - le plus ancien) -->
-			<div class="timeline-item">
-				<div class="timeline-date">Juillet 2024</div>
-				<div class="timeline-content">
-					<h3>Serveur en restauration</h3>
-					<div class="timeline-subtitle">Thaiger</div>
-					<div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 5e, Île-de-France</div>
-					<p class="timeline-description">Service en salle, prise de commandes, relation client, gestion des plannings et travail en équipe. Développement de compétences en communication et gestion du stress.</p>
-					<span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
-					<div class="timeline-icon"><i class="fas fa-utensils"></i></div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <!-- 4. Caissier en tabac-presse - Atmosphère Paris 10 (Août 2024) -->
+            <div class="timeline-item">
+                <div class="timeline-date">Août 2024</div>
+                <div class="timeline-content">
+                    <h3>Caissier en tabac-presse</h3>
+                    <div class="timeline-subtitle">Atmosphère</div>
+                    <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 10e, Île-de-France</div>
+                    <p class="timeline-description">Gestion de caisse, conseil client, gestion des stocks, encaissements et gestion des flux clients. Acquisition de rigueur et sens du service client.</p>
+                    <span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
+                    <div class="timeline-icon"><i class="fas fa-cash-register"></i></div>
+                </div>
+            </div>
+
+            <!-- 5. Serveur en restauration - Thaiger Paris 5e (Juillet 2024 - le plus ancien) -->
+            <div class="timeline-item">
+                <div class="timeline-date">Juillet 2024</div>
+                <div class="timeline-content">
+                    <h3>Serveur en restauration</h3>
+                    <div class="timeline-subtitle">Thaiger</div>
+                    <div class="location-info"><i class="fas fa-map-marker-alt"></i> Paris 5e, Île-de-France</div>
+                    <p class="timeline-description">Service en salle, prise de commandes, relation client, gestion des plannings et travail en équipe. Développement de compétences en communication et gestion du stress.</p>
+                    <span class="timeline-badge timeline-badge-work"><i class="fas fa-briefcase"></i> Expérience professionnelle</span>
+                    <div class="timeline-icon"><i class="fas fa-utensils"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-	<!-- Section Compétences -->
-	<section id="competences" class="section competences-section">
-		<div class="container">
-			<h2 class="section-title">Mes <span class="highlight">Compétences</span></h2>
 
-			<!-- Outils et Technologies - Design original avec 3 groupes de 4 outils -->
-			<div class="competence-category">
-				<h3><i class="fas fa-tools"></i> Outils et Technologies</h3>
-				<div class="tools-grid">
-					<div class="tool-category">
-						<h4><i class="fab fa-python"></i> Langages & Programmation</h4>
-						<div class="tool-items">
-							<div class="tool-item"><div class="tool-icon"><i class="fab fa-python"></i></div><span class="tool-name">Python</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">R</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQL</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-code"></i></div><span class="tool-name">SAS</span></div>
-						</div>
-					</div>
-					<div class="tool-category">
-						<h4><i class="fas fa-chart-pie"></i> Data Visualisation & BI</h4>
-						<div class="tool-items">
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-bar"></i></div><span class="tool-name">Power BI</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-pie"></i></div><span class="tool-name">Tableau</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">ggplot2</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-simple"></i></div><span class="tool-name">Matplotlib</span></div>
-						</div>
-					</div>
-					<div class="tool-category">
-						<h4><i class="fas fa-database"></i> SGBD & Stockage</h4>
-						<div class="tool-items">
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-table"></i></div><span class="tool-name">Access</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-cloud"></i></div><span class="tool-name">MySQL</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-server"></i></div><span class="tool-name">PostgreSQL</span></div>
-							<div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQLite</span></div>
-						</div>
-					</div>
-				</div>
-			</div>
+<!-- Section Compétences -->
+<section id="competences" class="section competences-section">
+    <div class="container">
+        <h2 class="section-title">Mes <span class="highlight">Compétences</span></h2>
 
-			<!-- Statistique -->
-			<div class="competence-category enhanced-category">
-				<h3><i class="fas fa-chart-line"></i> Statistique</h3>
-				<div class="business-grid">
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-clipboard-list"></i></div>
-						<div class="business-content">
-							<h4>Méthodologie d'enquête</h4>
-							<p>Techniques de sondage, conception de questionnaires, échantillonnage stratifié</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-chart-line"></i></div>
-						<div class="business-content">
-							<h4>Analyse avancée</h4>
-							<p>Descriptive, inférentielle, prédictive et analyse multivariée</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-project-diagram"></i></div>
-						<div class="business-content">
-							<h4>Modélisation</h4>
-							<p>Régression linéaire/logistique, séries temporelles, modèles ARIMA</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-vial"></i></div>
-						<div class="business-content">
-							<h4>Tests & Validation</h4>
-							<p>Tests d'hypothèses, ANOVA, validation croisée, métriques d'évaluation</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-chart-bar"></i></div>
-						<div class="business-content">
-							<h4>Reporting statistique</h4>
-							<p>Rédaction de rapports, interprétation des résultats, recommandations data-driven</p>
-						</div>
-					</div>
-				</div>
-			</div>
+        <!-- Outils et Technologies - Design original avec 3 groupes de 4 outils -->
+        <div class="competence-category">
+            <h3><i class="fas fa-tools"></i> Outils et Technologies</h3>
+            <div class="tools-grid">
+                <div class="tool-category">
+                    <h4><i class="fab fa-python"></i> Langages & Programmation</h4>
+                    <div class="tool-items">
+                        <div class="tool-item"><div class="tool-icon"><i class="fab fa-python"></i></div><span class="tool-name">Python</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">R</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQL</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-code"></i></div><span class="tool-name">SAS</span></div>
+                    </div>
+                </div>
+                <div class="tool-category">
+                    <h4><i class="fas fa-chart-pie"></i> Data Visualisation & BI</h4>
+                    <div class="tool-items">
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-bar"></i></div><span class="tool-name">Power BI</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-pie"></i></div><span class="tool-name">Tableau</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-line"></i></div><span class="tool-name">ggplot2</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-chart-simple"></i></div><span class="tool-name">Matplotlib</span></div>
+                    </div>
+                </div>
+                <div class="tool-category">
+                    <h4><i class="fas fa-database"></i> SGBD & Stockage</h4>
+                    <div class="tool-items">
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-table"></i></div><span class="tool-name">Access</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-cloud"></i></div><span class="tool-name">MySQL</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-server"></i></div><span class="tool-name">PostgreSQL</span></div>
+                        <div class="tool-item"><div class="tool-icon"><i class="fas fa-database"></i></div><span class="tool-name">SQLite</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<!-- Informatique Décisionnelle -->
-			<div class="competence-category enhanced-category">
-				<h3><i class="fas fa-laptop-code"></i> Informatique Décisionnelle</h3>
-				<div class="business-grid">
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-database"></i></div>
-						<div class="business-content">
-							<h4>Gestion de données</h4>
-							<p>Requêtage SQL avancé, optimisation de requêtes, gestion de bases relationnelles</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-robot"></i></div>
-						<div class="business-content">
-							<h4>Automatisation</h4>
-							<p>Programmation SAS, scripts Python pour analyses automatisées, ETL</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-chart-pie"></i></div>
-						<div class="business-content">
-							<h4>Data Visualisation</h4>
-							<p>Tableaux de bord Power BI, dashboards interactifs, dataviz avec R/ggplot2</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-chart-line"></i></div>
-						<div class="business-content">
-							<h4>Reporting & BI</h4>
-							<p>Création de rapports décisionnels, indicateurs KPI, storytelling data</p>
-						</div>
-					</div>
-				</div>
-			</div>
+        <!-- Statistique -->
+        <div class="competence-category enhanced-category">
+            <h3><i class="fas fa-chart-line"></i> Statistique</h3>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="business-content">
+                        <h4>Méthodologie d'enquête</h4>
+                        <p>Techniques de sondage, conception de questionnaires, échantillonnage stratifié</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="business-content">
+                        <h4>Analyse avancée</h4>
+                        <p>Descriptive, inférentielle, prédictive et analyse multivariée</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="business-content">
+                        <h4>Modélisation</h4>
+                        <p>Régression linéaire/logistique, séries temporelles, modèles ARIMA</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-vial"></i></div>
+                    <div class="business-content">
+                        <h4>Tests & Validation</h4>
+                        <p>Tests d'hypothèses, ANOVA, validation croisée, métriques d'évaluation</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="business-content">
+                        <h4>Reporting statistique</h4>
+                        <p>Rédaction de rapports, interprétation des résultats, recommandations data-driven</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<!-- Langues -->
-			<div class="competence-category enhanced-category">
-				<h3><i class="fas fa-language"></i> Langues</h3>
-				<div class="business-grid">
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
-						<div class="business-content">
-							<h4>Français <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
-							<p>Langue maternelle - Maîtrise parfaite à l'écrit comme à l'oral</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
-						<div class="business-content">
-							<h4>Chinois <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
-							<p>Langue maternelle - Bilingue complet, parfaitement courant</p>
-						</div>
-					</div>
-					<div class="business-card">
-						<div class="business-icon"><i class="fas fa-language"></i></div>
-						<div class="business-content">
-							<h4>Anglais <span style="font-size:0.7rem; background:linear-gradient(135deg, #2563eb, #06b6d4); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">B2</span></h4>
-							<p>Capacité à communiquer efficacement, lu, écrit et parlé couramment</p>
-						</div>
-					</div>
-				</div>
-			</div>
+        <!-- Informatique Décisionnelle -->
+        <div class="competence-category enhanced-category">
+            <h3><i class="fas fa-laptop-code"></i> Informatique Décisionnelle</h3>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-database"></i></div>
+                    <div class="business-content">
+                        <h4>Gestion de données</h4>
+                        <p>Requêtage SQL avancé, optimisation de requêtes, gestion de bases relationnelles</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-robot"></i></div>
+                    <div class="business-content">
+                        <h4>Automatisation</h4>
+                        <p>Programmation SAS, scripts Python pour analyses automatisées, ETL</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="business-content">
+                        <h4>Data Visualisation</h4>
+                        <p>Tableaux de bord Power BI, dashboards interactifs, dataviz avec R/ggplot2</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="business-content">
+                        <h4>Reporting & BI</h4>
+                        <p>Création de rapports décisionnels, indicateurs KPI, storytelling data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<!-- Savoir-être -->
-		<div class="competence-category enhanced-category">
-			<h3><i class="fas fa-users"></i> Savoir-être</h3>
-			<div class="business-grid">
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-users"></i></div>
-					<div class="business-content">
-						<h4>Travail en équipe</h4>
-						<p>Capacité à collaborer efficacement, partager les connaissances et contribuer aux objectifs communs</p>
-					</div>
-				</div>
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-user-check"></i></div>
-					<div class="business-content">
-						<h4>Autonomie & Rigueur</h4>
-						<p>Organisation personnelle, respect des délais et souci du détail dans l'exécution des tâches</p>
-					</div>
-				</div>
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-sync-alt"></i></div>
-					<div class="business-content">
-						<h4>Adaptabilité</h4>
-						<p>Flexibilité face aux changements, capacité à apprendre rapidement de nouvelles technologies</p>
-					</div>
-				</div>
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-lightbulb"></i></div>
-					<div class="business-content">
-						<h4>Curiosité intellectuelle</h4>
-						<p>Veille technologique constante, envie d'apprendre et de se former en continu</p>
-					</div>
-				</div>
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-comments"></i></div>
-					<div class="business-content">
-						<h4>Communication</h4>
-						<p>Capacité à vulgariser des concepts techniques et à présenter clairement des résultats d'analyse</p>
-					</div>
-				</div>
-				<div class="business-card">
-					<div class="business-icon"><i class="fas fa-clock"></i></div>
-					<div class="business-content">
-						<h4>Gestion du stress</h4>
-						<p>Réactivité sous pression, priorisation des tâches et maintien de la qualité en situation tendue</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+        <!-- Langues -->
+        <div class="competence-category enhanced-category">
+            <h3><i class="fas fa-language"></i> Langues</h3>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="business-content">
+                        <h4>Français <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
+                        <p>Langue maternelle - Maîtrise parfaite à l'écrit comme à l'oral</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="business-content">
+                        <h4>Chinois <span style="font-size:0.7rem; background:linear-gradient(135deg, #10b981, #059669); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">Natif</span></h4>
+                        <p>Langue maternelle - Bilingue complet, parfaitement courant</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-language"></i></div>
+                    <div class="business-content">
+                        <h4>Anglais <span style="font-size:0.7rem; background:linear-gradient(135deg, #2563eb, #06b6d4); color:white; padding:2px 8px; border-radius:20px; margin-left:8px;">B2</span></h4>
+                        <p>Capacité à communiquer efficacement, lu, écrit et parlé couramment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Savoir-être -->
+        <div class="competence-category enhanced-category">
+            <h3><i class="fas fa-users"></i> Savoir-être</h3>
+            <div class="business-grid">
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-users"></i></div>
+                    <div class="business-content">
+                        <h4>Travail en équipe</h4>
+                        <p>Capacité à collaborer efficacement, partager les connaissances et contribuer aux objectifs communs</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-user-check"></i></div>
+                    <div class="business-content">
+                        <h4>Autonomie & Rigueur</h4>
+                        <p>Organisation personnelle, respect des délais et souci du détail dans l'exécution des tâches</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-sync-alt"></i></div>
+                    <div class="business-content">
+                        <h4>Adaptabilité</h4>
+                        <p>Flexibilité face aux changements, capacité à apprendre rapidement de nouvelles technologies</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="business-content">
+                        <h4>Curiosité intellectuelle</h4>
+                        <p>Veille technologique constante, envie d'apprendre et de se former en continu</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-comments"></i></div>
+                    <div class="business-content">
+                        <h4>Communication</h4>
+                        <p>Capacité à vulgariser des concepts techniques et à présenter clairement des résultats d'analyse</p>
+                    </div>
+                </div>
+                <div class="business-card">
+                    <div class="business-icon"><i class="fas fa-clock"></i></div>
+                    <div class="business-content">
+                        <h4>Gestion du stress</h4>
+                        <p>Réactivité sous pression, priorisation des tâches et maintien de la qualité en situation tendue</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Section Projets -->
 <section id="projets" class="section projets-section">
-	<div class="container">
-		<h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
-		<p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
+    <div class="container">
+        <h2 class="section-title">Mes <span class="highlight">Projets</span></h2>
+        <p class="section-subtitle">Découvrez mes réalisations en Data Science, Statistique et Informatique</p>
+        <div class="projets-grid">
 		
-		<div class="projets-grid">
-			<!-- Projet 1 - Cardio Good Fitness (Déc 2025) - PLUS RÉCENT -->
-			<div class="projet-card" data-projet="1">
-				<div class="projet-card-badge">Déc 2025</div>
-				<div class="projet-card-category statistique">
-					<i class="fas fa-chart-line"></i> Statistique
-				</div>
-				<div class="projet-card-content">
-					<h3>Analyse de profils clients - Cardio Good Fitness</h3>
-					<p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation pour optimiser les stratégies marketing.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-chart-bar"></i> Tests statistiques</span>
-						<span class="tag"><i class="fas fa-chart-pie"></i> Analyse descriptive</span>
-						<span class="tag"><i class="fab fa-r-project"></i> R</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetAnalyseCardio.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-
-			<!-- Projet 2 - Pollution CO2 (Déc 2025) -->
-			<div class="projet-card" data-projet="2">
-				<div class="projet-card-badge">Déc 2025</div>
-				<div class="projet-card-category datascience">
-					<i class="fas fa-chart-line"></i> Data Science
-				</div>
-				<div class="projet-card-content">
-					<h3>Analyse série temporelle - Pollution CO2</h3>
-					<p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien à l'aide de modèles SARIMA.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-waveform"></i> Séries temporelles</span>
-						<span class="tag"><i class="fas fa-chart-line"></i> Prévision</span>
-						<span class="tag"><i class="fab fa-python"></i> Python</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetSerieTemp.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-
-			<!-- Projet 3 - RGPD (Déc 2025) -->
-			<div class="projet-card" data-projet="3">
-				<div class="projet-card-badge">Déc 2025</div>
-				<div class="projet-card-category reglementaire">
-					<i class="fas fa-gavel"></i> Réglementaire
-				</div>
-				<div class="projet-card-content">
-					<h3>Analyse de conformité RGPD</h3>
-					<p class="projet-description">Évaluation RGPD et rédaction d'Analyse d'Impact sur la Protection des Données pour une entreprise de grande distribution.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-shield-alt"></i> RGPD</span>
-						<span class="tag"><i class="fas fa-file-alt"></i> AIPD</span>
-						<span class="tag"><i class="fas fa-chart-line"></i> Analyse de risques</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetRGPD.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-
-			<!-- Projet 4 - SAS (Nov 2025) -->
-			<div class="projet-card" data-projet="4">
-				<div class="projet-card-badge">Nov 2025</div>
+			<!-- Projet 10 - Stage Data Engineer chez Noveocare (Avril 2026 - En cours) -->
+			<div class="projet-card" data-projet="10">
+				<div class="projet-card-badge">Avril 2026</div>
 				<div class="projet-card-category informatique">
 					<i class="fas fa-code"></i> Informatique
 				</div>
 				<div class="projet-card-content">
-					<h3>Système automatisé de pilotage SAS</h3>
-					<p class="projet-description">Développement d'un système d'automatisation des analyses statistiques avec interface Excel.</p>
+					<h3>Data Engineer - Contrôle qualité & Anti-fraude</h3>
+					<p class="projet-description">Stage chez Noveocare (assurance santé) à Chartres. Mission : contrôle de la qualité des données et mise en place de systèmes de détection des fraudes.</p>
 					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-chart-line"></i> SAS</span>
-						<span class="tag"><i class="fas fa-robot"></i> Automatisation</span>
-						<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
+						<span class="tag"><i class="fas fa-database"></i> Contrôle qualité</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> Détection de fraudes</span>
+						<span class="tag"><i class="fab fa-python"></i> Python</span>
+						<span class="tag"><i class="fas fa-map-marker-alt"></i> Chartres 28000</span>
 					</div>
 				</div>
 				<div class="projet-card-footer">
-					<a href="projetSASdomaine.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-
-
-
-			<!-- Projet 8 - Échantillonnage étoiles (Juin 2025) - À noter: date juin 2025 est après déc 2024 mais avant déc 2025 -->
-			<div class="projet-card" data-projet="8">
-				<div class="projet-card-badge">Juin 2025</div>
-				<div class="projet-card-category statistique">
-					<i class="fas fa-chart-line"></i> Statistique
-				</div>
-				<div class="projet-card-content">
-					<h3>Estimation par échantillonnage</h3>
-					<p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-chart-bar"></i> Échantillonnage</span>
-						<span class="tag"><i class="fas fa-chart-line"></i> Intervalles de confiance</span>
-						<span class="tag"><i class="fas fa-flask"></i> Tests d'hypothèses</span>
+					<div class="status-badge">
+						 <i class="fas fa-clock"></i> Stage en cours - Détails à venir
 					</div>
 				</div>
-				<div class="projet-card-footer">
-					<a href="projetEchantillonnage.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
 			</div>
+		
 
-			<!-- Projet 9 - Croissance (Juin 2025) -->
-			<div class="projet-card" data-projet="9">
-				<div class="projet-card-badge">Juin 2025</div>
+			<!-- Projet 11 - Tableau de bord Cardio Good Fitness (Avril 2026) -->
+			<div class="projet-card" data-projet="11">
+				<div class="projet-card-badge">Avril 2026</div>
 				<div class="projet-card-category datascience">
-					<i class="fas fa-chart-line"></i> Data Science
+					<i class="fas fa-chart-pie"></i> Data Science
 				</div>
 				<div class="projet-card-content">
-					<h3>Modélisation de courbes de croissance</h3>
-					<p class="projet-description">Étude de la croissance staturale des enfants via régression polynomiale.</p>
+					<h3>Tableau de bord interactif - Cardio Good Fitness</h3>
+					<p class="projet-description">Application R Shiny d'analyse statistique interactive pour segmenter les acheteurs de tapis de course en fonction de leurs revenus, usage et données démographiques.</p>
 					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-chart-line"></i> Régression</span>
-						<span class="tag"><i class="fas fa-chart-line"></i> Modélisation</span>
-						<span class="tag"><i class="fas fa-chart-line"></i> Polynomiale</span>
+						<span class="tag"><i class="fab fa-r-project"></i> R Shiny</span>
+						<span class="tag"><i class="fas fa-chart-line"></i> ACP / ACM</span>
+						<span class="tag"><i class="fas fa-chart-bar"></i> Segmentation</span>
+						<span class="tag"><i class="fas fa-database"></i> Analyses multivariées</span>
 					</div>
 				</div>
 				<div class="projet-card-footer">
-					<a href="projetCroissance.html" class="details-btn">
+					<a href="projetCardioFitness.html" class="details-btn">
 						<span>Découvrir</span>
 						<i class="fas fa-arrow-right"></i>
 					</a>
 				</div>
 			</div>
 			
-						<!-- Projet 5 - Enquête étudiants (Déc 2024) -->
-			<div class="projet-card" data-projet="7">
-				<div class="projet-card-badge">Déc 2024</div>
-				<div class="projet-card-category statistique">
-					<i class="fas fa-chart-line"></i> Statistique
-				</div>
-				<div class="projet-card-content">
-					<h3>Enquête pratiques culturelles étudiants</h3>
-					<p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-clipboard-list"></i> Enquête</span>
-						<span class="tag"><i class="fas fa-database"></i> SQL</span>
-						<span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetEnqueteEtudiant.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
+            <!-- Projet 2 - Pollution CO2 (Déc 2025) -->
+            <div class="projet-card" data-projet="2">
+                <div class="projet-card-badge">Déc 2025</div>
+                <div class="projet-card-category datascience">
+                    <i class="fas fa-chart-line"></i> Data Science
+                </div>
+                <div class="projet-card-content">
+                    <h3>Analyse série temporelle - Pollution CO2</h3>
+                    <p class="projet-description">Analyse et prévision de la concentration en CO2 dans le métro parisien à l'aide de modèles SARIMA.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-waveform"></i> Séries temporelles</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Prévision</span>
+                        <span class="tag"><i class="fab fa-python"></i> Python</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetSerieTemp.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
 
-			<!-- Projet 6 - Nettoyage données cinéma (Nov 2024) -->
-			<div class="projet-card" data-projet="5">
-				<div class="projet-card-badge">Nov 2024</div>
-				<div class="projet-card-category informatique">
-					<i class="fas fa-code"></i> Informatique
-				</div>
-				<div class="projet-card-content">
-					<h3>Nettoyage et structuration de données</h3>
-					<p class="projet-description">Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fab fa-python"></i> Python</span>
-						<span class="tag"><i class="fas fa-broom"></i> Nettoyage</span>
-						<span class="tag"><i class="fas fa-database"></i> CSV</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetFilm.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
+            <!-- Projet 3 - RGPD (Déc 2025) -->
+            <div class="projet-card" data-projet="3">
+                <div class="projet-card-badge">Déc 2025</div>
+                <div class="projet-card-category reglementaire">
+                    <i class="fas fa-gavel"></i> Réglementaire
+                </div>
+                <div class="projet-card-content">
+                    <h3>Analyse de conformité RGPD</h3>
+                    <p class="projet-description">Évaluation RGPD et rédaction d'Analyse d'Impact sur la Protection des Données pour une entreprise de grande distribution.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-shield-alt"></i> RGPD</span>
+                        <span class="tag"><i class="fas fa-file-alt"></i> AIPD</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Analyse de risques</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetRGPD.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
 
-			<!-- Projet 7 - Analyse bonheur (Oct 2024) -->
-			<div class="projet-card" data-projet="6">
-				<div class="projet-card-badge">Oct 2024</div>
-				<div class="projet-card-category statistique">
-					<i class="fas fa-chart-line"></i> Statistique
-				</div>
-				<div class="projet-card-content">
-					<h3>Analyse du bonheur dans le monde</h3>
-					<p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays à travers le monde.</p>
-					<div class="projet-tags">
-						<span class="tag"><i class="fas fa-chart-bar"></i> Statistique descriptive</span>
-						<span class="tag"><i class="fas fa-flask"></i> Tests statistiques</span>
-						<span class="tag"><i class="fas fa-chart-pie"></i> DataViz</span>
-					</div>
-				</div>
-				<div class="projet-card-footer">
-					<a href="projetAnalyseBonheur.html" class="details-btn">
-						<span>Découvrir</span>
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+            <!-- Projet 4 - SAS (Nov 2025) -->
+            <div class="projet-card" data-projet="4">
+                <div class="projet-card-badge">Nov 2025</div>
+                <div class="projet-card-category informatique">
+                    <i class="fas fa-code"></i> Informatique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Système automatisé de pilotage SAS</h3>
+                    <p class="projet-description">Développement d'un système d'automatisation des analyses statistiques avec interface Excel.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-chart-line"></i> SAS</span>
+                        <span class="tag"><i class="fas fa-robot"></i> Automatisation</span>
+                        <span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetSASdomaine.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+			
+			 <!-- Projet 1 - Cardio Good Fitness (Déc 2025) - PLUS RÉCENT -->
+            <div class="projet-card" data-projet="1">
+                <div class="projet-card-badge">Oct 2025</div>
+                <div class="projet-card-category statistique">
+                    <i class="fas fa-chart-line"></i> Statistique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Analyse de profils clients - Cardio Good Fitness</h3>
+                    <p class="projet-description">Analyse des profils de 180 clients de tapis de course avec tests statistiques et segmentation pour optimiser les stratégies marketing.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-chart-bar"></i> Tests statistiques</span>
+                        <span class="tag"><i class="fas fa-chart-pie"></i> Analyse descriptive</span>
+                        <span class="tag"><i class="fab fa-r-project"></i> R</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetAnalyseCardio.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projet 8 - Échantillonnage étoiles (Juin 2025) -->
+            <div class="projet-card" data-projet="8">
+                <div class="projet-card-badge">Juin 2025</div>
+                <div class="projet-card-category statistique">
+                    <i class="fas fa-chart-line"></i> Statistique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Estimation par échantillonnage</h3>
+                    <p class="projet-description">Estimation de la magnitude apparente moyenne d'étoiles par méthodes d'échantillonnage.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-chart-bar"></i> Échantillonnage</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Intervalles de confiance</span>
+                        <span class="tag"><i class="fas fa-flask"></i> Tests d'hypothèses</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetEchantillonnage.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projet 9 - Croissance (Juin 2025) -->
+            <div class="projet-card" data-projet="9">
+                <div class="projet-card-badge">Juin 2025</div>
+                <div class="projet-card-category datascience">
+                    <i class="fas fa-chart-line"></i> Data Science
+                </div>
+                <div class="projet-card-content">
+                    <h3>Modélisation de courbes de croissance</h3>
+                    <p class="projet-description">Étude de la croissance staturale des enfants via régression polynomiale.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-chart-line"></i> Régression</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Modélisation</span>
+                        <span class="tag"><i class="fas fa-chart-line"></i> Polynomiale</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetCroissance.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projet 5 - Enquête étudiants (Déc 2024) -->
+            <div class="projet-card" data-projet="7">
+                <div class="projet-card-badge">Déc 2024</div>
+                <div class="projet-card-category statistique">
+                    <i class="fas fa-chart-line"></i> Statistique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Enquête pratiques culturelles étudiants</h3>
+                    <p class="projet-description">Enquête sur l'impact du numérique sur les pratiques culturelles des étudiants.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-clipboard-list"></i> Enquête</span>
+                        <span class="tag"><i class="fas fa-database"></i> SQL</span>
+                        <span class="tag"><i class="fas fa-file-excel"></i> Excel</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetEnqueteEtudiant.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projet 6 - Nettoyage données cinéma (Nov 2024) -->
+            <div class="projet-card" data-projet="5">
+                <div class="projet-card-badge">Nov 2024</div>
+                <div class="projet-card-category informatique">
+                    <i class="fas fa-code"></i> Informatique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Nettoyage et structuration de données</h3>
+                    <p class="projet-description">Nettoyage de fichiers textes complexes sur des films pour création d'une base de données structurée.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fab fa-python"></i> Python</span>
+                        <span class="tag"><i class="fas fa-broom"></i> Nettoyage</span>
+                        <span class="tag"><i class="fas fa-database"></i> CSV</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetFilm.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projet 7 - Analyse bonheur (Oct 2024) -->
+            <div class="projet-card" data-projet="6">
+                <div class="projet-card-badge">Oct 2024</div>
+                <div class="projet-card-category statistique">
+                    <i class="fas fa-chart-line"></i> Statistique
+                </div>
+                <div class="projet-card-content">
+                    <h3>Analyse du bonheur dans le monde</h3>
+                    <p class="projet-description">Étude de l'influence du PIB et du COVID-19 sur le bonheur des pays à travers le monde.</p>
+                    <div class="projet-tags">
+                        <span class="tag"><i class="fas fa-chart-bar"></i> Statistique descriptive</span>
+                        <span class="tag"><i class="fas fa-flask"></i> Tests statistiques</span>
+                        <span class="tag"><i class="fas fa-chart-pie"></i> DataViz</span>
+                    </div>
+                </div>
+                <div class="projet-card-footer">
+                    <a href="projetAnalyseBonheur.html" class="details-btn">
+                        <span>Découvrir</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-	<!-- Section Contact -->
-	<section id="contact" class="section contact-section">
-		<div class="container">
-			<h2 class="section-title">Contactez<span class="highlight">-moi</span></h2>
-			<div class="contact-content">
-				<div class="contact-info">
-					<!-- Bouton CV en premier -->
-					<a href="pdf/CV général.pdf" class="contact-card cv-card" download>
-						<div class="contact-icon"><i class="fas fa-file-pdf"></i></div>
-						<div class="contact-details">
-							<h3>Télécharger mon CV</h3>
-							<p>CV - Enzo CHEN</p>
-						</div>
-					</a>
-					<a href="mailto:echen170406@gmail.com" class="contact-card">
-						<div class="contact-icon"><i class="fas fa-envelope"></i></div>
-						<div class="contact-details">
-							<h3>Email</h3>
-							<p>echen170406@gmail.com</p>
-						</div>
-					</a>
-					<a href="tel:0767896889" class="contact-card">
-						<div class="contact-icon"><i class="fas fa-phone"></i></div>
-						<div class="contact-details">
-							<h3>Téléphone</h3>
-							<p>07 67 89 68 89</p>
-						</div>
-					</a>
-					<a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="contact-card">
-						<div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-						<div class="contact-details">
-							<h3>LinkedIn</h3>
-							<p>Mon profil LinkedIn</p>
-						</div>
-					</a>
-					<div class="contact-card no-link">
-						<div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-						<div class="contact-details">
-							<h3>Adresse</h3>
-							<p>Gagny 93220</p>
-						</div>
+<!-- Section Contact -->
+<section id="contact" class="section contact-section">
+    <div class="container">
+        <h2 class="section-title">Contactez<span class="highlight">-moi</span></h2>
+        <div class="contact-content">
+			<div class="contact-info">
+				<!-- Bouton CV en premier -->
+				<a href="pdf/CV général.pdf" class="contact-card cv-card" download>
+					<div class="contact-icon"><i class="fas fa-file-pdf"></i></div>
+					<div class="contact-details">
+						<h3>Télécharger mon CV</h3>
+						<p>CV - Enzo CHEN</p>
 					</div>
-				</div>
-				<div class="contact-form-container">
-					<div class="form-header">
-						<h3>Envoyez-moi un message</h3>
-						<p>Je suis intéressé par des opportunités de stage en data science d'avril à août 2026.</p>
+				</a>
+				<a href="mailto:echen170406@gmail.com" class="contact-card">
+					<div class="contact-icon"><i class="fas fa-envelope"></i></div>
+					<div class="contact-details">
+						<h3>Email</h3>
+						<p>echen170406@gmail.com</p>
 					</div>
-					<form id="contact-form" class="contact-form">
-						<div class="form-group"><input type="text" id="name" placeholder="Votre nom" required></div>
-						<div class="form-group"><input type="email" id="email" placeholder="Votre email" required></div>
-						<div class="form-group"><input type="text" id="subject" placeholder="Sujet" required></div>
-						<div class="form-group"><textarea id="message" rows="5" placeholder="Votre message" required></textarea></div>
-						<button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
-						<div id="form-message" class="form-message"></div>
-					</form>
+				</a>
+				<a href="tel:0767896889" class="contact-card">
+					<div class="contact-icon"><i class="fas fa-phone"></i></div>
+					<div class="contact-details">
+						<h3>Téléphone</h3>
+						<p>07 67 89 68 89</p>
+					</div>
+				</a>
+				<a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="contact-card">
+					<div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+					<div class="contact-details">
+						<h3>LinkedIn</h3>
+						<p>Mon profil LinkedIn</p>
+					</div>
+				</a>
+				<div class="contact-card no-link">
+					<div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+					<div class="contact-details">
+						<h3>Adresse</h3>
+						<p>Gagny 93220</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+            <div class="contact-form-container">
+                <div class="form-header">
+                    <h3>Envoyez-moi un message</h3>
+                    <p>Je suis intéressé par des opportunités d'alternance en data à partir de septembre 2026.</p>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group"><input type="text" id="name" placeholder="Votre nom" required></div>
+                    <div class="form-group"><input type="email" id="email" placeholder="Votre email" required></div>
+                    <div class="form-group"><input type="text" id="subject" placeholder="Sujet" required></div>
+                    <div class="form-group"><textarea id="message" rows="5" placeholder="Votre message" required></textarea></div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+                    <div id="form-message" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 	<!-- Footer -->
 	<footer class="footer">
@@ -6831,8 +6937,7 @@ h1, h2, h3, h4, h5, h6 {
 				<div class="footer-logo">
 					Enzo<span class="footer-logo-dot">.</span>CHEN
 				</div>
-				<p class="footer-text">Étudiant en Science des Données - Recherche de stage Data Scientist (avril-août 2026)</p>
-				
+				<p class="footer-text">Étudiant en Science des Données - Recherche d'alternance Data Scientist</p>
 				<div class="footer-social">
 					<a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin">
 						<i class="fab fa-linkedin-in"></i>
@@ -6847,7 +6952,6 @@ h1, h2, h3, h4, h5, h6 {
 						<i class="fab fa-github"></i>
 					</a>
 				</div>
-				
 				<div class="footer-links">
 					<a href="index.html#accueil">Accueil</a>
 					<a href="index.html#profil">Profil</a>
@@ -6856,7 +6960,6 @@ h1, h2, h3, h4, h5, h6 {
 					<a href="index.html#projets">Projets</a>
 					<a href="index.html#contact">Contact</a>
 				</div>
-				
 				<p class="footer-copyright">
 					&copy; 2026 Enzo CHEN. Tous droits réservés.
 				</p>
@@ -6871,7 +6974,7 @@ h1, h2, h3, h4, h5, h6 {
 		<div class="modal-content">
 			<div class="modal-header">
 				<h2 id="modal-title">Détails du projet</h2>
-				<button class="modal-close">&times;</button>
+				<button class="modal-close">&times;</buttoxn>
 			</div>
 			<div class="modal-body"><div id="modal-content"></div></div>
 		</div>
@@ -7118,7 +7221,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
 		timelineObserver.observe(item);
 	});
-});
+});	
 	</script>
 </body>
 </html>
