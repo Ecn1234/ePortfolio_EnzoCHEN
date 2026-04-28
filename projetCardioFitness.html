@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardio Good Fitness - Tableau de bord interactif R Shiny | Enzo CHEN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo-dot {
+            color: var(--primary-color);
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        .projet-header {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .projet-header h1 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .projet-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .projet-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .downloads-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .downloads-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .downloads-title h2 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .downloads-title p {
+            color: var(--gray-color);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .download-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .download-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .download-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .download-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .download-card p {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .description-section {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .description-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .description-section h3 {
+            margin: 25px 0 15px;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+        }
+
+        .description-section p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .description-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .description-section li {
+            color: var(--gray-color);
+            margin-bottom: 8px;
+        }
+
+        .methodo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .methodo-card {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .methodo-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .methodo-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .methodo-card h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .methodo-card p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .resultat-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-left: 4px solid #06b6d4;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .model-card {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .model-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .model-card .modele-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .tech-stack span {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 0 50px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        .footer-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-logo-dot {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-text {
+            color: #94a3b8;
+            margin-bottom: 40px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 45px;
+        }
+
+        .social-link {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .footer-copyright {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 992px) {
+            .projet-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .methodo-grid, .model-grid, .downloads-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projet-header h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 20px;
+            }
+            .projet-content, .downloads-section, .description-section {
+                padding: 25px;
+            }
+            .meta-item {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+            .footer-logo {
+                font-size: 2rem;
+            }
+            .footer-text {
+                font-size: 0.9rem;
+            }
+            .footer-links {
+                gap: 25px;
+            }
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+		.downloads-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 25px;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Enzo<span class="logo-dot">.</span>CHEN</div>
+            <a href="index.html#projets" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="projet-header">
+            <h1>Tableau de bord interactif</h1>
+            <h1 style="font-size: 1.5rem; margin-top: -10px;">Cardio Good Fitness - Analyse des profils clients</h1>
+            <div class="projet-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> Avril 2026</div>
+                <div class="meta-item"><i class="fas fa-tag"></i> Data Science / R Shiny</div>
+                <div class="meta-item"><i class="fas fa-users"></i> 180 clients</div>
+                <div class="meta-item"><i class="fas fa-chart-pie"></i> ACP / ACM</div>
+            </div>
+            <div class="category-badge">
+                <i class="fas fa-chart-line"></i> Projet académique - BUT Science des Données
+            </div>
+        </div>
+
+        <div class="projet-content">
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;"><i class="fas fa-bullseye"></i> Objectifs</h2>
+                <p>Identifier des profils types d'acheteurs de tapis de course en fonction du modèle choisi (TM195, TM498, TM798), ainsi que de variables démographiques et comportementales via une application interactive R Shiny.</p>
+                
+                <h3><i class="fas fa-database"></i> Jeu de données</h3>
+                <ul>
+                    <li><strong>Effectif :</strong> 180 clients</li>
+                    <li><strong>Modèles :</strong> TM195, TM498, TM798</li>
+                    <li><strong>Variables :</strong> Âge, revenu, genre, niveau d'éducation, usage prévu, distance parcourue</li>
+                </ul>
+
+                <h3><i class="fas fa-chart-line"></i> Méthodologie</h3>
+                <ul>
+                    <li>Analyse univariée (distributions, stats descriptives)</li>
+                    <li>Analyse bivariée (corrélations revenu/usage/distance)</li>
+                    <li>Analyse multivariée : ACP et ACM</li>
+                    <li>Application interactive R Shiny</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;"><i class="fas fa-chart-simple"></i> Trois niveaux d'analyse</h2>
+                <div class="methodo-grid">
+                    <div class="methodo-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Analyse univariée</h4>
+                        <p>Distribution des revenus, âge moyen, comportements d'usage</p>
+                    </div>
+                    <div class="methodo-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Analyse bivariée</h4>
+                        <p>Relations revenu/usage/distance parcourue</p>
+                    </div>
+                    <div class="methodo-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h4>Analyse multivariée</h4>
+                        <p>ACP & ACM - Segmentation des profils clients</p>
+                    </div>
+                </div>
+
+                <div class="resultat-box">
+                    <h4><i class="fas fa-chart-line"></i> Corrélation clé</h4>
+                    <p>Le revenu, l'usage et la distance sont fortement corrélés → lien direct entre pouvoir d'achat et intensité sportive.</p>
+                </div>
+            </div>
+        </div>
+
+		<div class="downloads-section">
+			<div class="downloads-title">
+				<h2><i class="fas fa-download"></i> Téléchargements</h2>
+				<p>Retrouvez l'application R Shiny, le code source et le jeu de données</p>
+			</div>
+			<div class="downloads-grid">
+				<div class="download-card">
+					<div class="download-icon"><i class="fab fa-r-project"></i></div>
+					<h3>Code R Shiny</h3>
+					<p>Application interactive complète pour l'analyse des profils clients</p>
+					<a href="pdf/BOUHAZAMA_CHEN_DAI_MAI_WICKRAMASINGHE_Reporting_Rshiny.R" class="download-btn" download>
+						<i class="fas fa-download"></i> Télécharger .R
+					</a>
+				</div>
+				<div class="download-card">
+					<div class="download-icon"><i class="fas fa-table"></i></div>
+					<h3>Jeu de données</h3>
+					<p>Fichier CSV des 180 clients CardioGoodFitness</p>
+					<a href="pdf/CardioGoodFitness.csv" class="download-btn" download>
+						<i class="fas fa-download"></i> Télécharger CSV
+					</a>
+				</div>
+			</div>
+		</div>
+
+        <div class="description-section">
+            <h2><i class="fas fa-chart-line"></i> Résultats clés</h2>
+            
+            <div class="model-grid">
+                <div class="model-card">
+                    <h5><i class="fas fa-chart-line"></i> TM798</h5>
+                    <div class="modele-name">Haut de gamme</div>
+                    <p>Clients à revenus élevés, usage intensif, niveau d'éducation supérieur</p>
+                </div>
+                <div class="model-card">
+                    <h5><i class="fas fa-chart-line"></i> TM195</h5>
+                    <div class="modele-name">Entrée de gamme</div>
+                    <p>Clientèle plus jeune et modeste, usage occasionnel</p>
+                </div>
+                <div class="model-card">
+                    <h5><i class="fas fa-venus-mars"></i> Genre</h5>
+                    <div class="modele-name">Influence significative</div>
+                    <p>Hommes surreprésentés parmi les acheteurs du modèle haut de gamme</p>
+                </div>
+            </div>
+
+            <div class="resultat-box">
+                <h4><i class="fas fa-chart-pie"></i> Segmentation client</h4>
+                <p>Les analyses multivariées confirment une segmentation nette des clients, avec un positionnement intermédiaire pour le TM498.</p>
+            </div>
+
+            <h2><i class="fas fa-lightbulb"></i> Conclusion</h2>
+            <p>Ce projet met en évidence l'intérêt de la data analyse pour comprendre les comportements clients et segmenter un marché. L'application permet une exploration interactive des données et fournit des insights utiles pour orienter des stratégies marketing ciblées.</p>
+
+            <div class="tech-stack">
+                <span><i class="fab fa-r-project"></i> R Shiny</span>
+                <span><i class="fas fa-chart-pie"></i> ggplot2</span>
+                <span><i class="fas fa-chart-line"></i> FactoMineR</span>
+                <span><i class="fas fa-chart-bar"></i> dplyr</span>
+                <span><i class="fas fa-chart-simple"></i> plotly</span>
+                <span><i class="fas fa-chart-line"></i> ACP / ACM</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    Enzo<span class="footer-logo-dot">.</span>CHEN
+                </div>
+                <p class="footer-text">Étudiant en Science des Données - Recherche d'alternance Data Scientist (septembre 2026)</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/enzo-chen-78555934a" target="_blank" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:echen170406@gmail.com" class="social-link email"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:0767896889" class="social-link phone"><i class="fas fa-phone-alt"></i></a>
+                    <a href="https://github.com/Ecn1234" target="_blank" class="social-link github"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#accueil">Accueil</a>
+                    <a href="index.html#profil">Profil</a>
+                    <a href="index.html#parcours">Parcours</a>
+                    <a href="index.html#competences">Compétences</a>
+                    <a href="index.html#projets">Projets</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <p class="footer-copyright">&copy; 2026 Enzo CHEN. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
